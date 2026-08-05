@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Benula Airdrop</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    body {
+      min-height: 100vh;
+      background: #1a1a2e;
+      background: radial-gradient(ellipse at 30% 20%, #1a1a2e 0%, #0d0d1a 70%);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px 16px 40px;
+    }
+    .app {
+      max-width: 420px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 28px;
+      box-shadow: 0 25px 50px -8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      padding: 24px 20px;
+      margin-bottom: 18px;
+      transition: all 0.2s;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 6px;
+    }
+    .logo {
+      font-size: 26px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #00d4ff, #00b8e6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .badge {
+      background: rgba(0, 212, 255, 0.12);
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      color: #00d4ff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 40px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+    .subtitle {
+      color: #e0e0e0;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 2px;
+      opacity: 0.6;
+    }
+    .token-box {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-top: 14px;
+      padding: 16px 0 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .token-number {
+      font-size: 48px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .token-label {
+      font-size: 18px;
+      font-weight: 500;
+      color: #e0e0e0;
+      opacity: 0.7;
+      margin-left: 4px;
+    }
+    .token-sub {
+      font-size: 13px;
+      color: #e0e0e0;
+      opacity: 0.35;
+      margin-left: auto;
+      font-weight: 300;
+    }
+    .join-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 16px 0 10px;
+    }
+    .join-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      transition: 0.2s;
+    }
+    .join-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .join-item span {
+      color: #e0e0e0;
+      opacity: 0.8;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .join-item .join-btn {
+      background: rgba(0, 212, 255, 0.08);
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      color: #00d4ff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 20px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .join-item .join-btn:hover {
+      background: rgba(0, 212, 255, 0.15);
+      border-color: rgba(0, 212, 255, 0.3);
+    }
+    .join-item .join-btn.verified {
+      background: rgba(0, 255, 136, 0.1);
+      border-color: rgba(0, 255, 136, 0.2);
+      color: #00ff88;
+      cursor: default;
+    }
+    .ref-input-area {
+      margin: 12px 0 8px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .ref-input-area label {
+      color: #e0e0e0;
+      opacity: 0.5;
+      font-size: 13px;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .ref-input-area .ref-input-wrap {
+      display: flex;
+      gap: 8px;
+    }
+    .ref-input-area input[type="text"] {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.03);
+      color: #FFFFFF;
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s;
+    }
+    .ref-input-area input[type="text"]:focus {
+      border-color: rgba(0, 212, 255, 0.3);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .ref-input-area input[type="text"]:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .ref-input-area .ref-apply-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #00d4ff, #0099cc);
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
+    .ref-input-area .ref-apply-btn:hover {
+      opacity: 0.85;
+    }
+    .ref-input-area .ref-apply-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .ref-input-area .ref-status {
+      color: #e0e0e0;
+      opacity: 0.4;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+    .confirm-btn {
+      width: 100%;
+      padding: 14px;
+      margin: 4px 0 4px;
+      border: none;
+      border-radius: 60px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #FFFFFF;
+      background: linear-gradient(135deg, #00d4ff, #0099cc);
+      cursor: pointer;
+      transition: 0.25s;
+      box-shadow: 0 8px 24px -6px rgba(0, 212, 255, 0.3);
+      letter-spacing: 0.3px;
+    }
+    .confirm-btn:hover {
+      transform: scale(1.01);
+      box-shadow: 0 12px 32px -8px rgba(0, 212, 255, 0.45);
+    }
+    .confirm-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .confirm-btn.success {
+      background: linear-gradient(135deg, #00ff88, #00cc66);
+      box-shadow: 0 8px 24px -6px rgba(0, 255, 136, 0.3);
+    }
+    .confirm-btn.success:hover {
+      box-shadow: 0 12px 32px -8px rgba(0, 255, 136, 0.45);
+    }
+    .confirm-btn.loading {
+      background: linear-gradient(135deg, #6b7280, #4b5563);
+      cursor: wait;
+      box-shadow: none;
+    }
+    .confirm-btn.error {
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      box-shadow: none;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 8px 0 4px;
+    }
+    .menu-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 18px;
+      padding: 18px 10px 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
+      backdrop-filter: blur(4px);
+    }
+    .menu-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(0, 212, 255, 0.15);
+      transform: translateY(-2px);
+    }
+    .menu-card .icon {
+      font-size: 26px;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .menu-card .label {
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .menu-card .sub-label {
+      color: #e0e0e0;
+      opacity: 0.35;
+      font-size: 11px;
+      margin-top: 2px;
+    }
+    .distro-box {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .distro-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #e0e0e0;
+      opacity: 0.7;
+      padding: 5px 0;
+    }
+    .distro-row .bar-wrap {
+      flex: 1;
+      margin: 0 12px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      overflow: hidden;
+      align-self: center;
+    }
+    .distro-row .bar-fill {
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #00d4ff, #00b8e6);
+      width: 0%;
+    }
+    .distro-row .pct {
+      color: #e0e0e0;
+      opacity: 0.5;
+      font-weight: 500;
+      min-width: 36px;
+      text-align: right;
+    }
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      animation: fadeIn 0.25s ease;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal {
+      background: rgba(18, 10, 32, 0.95);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 32px;
+      max-width: 400px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 28px 22px 22px;
+      box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.8);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .modal-header h2 {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .modal-close {
+      background: rgba(255, 255, 255, 0.05);
+      border: none;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    .modal-body {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .modal-body .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .modal-body .info-row .label {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .modal-body .info-row .value {
+      color: #fff;
+      font-weight: 500;
+    }
+    .modal-body .ref-link-box {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 10px 12px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .modal-body .ref-link-box span {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      word-break: break-all;
+      flex: 1;
+      margin-right: 8px;
+    }
+    .modal-body .ref-link-box button {
+      background: rgba(0, 212, 255, 0.12);
+      border: none;
+      color: #00d4ff;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .modal-body .ref-link-box button:hover {
+      background: rgba(0, 212, 255, 0.2);
+    }
+    .modal::-webkit-scrollbar { width: 3px; }
+    .modal::-webkit-scrollbar-track { background: transparent; }
+    .modal::-webkit-scrollbar-thumb { background: rgba(0, 212, 255, 0.3); border-radius: 10px; }
+
+    .daily-check-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+    }
+    .daily-check-btn {
+      width: 100%;
+      padding: 16px 24px;
+      border: none;
+      border-radius: 60px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #00d4ff, #0099cc);
+      box-shadow: 0 8px 32px -6px rgba(0, 212, 255, 0.4);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .daily-check-btn::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .daily-check-btn:hover:not(:disabled)::before {
+      opacity: 1;
+    }
+    .daily-check-btn:hover:not(:disabled) {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 12px 40px -8px rgba(0, 212, 255, 0.6);
+    }
+    .daily-check-btn:active:not(:disabled) {
+      transform: scale(0.97);
+    }
+    .daily-check-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: 0 4px 16px -4px rgba(0, 212, 255, 0.15);
+    }
+    .daily-check-btn .btn-icon {
+      font-size: 22px;
+    }
+    .daily-check-btn .btn-reward {
+      background: rgba(255,255,255,0.12);
+      padding: 2px 14px;
+      border-radius: 40px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .daily-check-btn.success {
+      background: linear-gradient(135deg, #00ff88, #00cc66);
+      box-shadow: 0 8px 32px -6px rgba(0, 255, 136, 0.4);
+    }
+    .daily-check-btn.success:hover:not(:disabled) {
+      box-shadow: 0 12px 40px -8px rgba(0, 255, 136, 0.6);
+    }
+    .daily-check-btn.loading {
+      background: linear-gradient(135deg, #6b7280, #4b5563);
+      cursor: wait;
+      box-shadow: 0 4px 16px -4px rgba(107, 114, 128, 0.3);
+    }
+    .daily-check-btn .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .daily-status-text {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.4);
+      text-align: center;
+      padding: 4px 0;
+    }
+    .daily-status-text.success {
+      color: #00ff88;
+    }
+    .daily-status-text.error {
+      color: #f87171;
+    }
+    .daily-timer {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.3);
+      text-align: center;
+      padding: 2px 0;
+    }
+    .action-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 60px;
+      background: linear-gradient(135deg, #00d4ff, #0099cc);
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 6px;
+    }
+    .action-btn:hover {
+      opacity: 0.9;
+      transform: scale(1.01);
+    }
+    .action-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    /* ===== TOAST SYSTEM ===== */
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 90%;
+      max-width: 420px;
+      pointer-events: none;
+    }
+    .toast {
+      pointer-events: auto;
+      background: rgba(26, 26, 46, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 18px;
+      padding: 14px 20px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 20px 60px -12px rgba(0, 0, 0, 0.6);
+      animation: toastIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.3s ease;
+    }
+    .toast.hide {
+      animation: toastOut 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    @keyframes toastOut {
+      from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+      }
+    }
+    .toast .toast-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .toast .toast-icon.success {
+      background: rgba(0, 255, 136, 0.12);
+      border: 1px solid rgba(0, 255, 136, 0.15);
+    }
+    .toast .toast-icon.error {
+      background: rgba(248, 113, 113, 0.12);
+      border: 1px solid rgba(248, 113, 113, 0.15);
+    }
+    .toast .toast-icon.warning {
+      background: rgba(251, 191, 36, 0.12);
+      border: 1px solid rgba(251, 191, 36, 0.15);
+    }
+    .toast .toast-icon.info {
+      background: rgba(0, 212, 255, 0.12);
+      border: 1px solid rgba(0, 212, 255, 0.15);
+    }
+    .toast .toast-content {
+      flex: 1;
+    }
+    .toast .toast-title {
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .toast .toast-message {
+      color: #e0e0e0;
+      font-size: 13px;
+      opacity: 0.7;
+      line-height: 1.4;
+    }
+    .toast .toast-close {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 4px 8px;
+      transition: 0.2s;
+      border-radius: 8px;
+    }
+    .toast .toast-close:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .toast.success .toast-icon { background: rgba(0, 255, 136, 0.12); border-color: rgba(0, 255, 136, 0.15); }
+    .toast.error .toast-icon { background: rgba(248, 113, 113, 0.12); border-color: rgba(248, 113, 113, 0.15); }
+    .toast.warning .toast-icon { background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.15); }
+    .toast.info .toast-icon { background: rgba(0, 212, 255, 0.12); border-color: rgba(0, 212, 255, 0.15); }
+
+    @media (max-width: 400px) {
+      .token-number { font-size: 38px; }
+      .glass { padding: 20px 16px; }
+      .menu-card .label { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- MAIN CARD -->
+  <div class="glass">
+    <div class="header">
+      <span class="logo">Benula</span>
+      <span class="badge">Airdrop</span>
+    </div>
+    <div class="subtitle">✦ Airdrop</div>
+
+    <div class="token-box">
+      <span class="token-number" id="tokenDisplay">0</span>
+      <span class="token-label">Benula</span>
+      <span class="token-sub" id="userIdDisplay">ID: ---</span>
+    </div>
+
+    <!-- Join row -->
+    <div class="join-row">
+      <div class="join-item">
+        <span>📢 Join Channel</span>
+        <button class="join-btn" id="channelBtn">Join →</button>
+      </div>
+      <div class="join-item">
+        <span>💬 Join Group</span>
+        <button class="join-btn" id="groupBtn">Join →</button>
+      </div>
+    </div>
+
+    <!-- Referral code input -->
+    <div class="ref-input-area" id="refInputArea">
+      <label>🔗 Referral Code (optional)</label>
+      <div class="ref-input-wrap">
+        <input type="text" id="refInput" placeholder="Enter referral code" />
+        <button class="ref-apply-btn" id="applyRefBtn">Apply</button>
+      </div>
+      <div class="ref-status" id="refStatus">Enter a referral code before confirming registration.</div>
+    </div>
+
+    <!-- Confirm button -->
+    <button class="confirm-btn" id="confirmBtn">✔ Confirm & Get 100 Benula</button>
+
+    <!-- Menu grid -->
+    <div class="menu-grid">
+      <div class="menu-card" data-modal="daily">
+        <span class="icon">📅</span>
+        <div class="label">Daily Check</div>
+        <div class="sub-label" id="dailyCount">0 days</div>
+      </div>
+      <div class="menu-card" data-modal="tasks">
+        <span class="icon">📋</span>
+        <div class="label">Tasks</div>
+        <div class="sub-label" id="taskCount">0 completed</div>
+      </div>
+      <div class="menu-card" data-modal="referral">
+        <span class="icon">👥</span>
+        <div class="label">Referral</div>
+        <div class="sub-label" id="refCount">0 referrals</div>
+      </div>
+      <div class="menu-card" data-modal="distribution">
+        <span class="icon">📊</span>
+        <div class="label">Distribution</div>
+        <div class="sub-label">Tokenomics</div>
+      </div>
+    </div>
+
+    <!-- Distribution inline -->
+    <div class="distro-box">
+      <div class="distro-row"><span>Community</span><div class="bar-wrap"><div class="bar-fill" style="width:68%"></div></div><span class="pct">68%</span></div>
+      <div class="distro-row"><span>Owner</span><div class="bar-wrap"><div class="bar-fill" style="width:15%"></div></div><span class="pct">15%</span></div>
+      <div class="distro-row"><span>Liquidity</span><div class="bar-wrap"><div class="bar-fill" style="width:12%"></div></div><span class="pct">12%</span></div>
+      <div class="distro-row"><span>Development</span><div class="bar-wrap"><div class="bar-fill" style="width:5%"></div></div><span class="pct">5%</span></div>
+    </div>
+  </div>
+
+  <!-- ===== MODALS ===== -->
+
+  <!-- Daily Check -->
+  <div class="modal-overlay" id="modal-daily">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>📅 Daily Check</h2>
+        <button class="modal-close" data-modal="modal-daily">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="info-row">
+          <span class="label">Total days checked</span>
+          <span class="value" id="modalDailyTotal">0</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Reward per check</span>
+          <span class="value">5 Benula</span>
+        </div>
+        <div class="daily-check-wrap">
+          <button class="daily-check-btn" id="dailyCheckBtn">
+            <span class="btn-icon">✅</span>
+            Check in today
+            <span class="btn-reward">+5</span>
+          </button>
+          <div class="daily-status-text" id="dailyStatus">You haven't checked today.</div>
+          <div class="daily-timer" id="dailyTimer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tasks -->
+  <div class="modal-overlay" id="modal-tasks">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>📋 Tasks</h2>
+        <button class="modal-close" data-modal="modal-tasks">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="youtubeTask" style="background:rgba(255,255,255,0.04); border-radius:14px; padding:16px; border:1px solid rgba(255,255,255,0.06); transition: all 0.3s ease;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="color:#fff; font-weight:600; font-size:15px;">▶️ YouTube</span>
+            <span id="youtubeTaskReward" style="color:#00d4ff; font-weight:600; font-size:14px;">+50</span>
+          </div>
+          
+          <a id="youtubeOpenBtn" href="#" target="_blank" style="display:inline-block; color:#ff0000; font-weight:500; font-size:13px; text-decoration:none; margin-bottom:8px;">
+            🔗 Open YouTube
+          </a>
+          
+          <div style="display:flex; gap:6px;">
+            <input type="text" id="youtubeCodeInput" placeholder="Code..." style="flex:1; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.03); color:#fff; font-size:13px; outline:none;">
+            <button id="youtubeVerifyBtn" style="padding:8px 16px; border:none; border-radius:10px; background:linear-gradient(135deg,#00d4ff,#0099cc); color:#fff; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap; transition:0.2s;">Verify</button>
+          </div>
+          
+          <div id="youtubeTaskStatus" style="font-size:11px; color:rgba(255,255,255,0.3); margin-top:6px;">🔍 Find code in YouTube</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Referral -->
+  <div class="modal-overlay" id="modal-referral">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>👥 Referral</h2>
+        <button class="modal-close" data-modal="modal-referral">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="info-row"><span class="label">Your Referral Code</span><span class="value" id="referralCodeDisplay">------</span></div>
+        <div class="info-row"><span class="label">Total Referrals</span><span class="value" id="referralTotalDisplay">0</span></div>
+        <div class="ref-link-box">
+          <span id="refLinkDisplay">Loading link...</span>
+          <button id="copyRefLink">Copy</button>
+        </div>
+        <div style="margin-top:12px; color:rgba(255,255,255,0.3); font-size:13px; text-align:center;">
+          Share your referral link with friends and earn 20 Benula per referral!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Distribution -->
+  <div class="modal-overlay" id="modal-distribution">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>📊 Token Distribution</h2>
+        <button class="modal-close" data-modal="modal-distribution">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="info-row"><span class="label">Community</span><span class="value">68%</span></div>
+        <div class="info-row"><span class="label">Owner</span><span class="value">15%</span></div>
+        <div class="info-row"><span class="label">Liquidity</span><span class="value">12%</span></div>
+        <div class="info-row"><span class="label">Development</span><span class="value">5%</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ============================================================
+  //  TOAST SYSTEM
+  // ============================================================
+  const toastContainer = document.getElementById('toastContainer');
+
+  function showToast({ type = 'info', title, message, duration = 5000 }) {
+    const icons = {
+      success: '✅',
+      error: '❌',
+      warning: '⚠️',
+      info: 'ℹ️'
+    };
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `
+      <div class="toast-icon ${type}">${icons[type] || 'ℹ️'}</div>
+      <div class="toast-content">
+        <div class="toast-title">${title}</div>
+        <div class="toast-message">${message}</div>
+      </div>
+      <button class="toast-close">✕</button>
+    `;
+
+    const closeBtn = toast.querySelector('.toast-close');
+    closeBtn.addEventListener('click', () => removeToast(toast));
+
+    toastContainer.appendChild(toast);
+
+    const timeout = setTimeout(() => removeToast(toast), duration);
+    toast.dataset.timeout = timeout;
+
+    return toast;
+  }
+
+  function removeToast(toast) {
+    if (toast.classList.contains('hide')) return;
+    toast.classList.add('hide');
+    clearTimeout(toast.dataset.timeout);
+    setTimeout(() => {
+      if (toast.parentNode) toast.parentNode.removeChild(toast);
+    }, 350);
+  }
+
+  // ============================================================
+  //  CONFIG
+  // ============================================================
+  const CONFIG = {
+    GROUP_CHAT_ID: '-1003934156953',
+    CHANNEL_LINK: 'https://t.me/Benula_Official',
+    GROUP_LINK: 'https://t.me/BenulaOfficial',
+    REGISTER_REWARD: 100,
+    REF_REWARD: 20,
+    DAILY_REWARD: 5,
+    WEBHOOK_SERVER: 'https://benula-webhook-production.up.railway.app',
+    YOUTUBE_LINK: 'https://www.youtube.com/@BenulaOfficial',
+    YOUTUBE_SECRET_CODE: 'BENULA2026',
+    BOT_USERNAME: 'Benula_bot'
+  };
+
+  // ============================================================
+  //  STATE (localStorage)
+  // ============================================================
+  function getState() {
+    try {
+      const raw = localStorage.getItem('benula_state');
+      if (raw) return JSON.parse(raw);
+    } catch (_) {}
+    return null;
+  }
+
+  function saveState(s) {
+    localStorage.setItem('benula_state', JSON.stringify(s));
+  }
+
+  function generateUserId() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let id = '';
+    for (let i = 0; i < 6; i++) {
+      id += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return id;
+  }
+
+  // init
+  let state = getState();
+  if (!state) {
+    const newId = generateUserId();
+    state = {
+      userId: newId,
+      registered: false,
+      tokens: 0,
+      dailyChecks: [],
+      referrals: [],
+      refCodeUsed: null,
+      dailyCheckDoneToday: false,
+      channelJoined: false,
+      groupJoined: false,
+      referralRewardsClaimed: [],
+      lastDailyCheckDate: null,
+      cachedReferralCount: 0,
+    };
+    saveState(state);
+  } else {
+    if (!state.dailyChecks) state.dailyChecks = [];
+    if (!state.referrals) state.referrals = [];
+    if (typeof state.dailyCheckDoneToday === 'undefined') state.dailyCheckDoneToday = false;
+    if (typeof state.channelJoined === 'undefined') state.channelJoined = false;
+    if (typeof state.groupJoined === 'undefined') state.groupJoined = false;
+    if (!state.referralRewardsClaimed) state.referralRewardsClaimed = [];
+    if (!state.registered) state.tokens = 0;
+    if (!state.lastDailyCheckDate) state.lastDailyCheckDate = null;
+    if (typeof state.cachedReferralCount === 'undefined') state.cachedReferralCount = 0;
+    saveState(state);
+  }
+
+  // ============================================================
+  //  DOM REFS
+  // ============================================================
+  const $ = id => document.getElementById(id);
+  const tokenDisplay = $('tokenDisplay');
+  const userIdDisplay = $('userIdDisplay');
+  const confirmBtn = $('confirmBtn');
+  const dailyCount = $('dailyCount');
+  const taskCount = $('taskCount');
+  const refCount = $('refCount');
+  const referralCodeDisplay = $('referralCodeDisplay');
+  const referralTotalDisplay = $('referralTotalDisplay');
+  const modalDailyTotal = $('modalDailyTotal');
+  const dailyCheckBtn = $('dailyCheckBtn');
+  const dailyStatus = $('dailyStatus');
+  const dailyTimer = $('dailyTimer');
+  const refInput = $('refInput');
+  const applyRefBtn = $('applyRefBtn');
+  const refStatus = $('refStatus');
+  const refLinkDisplay = $('refLinkDisplay');
+  const copyRefLink = $('copyRefLink');
+  const channelBtn = $('channelBtn');
+  const groupBtn = $('groupBtn');
+  const refInputArea = $('refInputArea');
+
+  // ============================================================
+  //  MODAL CONTROLS
+  // ============================================================
+  document.querySelectorAll('.menu-card[data-modal]').forEach(card => {
+    card.addEventListener('click', function(e) {
+      const modalId = this.dataset.modal;
+      const overlay = document.getElementById('modal-' + modalId);
+      if (overlay) {
+        overlay.classList.add('active');
+        if (modalId === 'referral' && state.registered) {
+          showReferrals();
+        }
+        if (modalId === 'tasks' && state.registered) {
+          updateYoutubeUI();
+        }
+      }
+    });
+  });
+
+  document.querySelectorAll('.modal-close[data-modal]').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const modalId = this.dataset.modal;
+      const overlay = document.getElementById(modalId);
+      if (overlay) {
+        overlay.classList.remove('active');
+      }
+    });
+  });
+
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.remove('active');
+      }
+    });
+  });
+
+  // ============================================================
+  //  JOIN BUTTONS
+  // ============================================================
+  function markJoined(type) {
+    if (type === 'channel') {
+      state.channelJoined = true;
+      channelBtn.textContent = '✅ Joined';
+      channelBtn.classList.add('verified');
+      showToast({
+        type: 'success',
+        title: '✅ Channel Joined!',
+        message: 'You have successfully joined the Benula channel.'
+      });
+    } else if (type === 'group') {
+      state.groupJoined = true;
+      groupBtn.textContent = '✅ Joined';
+      groupBtn.classList.add('verified');
+      showToast({
+        type: 'success',
+        title: '✅ Group Joined!',
+        message: 'You have successfully joined the Benula group.'
+      });
+    }
+    saveState(state);
+    render();
+  }
+
+  channelBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.open(CONFIG.CHANNEL_LINK, '_blank');
+    markJoined('channel');
+  });
+
+  groupBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.open(CONFIG.GROUP_LINK, '_blank');
+    markJoined('group');
+  });
+
+  // ============================================================
+  //  DAILY CHECK
+  // ============================================================
+  function checkDailyReset() {
+    const today = new Date().toISOString().split('T')[0];
+    const lastCheck = state.lastDailyCheckDate;
+    if (lastCheck !== today) {
+      state.dailyCheckDoneToday = false;
+      state.lastDailyCheckDate = today;
+      saveState(state);
+      render();
+    }
+    return state.dailyCheckDoneToday;
+  }
+
+  function getRemainingTime() {
+    const now = new Date();
+    const endOfDay = new Date(now);
+    endOfDay.setHours(23, 59, 59, 999);
+    const diff = endOfDay - now;
+    if (diff <= 0) return '⏰ Time expired!';
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    return `⏳ ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} remaining`;
+  }
+
+  function updateTimer() {
+    if (dailyTimer) {
+      dailyTimer.textContent = getRemainingTime();
+    }
+  }
+
+  setInterval(updateTimer, 1000);
+  setInterval(() => {
+    checkDailyReset();
+    render();
+  }, 60000);
+
+  // ============================================================
+  //  📦 localStorage
+  // ============================================================
+  function saveReferralToLocalStorage(refCode, userId) {
+    try {
+      let storedReferrals = JSON.parse(localStorage.getItem('benula_referrals')) || {};
+      if (!storedReferrals[refCode]) {
+        storedReferrals[refCode] = [];
+      }
+      if (!storedReferrals[refCode].includes(userId)) {
+        storedReferrals[refCode].push(userId);
+        localStorage.setItem('benula_referrals', JSON.stringify(storedReferrals));
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('localStorage error:', error);
+      return false;
+    }
+  }
+
+  function getReferralsFromLocalStorage(refCode) {
+    try {
+      const storedReferrals = JSON.parse(localStorage.getItem('benula_referrals')) || {};
+      return storedReferrals[refCode] || [];
+    } catch (error) {
+      console.error('localStorage read error:', error);
+      return [];
+    }
+  }
+
+  // ============================================================
+  //  📊 Referrals
+  // ============================================================
+  async function showReferrals() {
+    if (!state.registered) return;
+    
+    const localReferrals = getReferralsFromLocalStorage(state.userId);
+    state.cachedReferralCount = localReferrals.length;
+    state.referrals = localReferrals;
+    saveState(state);
+    render();
+    
+    if (referralTotalDisplay) {
+      referralTotalDisplay.textContent = localReferrals.length;
+    }
+    
+    try {
+      const response = await fetch(`${CONFIG.WEBHOOK_SERVER}/api/referrals/${state.userId}`);
+      const data = await response.json();
+      
+      if (data.success) {
+        const serverReferrals = data.referrals || [];
+        const oldCount = localReferrals.length;
+        const allReferrals = [...new Set([...localReferrals, ...serverReferrals])];
+        
+        const storedReferrals = JSON.parse(localStorage.getItem('benula_referrals')) || {};
+        storedReferrals[state.userId] = allReferrals;
+        localStorage.setItem('benula_referrals', JSON.stringify(storedReferrals));
+        
+        state.cachedReferralCount = allReferrals.length;
+        state.referrals = allReferrals;
+        saveState(state);
+        render();
+        
+        if (referralTotalDisplay) {
+          referralTotalDisplay.textContent = allReferrals.length;
+        }
+        
+        if (allReferrals.length > oldCount) {
+          const newReferrals = allReferrals.length - oldCount;
+          const reward = newReferrals * CONFIG.REF_REWARD;
+          state.tokens = (state.tokens || 0) + reward;
+          saveState(state);
+          render();
+          
+          showToast({
+            type: 'success',
+            title: '🎉 New Referral!',
+            message: `${newReferrals} new user(s)! +${reward} Benula!`
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Sync error:', error);
+    }
+  }
+
+  // ============================================================
+  //  📝 Register
+  // ============================================================
+  async function registerUserDirectly(userId, refCode) {
+    try {
+      const response = await fetch(`${CONFIG.WEBHOOK_SERVER}/api/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userId: userId,
+          refCode: refCode || 'none',
+          timestamp: new Date().toISOString()
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        saveReferralToLocalStorage(refCode || 'none', userId);
+        
+        if (refCode && refCode !== 'none') {
+          const storedReferrals = JSON.parse(localStorage.getItem('benula_referrals')) || {};
+          if (!storedReferrals[refCode]) {
+            storedReferrals[refCode] = [];
+          }
+          if (!storedReferrals[refCode].includes(userId)) {
+            storedReferrals[refCode].push(userId);
+            localStorage.setItem('benula_referrals', JSON.stringify(storedReferrals));
+          }
+        }
+        
+        return { ok: true };
+      }
+      return { ok: false, error: 'Server error' };
+    } catch (error) {
+      console.error('Registration error:', error);
+      return { ok: false, error: error.message };
+    }
+  }
+
+  // ============================================================
+  //  📋 YOUTUBE TASK
+  // ============================================================
+  const YT = {
+    link: 'https://www.youtube.com/@BenulaOfficial',
+    code: 'BENULA2026',
+    reward: 50
+  };
+
+  function isYTDone() {
+    return localStorage.getItem('youtubeTaskDone') === 'true';
+  }
+
+  function updateYoutubeUI() {
+    const done = isYTDone();
+    const task = document.getElementById('youtubeTask');
+    const input = document.getElementById('youtubeCodeInput');
+    const verify = document.getElementById('youtubeVerifyBtn');
+    const status = document.getElementById('youtubeTaskStatus');
+    const reward = document.getElementById('youtubeTaskReward');
+
+    if (done) {
+      if (task) task.style.borderColor = 'rgba(0,255,136,0.3)';
+      if (input) { input.disabled = true; input.value = YT.code; }
+      if (verify) { verify.disabled = true; verify.textContent = '✅'; verify.style.background = 'linear-gradient(135deg,#00ff88,#00cc66)'; }
+      if (status) { status.textContent = '✅ Done! +50'; status.style.color = '#00ff88'; }
+      if (reward) { reward.textContent = '✅ +50'; reward.style.color = '#00ff88'; }
+    } else {
+      if (task) task.style.borderColor = 'rgba(255,255,255,0.06)';
+      if (input) { input.disabled = false; input.value = ''; }
+      if (verify) { verify.disabled = false; verify.textContent = 'Verify'; verify.style.background = 'linear-gradient(135deg,#00d4ff,#0099cc)'; }
+      if (status) { status.textContent = '🔍 Find code in YouTube'; status.style.color = 'rgba(255,255,255,0.3)'; }
+      if (reward) { reward.textContent = '+50'; reward.style.color = '#00d4ff'; }
+    }
+    updateTaskCount();
+  }
+
+  function updateTaskCount() {
+    const done = isYTDone();
+    if (taskCount) taskCount.textContent = (done ? 1 : 0) + ' completed';
+  }
+
+  // Open YouTube
+  document.getElementById('youtubeOpenBtn')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!state.registered) {
+      showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' });
+      return;
+    }
+    window.open(YT.link, '_blank');
+  });
+
+  // Verify Code
+  document.getElementById('youtubeVerifyBtn')?.addEventListener('click', () => {
+    if (!state.registered) {
+      showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' });
+      return;
+    }
+    if (isYTDone()) {
+      showToast({ type: 'info', title: '✅ Done', message: 'Task already completed!' });
+      return;
+    }
+
+    const input = document.getElementById('youtubeCodeInput');
+    if (input.value.trim() === YT.code) {
+      localStorage.setItem('youtubeTaskDone', 'true');
+      state.tokens = (state.tokens || 0) + YT.reward;
+      saveState(state);
+      render();
+      showToast({ type: 'success', title: '🎉 +50 Benula!', message: 'Task completed!' });
+      updateYoutubeUI();
+      render();
+    } else {
+      showToast({ type: 'error', title: '❌ Wrong Code', message: 'Check YouTube channel!' });
+    }
+  });
+
+  // ============================================================
+  //  AUTO-FILL REFERRAL FROM URL
+  // ============================================================
+  (function autoFillRef() {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('ref');
+    if (ref && !state.registered && !state.refCodeUsed) {
+      state.refCodeUsed = ref;
+      
+      // ✅ نمایش کد در ورودی
+      const refInput = document.getElementById('refInput');
+      if (refInput) {
+        refInput.value = ref;
+        refInput.disabled = true;
+      }
+      
+      // ✅ نمایش وضعیت
+      const refStatus = document.getElementById('refStatus');
+      if (refStatus) {
+        refStatus.textContent = '✅ Referral code applied: ' + ref;
+      }
+      
+      // ✅ غیرفعال کردن دکمه Apply
+      const applyBtn = document.getElementById('applyRefBtn');
+      if (applyBtn) {
+        applyBtn.disabled = true;
+      }
+      
+      saveState(state);
+      render();
+      showToast({
+        type: 'info',
+        title: '🔗 Referral Applied',
+        message: `You were referred by "${ref}"!`
+      });
+      console.log('✅ Referral code auto-filled from URL:', ref);
+    }
+  })();
+
+  // ============================================================
+  //  RENDER
+  // ============================================================
+  function render() {
+    tokenDisplay.textContent = state.tokens || 0;
+    userIdDisplay.textContent = 'ID: ' + state.userId;
+
+    const totalDays = state.dailyChecks ? state.dailyChecks.length : 0;
+    dailyCount.textContent = totalDays + ' days';
+    if (modalDailyTotal) modalDailyTotal.textContent = totalDays;
+
+    const refs = state.cachedReferralCount || 0;
+    refCount.textContent = refs + ' referrals';
+    if (referralTotalDisplay) referralTotalDisplay.textContent = refs;
+    if (referralCodeDisplay) referralCodeDisplay.textContent = state.userId;
+
+    // لینک مینی‌اپ تلگرام
+    const baseUrl = `https://t.me/${CONFIG.BOT_USERNAME}?start=ref_`;
+    const refLink = baseUrl + state.userId;
+    refLinkDisplay.textContent = refLink;
+
+    updateTaskCount();
+
+    if (state.channelJoined) {
+      channelBtn.textContent = '✅ Joined';
+      channelBtn.classList.add('verified');
+    } else {
+      channelBtn.textContent = 'Join →';
+      channelBtn.classList.remove('verified');
+    }
+    if (state.groupJoined) {
+      groupBtn.textContent = '✅ Joined';
+      groupBtn.classList.add('verified');
+    } else {
+      groupBtn.textContent = 'Join →';
+      groupBtn.classList.remove('verified');
+    }
+
+    if (state.registered) {
+      refInputArea.style.display = 'none';
+    } else {
+      refInputArea.style.display = 'block';
+      if (state.refCodeUsed) {
+        refInput.value = state.refCodeUsed;
+        refInput.disabled = true;
+        applyRefBtn.disabled = true;
+        refStatus.textContent = '✅ Referral code applied: ' + state.refCodeUsed;
+      } else {
+        refInput.disabled = false;
+        applyRefBtn.disabled = false;
+        refStatus.textContent = 'Enter a referral code (optional) before confirming registration.';
+      }
+    }
+
+    checkDailyReset();
+    if (state.dailyCheckDoneToday) {
+      dailyStatus.textContent = '✅ Already checked today! +5 Benula rewarded';
+      dailyStatus.className = 'daily-status-text success';
+      dailyCheckBtn.disabled = true;
+      dailyCheckBtn.className = 'daily-check-btn success';
+      dailyCheckBtn.innerHTML = `
+        <span class="btn-icon">✅</span>
+        Done today!
+        <span class="btn-reward">+5</span>
+      `;
+    } else if (!state.registered) {
+      dailyStatus.textContent = '⚠️ Please register first to check in.';
+      dailyStatus.className = 'daily-status-text error';
+      dailyCheckBtn.disabled = true;
+      dailyCheckBtn.className = 'daily-check-btn';
+      dailyCheckBtn.innerHTML = `
+        <span class="btn-icon">🔒</span>
+        Register first
+      `;
+    } else {
+      dailyStatus.textContent = '💪 Check in now to earn 5 Benula!';
+      dailyStatus.className = 'daily-status-text';
+      dailyCheckBtn.disabled = false;
+      dailyCheckBtn.className = 'daily-check-btn';
+      dailyCheckBtn.innerHTML = `
+        <span class="btn-icon">✅</span>
+        Check in today
+        <span class="btn-reward">+5</span>
+      `;
+    }
+
+    updateConfirmButton();
+    updateYoutubeUI();
+  }
+
+  function updateConfirmButton() {
+    const allJoined = state.channelJoined && state.groupJoined;
+    if (state.registered) {
+      confirmBtn.textContent = '✅ Registered';
+      confirmBtn.disabled = true;
+      confirmBtn.classList.add('success');
+      confirmBtn.classList.remove('loading', 'error');
+    } else if (!allJoined) {
+      confirmBtn.textContent = '⚠️ Join Channel & Group first';
+      confirmBtn.disabled = true;
+      confirmBtn.classList.remove('success', 'loading', 'error');
+    } else {
+      confirmBtn.textContent = '✔ Confirm & Get 100 Benula';
+      confirmBtn.disabled = false;
+      confirmBtn.classList.remove('success', 'loading', 'error');
+    }
+  }
+
+  // ============================================================
+  //  DAILY CHECK ACTION
+  // ============================================================
+  dailyCheckBtn.addEventListener('click', async () => {
+    if (!state.registered) {
+      showToast({
+        type: 'warning',
+        title: '⚠️ Registration Required',
+        message: 'Please register first to check in daily.'
+      });
+      return;
+    }
+    if (state.dailyCheckDoneToday) {
+      showToast({
+        type: 'info',
+        title: 'ℹ️ Already Checked',
+        message: 'You have already checked in today! Come back tomorrow.'
+      });
+      return;
+    }
+
+    dailyCheckBtn.disabled = true;
+    dailyCheckBtn.className = 'daily-check-btn loading';
+    dailyCheckBtn.innerHTML = `<span class="spinner"></span> Processing...`;
+
+    await new Promise(resolve => setTimeout(resolve, 800));
+
+    const today = new Date().toISOString().split('T')[0];
+    if (!state.dailyChecks) state.dailyChecks = [];
+    state.dailyChecks.push(today);
+    state.dailyCheckDoneToday = true;
+    state.lastDailyCheckDate = today;
+    state.tokens = (state.tokens || 0) + CONFIG.DAILY_REWARD;
+    saveState(state);
+
+    showToast({
+      type: 'success',
+      title: '🎉 Daily Check Complete!',
+      message: `You earned +${CONFIG.DAILY_REWARD} Benula! Keep it up!`
+    });
+
+    dailyCheckBtn.className = 'daily-check-btn success';
+    dailyCheckBtn.innerHTML = `
+      <span class="btn-icon">🎉</span>
+      +${CONFIG.DAILY_REWARD} Benula Earned!
+    `;
+    dailyStatus.textContent = `✅ Checked in! +${CONFIG.DAILY_REWARD} Benula added!`;
+    dailyStatus.className = 'daily-status-text success';
+
+    render();
+
+    setTimeout(() => {
+      render();
+    }, 2000);
+  });
+
+  // ============================================================
+  //  CONFIRM REGISTRATION
+  // ============================================================
+  confirmBtn.addEventListener('click', async () => {
+    if (state.registered) return;
+    
+    if (!state.channelJoined || !state.groupJoined) {
+      showToast({
+        type: 'warning',
+        title: '⚠️ Join First',
+        message: 'Please join both Channel and Group before registering.'
+      });
+      return;
+    }
+
+    confirmBtn.textContent = '⏳ Saving...';
+    confirmBtn.disabled = true;
+    confirmBtn.classList.add('loading');
+
+    const refCode = state.refCodeUsed || null;
+    const userId = state.userId;
+    
+    const result = await registerUserDirectly(userId, refCode);
+    
+    if (result.ok) {
+      state.registered = true;
+      state.tokens = CONFIG.REGISTER_REWARD;
+      saveState(state);
+      render();
+      
+      confirmBtn.textContent = '✅ Registration Complete!';
+      confirmBtn.classList.add('success');
+      confirmBtn.classList.remove('loading');
+      
+      showToast({
+        type: 'success',
+        title: '🎉 Registration Successful!',
+        message: `You received ${CONFIG.REGISTER_REWARD} Benula!`
+      });
+      
+      setTimeout(() => {
+        showReferrals();
+      }, 500);
+      
+    } else {
+      confirmBtn.textContent = '❌ Failed';
+      confirmBtn.classList.remove('loading');
+      confirmBtn.classList.add('error');
+      
+      showToast({
+        type: 'error',
+        title: '❌ Registration Failed',
+        message: 'Network error. Please check your connection and try again.'
+      });
+      
+      setTimeout(() => {
+        confirmBtn.textContent = '✔ Confirm & Get 100 Benula';
+        confirmBtn.disabled = false;
+        confirmBtn.classList.remove('error', 'loading');
+        updateConfirmButton();
+      }, 3000);
+    }
+  });
+
+  // ============================================================
+  //  REFERRAL CODE APPLY
+  // ============================================================
+  applyRefBtn.addEventListener('click', () => {
+    if (state.registered) {
+      showToast({
+        type: 'warning',
+        title: '⚠️ Already Registered',
+        message: 'Referral code can only be applied during registration.'
+      });
+      return;
+    }
+    const code = refInput.value.trim();
+    if (!code) {
+      showToast({
+        type: 'warning',
+        title: '⚠️ Empty Code',
+        message: 'Please enter a referral code.'
+      });
+      return;
+    }
+    if (code === state.userId) {
+      showToast({
+        type: 'error',
+        title: '❌ Invalid Code',
+        message: 'You cannot use your own referral code.'
+      });
+      return;
+    }
+    state.refCodeUsed = code;
+    saveState(state);
+    render();
+    showToast({
+      type: 'success',
+      title: '✅ Code Applied!',
+      message: `Referral code "${code}" applied successfully.`
+    });
+  });
+
+  // ============================================================
+  //  COPY REFERRAL LINK
+  // ============================================================
+  copyRefLink.addEventListener('click', () => {
+    const link = refLinkDisplay.textContent;
+    const copyFn = () => {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(link).then(() => {
+          showToast({
+            type: 'success',
+            title: '📋 Copied!',
+            message: 'Referral link copied to clipboard.'
+          });
+        }).catch(() => fallbackCopy(link));
+      } else {
+        fallbackCopy(link);
+      }
+    };
+
+    function fallbackCopy(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      showToast({
+        type: 'success',
+        title: '📋 Copied!',
+        message: 'Referral link copied to clipboard.'
+      });
+    }
+
+    copyFn();
+  });
+
+  // ============================================================
+  //  INIT
+  // ============================================================
+  render();
+  updateTimer();
+  
+  if (state.registered) {
+    showReferrals();
+  }
+  
+  console.log('✅ Benula Airdrop loaded. User ID:', state.userId);
+  console.log('📊 Webhook Server:', CONFIG.WEBHOOK_SERVER);
+</script>
+</body>
+  </html>
