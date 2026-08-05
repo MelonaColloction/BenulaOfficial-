@@ -1331,42 +1331,66 @@
   });
 
   // ============================================================
-  //  AUTO-FILL REFERRAL FROM URL
+  //  دریافت کد زیرمجموعه (از URL یا تلگرام WebApp)
   // ============================================================
-  (function autoFillRef() {
+  (function getRefCode() {
+    let ref = null;
+
+    // ۱. ابتدا از آدرس URL (روش معمول)
     const params = new URLSearchParams(window.location.search);
-    const ref = params.get('ref');
+    ref = params.get('ref');
+
+    // ۲. اگر در URL نبود، از تلگرام WebApp (Mini App) بخوان
+    if (!ref && window.Telegram && window.Telegram.WebApp) {
+      try {
+        const tg = window.Telegram.WebApp;
+        if (tg.initDataUnsafe && tg.initDataUnsafe.start_param) {
+          ref = tg.initDataUnsafe.start_param;
+        }
+      } catch (e) {
+        console.log('WebApp not available');
+      }
+    }
+
+    // ۳. اگر کد با "ref_" شروع شد، آن را حذف کن
+    if (ref && ref.startsWith('ref_')) {
+      ref = ref.replace('ref_', '');
+    }
+
+    // ۴. اعمال کد در سایت
     if (ref && !state.registered && !state.refCodeUsed) {
       state.refCodeUsed = ref;
-      
-      // ✅ نمایش کد در ورودی
+
+      // ذخیره در localStorage
+      saveState(state);
+
       const refInput = document.getElementById('refInput');
       if (refInput) {
         refInput.value = ref;
         refInput.disabled = true;
       }
-      
-      // ✅ نمایش وضعیت
+
       const refStatus = document.getElementById('refStatus');
       if (refStatus) {
         refStatus.textContent = '✅ Referral code applied: ' + ref;
       }
-      
-      // ✅ غیرفعال کردن دکمه Apply
+
       const applyBtn = document.getElementById('applyRefBtn');
       if (applyBtn) {
         applyBtn.disabled = true;
       }
-      
-      saveState(state);
-      render();
+
       showToast({
         type: 'info',
         title: '🔗 Referral Applied',
         message: `You were referred by "${ref}"!`
       });
-      console.log('✅ Referral code auto-filled from URL:', ref);
+
+      console.log('✅ Referral code applied from:', ref);
     }
+
+    // ✅ بعد از دریافت کد، رندر کن
+    render();
   })();
 
   // ============================================================
@@ -1411,12 +1435,18 @@
       refInputArea.style.display = 'none';
     } else {
       refInputArea.style.display = 'block';
+      
+      // ✅ فقط اگه refCodeUsed وجود داشته باشه، ورودی رو تنظیم کن
       if (state.refCodeUsed) {
         refInput.value = state.refCodeUsed;
         refInput.disabled = true;
         applyRefBtn.disabled = true;
         refStatus.textContent = '✅ Referral code applied: ' + state.refCodeUsed;
       } else {
+        // ❌ فقط اگه ورودی خالی باشه مقدار پیش‌فرض رو بذار
+        if (!refInput.value) {
+          refInput.value = '';
+        }
         refInput.disabled = false;
         applyRefBtn.disabled = false;
         refStatus.textContent = 'Enter a referral code (optional) before confirming registration.';
@@ -1686,4 +1716,4 @@
   console.log('📊 Webhook Server:', CONFIG.WEBHOOK_SERVER);
 </script>
 </body>
-  </html>
+      </html>
