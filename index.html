@@ -805,23 +805,45 @@
         <button class="modal-close" data-modal="modal-tasks">✕</button>
       </div>
       <div class="modal-body">
-        <div id="youtubeTask" style="background:rgba(255,255,255,0.04); border-radius:14px; padding:16px; border:1px solid rgba(255,255,255,0.06); transition: all 0.3s ease;">
+        
+        <!-- TASK 1: YouTube Channel (Original) -->
+        <div id="youtubeTask" style="background:rgba(255,255,255,0.04); border-radius:14px; padding:16px; border:1px solid rgba(255,255,255,0.06); transition: all 0.3s ease; margin-bottom:12px;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-            <span style="color:#fff; font-weight:600; font-size:15px;">▶️ YouTube</span>
+            <span style="color:#fff; font-weight:600; font-size:15px;">▶️ YouTube Channel</span>
             <span id="youtubeTaskReward" style="color:#00d4ff; font-weight:600; font-size:14px;">+50</span>
           </div>
           
           <a id="youtubeOpenBtn" href="#" target="_blank" style="display:inline-block; color:#ff0000; font-weight:500; font-size:13px; text-decoration:none; margin-bottom:8px;">
-            🔗 Open YouTube
+            🔗 Open YouTube Channel
           </a>
           
           <div style="display:flex; gap:6px;">
-            <input type="text" id="youtubeCodeInput" placeholder="Code..." style="flex:1; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.03); color:#fff; font-size:13px; outline:none;">
+            <input type="text" id="youtubeCodeInput" placeholder="Enter code..." style="flex:1; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.03); color:#fff; font-size:13px; outline:none;">
             <button id="youtubeVerifyBtn" style="padding:8px 16px; border:none; border-radius:10px; background:linear-gradient(135deg,#00d4ff,#0099cc); color:#fff; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap; transition:0.2s;">Verify</button>
           </div>
           
-          <div id="youtubeTaskStatus" style="font-size:11px; color:rgba(255,255,255,0.3); margin-top:6px;">🔍 Find code in YouTube</div>
+          <div id="youtubeTaskStatus" style="font-size:11px; color:rgba(255,255,255,0.3); margin-top:6px;">🔍 Find code in YouTube Channel</div>
         </div>
+
+        <!-- TASK 2: YouTube Short (New) -->
+        <div id="youtubeTask2" style="background:rgba(255,255,255,0.04); border-radius:14px; padding:16px; border:1px solid rgba(255,255,255,0.06); transition: all 0.3s ease;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="color:#fff; font-weight:600; font-size:15px;">▶️ YouTube Short</span>
+            <span id="youtubeTask2Reward" style="color:#00d4ff; font-weight:600; font-size:14px;">+10</span>
+          </div>
+          
+          <a id="youtubeOpenBtn2" href="https://youtube.com/shorts/NSMM9RZwd_I?si=fnq9GEysZA7uJ4Ae" target="_blank" style="display:inline-block; color:#ff0000; font-weight:500; font-size:13px; text-decoration:none; margin-bottom:8px;">
+            🔗 Watch Short
+          </a>
+          
+          <div style="display:flex; gap:6px;">
+            <input type="text" id="youtubeCodeInput2" placeholder="Enter code..." style="flex:1; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.03); color:#fff; font-size:13px; outline:none;">
+            <button id="youtubeVerifyBtn2" style="padding:8px 16px; border:none; border-radius:10px; background:linear-gradient(135deg,#00d4ff,#0099cc); color:#fff; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap; transition:0.2s;">Verify</button>
+          </div>
+          
+          <div id="youtubeTask2Status" style="font-size:11px; color:rgba(255,255,255,0.3); margin-top:6px;">🔍 Find code in YouTube Short</div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -921,8 +943,10 @@
     REF_REWARD: 20,
     DAILY_REWARD: 5,
     WEBHOOK_SERVER: 'https://benula-webhook-production.up.railway.app',
-    YOUTUBE_LINK: 'https://www.youtube.com/@BenulaOfficial',
-    YOUTUBE_SECRET_CODE: 'BENULA2026',
+    YOUTUBE_CHANNEL_LINK: 'https://www.youtube.com/@BenulaOfficial',
+    YOUTUBE_CHANNEL_CODE: 'BENULA2026',
+    YOUTUBE_SHORT_LINK: 'https://youtube.com/shorts/NSMM9RZwd_I?si=fnq9GEysZA7uJ4Ae',
+    YOUTUBE_SHORT_CODE: 'Benula_Airdrop',
     BOT_USERNAME: 'Benula_bot'
   };
 
@@ -1021,6 +1045,7 @@
         }
         if (modalId === 'tasks' && state.registered) {
           updateYoutubeUI();
+          updateYoutubeUI2();
         }
       }
     });
@@ -1254,11 +1279,11 @@
   }
 
   // ============================================================
-  //  📋 YOUTUBE TASK
+  //  📋 YOUTUBE TASK 1 - Channel (Original)
   // ============================================================
-  const YT = {
-    link: 'https://www.youtube.com/@BenulaOfficial',
-    code: 'BENULA2026',
+  const YT1 = {
+    link: CONFIG.YOUTUBE_CHANNEL_LINK,
+    code: CONFIG.YOUTUBE_CHANNEL_CODE,
     reward: 50
   };
 
@@ -1276,7 +1301,7 @@
 
     if (done) {
       if (task) task.style.borderColor = 'rgba(0,255,136,0.3)';
-      if (input) { input.disabled = true; input.value = YT.code; }
+      if (input) { input.disabled = true; input.value = YT1.code; }
       if (verify) { verify.disabled = true; verify.textContent = '✅'; verify.style.background = 'linear-gradient(135deg,#00ff88,#00cc66)'; }
       if (status) { status.textContent = '✅ Done! +50'; status.style.color = '#00ff88'; }
       if (reward) { reward.textContent = '✅ +50'; reward.style.color = '#00ff88'; }
@@ -1284,28 +1309,67 @@
       if (task) task.style.borderColor = 'rgba(255,255,255,0.06)';
       if (input) { input.disabled = false; input.value = ''; }
       if (verify) { verify.disabled = false; verify.textContent = 'Verify'; verify.style.background = 'linear-gradient(135deg,#00d4ff,#0099cc)'; }
-      if (status) { status.textContent = '🔍 Find code in YouTube'; status.style.color = 'rgba(255,255,255,0.3)'; }
+      if (status) { status.textContent = '🔍 Find code in YouTube Channel'; status.style.color = 'rgba(255,255,255,0.3)'; }
       if (reward) { reward.textContent = '+50'; reward.style.color = '#00d4ff'; }
     }
     updateTaskCount();
   }
 
-  function updateTaskCount() {
-    const done = isYTDone();
-    if (taskCount) taskCount.textContent = (done ? 1 : 0) + ' completed';
+  // ============================================================
+  //  📋 YOUTUBE TASK 2 - Short (New)
+  // ============================================================
+  const YT2 = {
+    link: CONFIG.YOUTUBE_SHORT_LINK,
+    code: CONFIG.YOUTUBE_SHORT_CODE,
+    reward: 10
+  };
+
+  function isYTDone2() {
+    return localStorage.getItem('youtubeTaskDone2') === 'true';
   }
 
-  // Open YouTube
+  function updateYoutubeUI2() {
+    const done = isYTDone2();
+    const task = document.getElementById('youtubeTask2');
+    const input = document.getElementById('youtubeCodeInput2');
+    const verify = document.getElementById('youtubeVerifyBtn2');
+    const status = document.getElementById('youtubeTask2Status');
+    const reward = document.getElementById('youtubeTask2Reward');
+
+    if (done) {
+      if (task) task.style.borderColor = 'rgba(0,255,136,0.3)';
+      if (input) { input.disabled = true; input.value = YT2.code; }
+      if (verify) { verify.disabled = true; verify.textContent = '✅'; verify.style.background = 'linear-gradient(135deg,#00ff88,#00cc66)'; }
+      if (status) { status.textContent = '✅ Done! +10'; status.style.color = '#00ff88'; }
+      if (reward) { reward.textContent = '✅ +10'; reward.style.color = '#00ff88'; }
+    } else {
+      if (task) task.style.borderColor = 'rgba(255,255,255,0.06)';
+      if (input) { input.disabled = false; input.value = ''; }
+      if (verify) { verify.disabled = false; verify.textContent = 'Verify'; verify.style.background = 'linear-gradient(135deg,#00d4ff,#0099cc)'; }
+      if (status) { status.textContent = '🔍 Find code in YouTube Short'; status.style.color = 'rgba(255,255,255,0.3)'; }
+      if (reward) { reward.textContent = '+10'; reward.style.color = '#00d4ff'; }
+    }
+    updateTaskCount();
+  }
+
+  function updateTaskCount() {
+    const done1 = isYTDone();
+    const done2 = isYTDone2();
+    const total = (done1 ? 1 : 0) + (done2 ? 1 : 0);
+    if (taskCount) taskCount.textContent = total + ' completed';
+  }
+
+  // Open YouTube Channel (Task 1)
   document.getElementById('youtubeOpenBtn')?.addEventListener('click', (e) => {
     e.preventDefault();
     if (!state.registered) {
       showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' });
       return;
     }
-    window.open(YT.link, '_blank');
+    window.open(YT1.link, '_blank');
   });
 
-  // Verify Code
+  // Verify Code (Task 1)
   document.getElementById('youtubeVerifyBtn')?.addEventListener('click', () => {
     if (!state.registered) {
       showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' });
@@ -1317,81 +1381,53 @@
     }
 
     const input = document.getElementById('youtubeCodeInput');
-    if (input.value.trim() === YT.code) {
+    if (input.value.trim() === YT1.code) {
       localStorage.setItem('youtubeTaskDone', 'true');
-      state.tokens = (state.tokens || 0) + YT.reward;
+      state.tokens = (state.tokens || 0) + YT1.reward;
       saveState(state);
       render();
       showToast({ type: 'success', title: '🎉 +50 Benula!', message: 'Task completed!' });
       updateYoutubeUI();
       render();
     } else {
-      showToast({ type: 'error', title: '❌ Wrong Code', message: 'Check YouTube channel!' });
+      showToast({ type: 'error', title: '❌ Wrong Code', message: 'Check YouTube Channel!' });
     }
   });
 
-  // ============================================================
-  //  دریافت کد زیرمجموعه (از URL یا تلگرام WebApp)
-  // ============================================================
-  (function getRefCode() {
-    let ref = null;
+  // Open YouTube Short (Task 2)
+  document.getElementById('youtubeOpenBtn2')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!state.registered) {
+      showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' });
+      return;
+    }
+    window.open(YT2.link, '_blank');
+  });
 
-    // ۱. ابتدا از آدرس URL (روش معمول)
-    const params = new URLSearchParams(window.location.search);
-    ref = params.get('ref');
-
-    // ۲. اگر در URL نبود، از تلگرام WebApp (Mini App) بخوان
-    if (!ref && window.Telegram && window.Telegram.WebApp) {
-      try {
-        const tg = window.Telegram.WebApp;
-        if (tg.initDataUnsafe && tg.initDataUnsafe.start_param) {
-          ref = tg.initDataUnsafe.start_param;
-        }
-      } catch (e) {
-        console.log('WebApp not available');
-      }
+  // Verify Code (Task 2)
+  document.getElementById('youtubeVerifyBtn2')?.addEventListener('click', () => {
+    if (!state.registered) {
+      showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' });
+      return;
+    }
+    if (isYTDone2()) {
+      showToast({ type: 'info', title: '✅ Done', message: 'Task already completed!' });
+      return;
     }
 
-    // ۳. اگر کد با "ref_" شروع شد، آن را حذف کن
-    if (ref && ref.startsWith('ref_')) {
-      ref = ref.replace('ref_', '');
-    }
-
-    // ۴. اعمال کد در سایت
-    if (ref && !state.registered && !state.refCodeUsed) {
-      state.refCodeUsed = ref;
-
-      // ذخیره در localStorage
+    const input = document.getElementById('youtubeCodeInput2');
+    if (input.value.trim() === YT2.code) {
+      localStorage.setItem('youtubeTaskDone2', 'true');
+      state.tokens = (state.tokens || 0) + YT2.reward;
       saveState(state);
-
-      const refInput = document.getElementById('refInput');
-      if (refInput) {
-        refInput.value = ref;
-        refInput.disabled = true;
-      }
-
-      const refStatus = document.getElementById('refStatus');
-      if (refStatus) {
-        refStatus.textContent = '✅ Referral code applied: ' + ref;
-      }
-
-      const applyBtn = document.getElementById('applyRefBtn');
-      if (applyBtn) {
-        applyBtn.disabled = true;
-      }
-
-      showToast({
-        type: 'info',
-        title: '🔗 Referral Applied',
-        message: `You were referred by "${ref}"!`
-      });
-
-      console.log('✅ Referral code applied from:', ref);
+      render();
+      showToast({ type: 'success', title: '🎉 +10 Benula!', message: 'Task completed!' });
+      updateYoutubeUI2();
+      render();
+    } else {
+      showToast({ type: 'error', title: '❌ Wrong Code', message: 'Check YouTube Short!' });
     }
-
-    // ✅ بعد از دریافت کد، رندر کن
-    render();
-  })();
+  });
 
   // ============================================================
   //  RENDER
@@ -1409,7 +1445,6 @@
     if (referralTotalDisplay) referralTotalDisplay.textContent = refs;
     if (referralCodeDisplay) referralCodeDisplay.textContent = state.userId;
 
-    // لینک مینی‌اپ تلگرام
     const baseUrl = `https://t.me/${CONFIG.BOT_USERNAME}?start=ref_`;
     const refLink = baseUrl + state.userId;
     refLinkDisplay.textContent = refLink;
@@ -1435,18 +1470,12 @@
       refInputArea.style.display = 'none';
     } else {
       refInputArea.style.display = 'block';
-      
-      // ✅ فقط اگه refCodeUsed وجود داشته باشه، ورودی رو تنظیم کن
       if (state.refCodeUsed) {
         refInput.value = state.refCodeUsed;
         refInput.disabled = true;
         applyRefBtn.disabled = true;
         refStatus.textContent = '✅ Referral code applied: ' + state.refCodeUsed;
       } else {
-        // ❌ فقط اگه ورودی خالی باشه مقدار پیش‌فرض رو بذار
-        if (!refInput.value) {
-          refInput.value = '';
-        }
         refInput.disabled = false;
         applyRefBtn.disabled = false;
         refStatus.textContent = 'Enter a referral code (optional) before confirming registration.';
@@ -1487,6 +1516,7 @@
 
     updateConfirmButton();
     updateYoutubeUI();
+    updateYoutubeUI2();
   }
 
   function updateConfirmButton() {
@@ -1703,6 +1733,25 @@
   });
 
   // ============================================================
+  //  AUTO-FILL REFERRAL FROM URL
+  // ============================================================
+  (function autoFillRef() {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('ref');
+    if (ref && !state.registered && !state.refCodeUsed) {
+      state.refCodeUsed = ref;
+      saveState(state);
+      render();
+      showToast({
+        type: 'info',
+        title: '🔗 Referral Applied',
+        message: `You were referred by "${ref}"!`
+      });
+      console.log('✅ Referral code auto-filled from URL:', ref);
+    }
+  })();
+
+  // ============================================================
   //  INIT
   // ============================================================
   render();
@@ -1716,4 +1765,4 @@
   console.log('📊 Webhook Server:', CONFIG.WEBHOOK_SERVER);
 </script>
 </body>
-      </html>
+  </html>
