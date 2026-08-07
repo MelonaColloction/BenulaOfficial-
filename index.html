@@ -13,8 +13,8 @@
     }
     body {
       min-height: 100vh;
-      background: #1a1a2e;
-      background: radial-gradient(ellipse at 30% 20%, #1a1a2e 0%, #0d0d1a 70%);
+      background: #0f0a1a;
+      background: radial-gradient(ellipse at 30% 20%, #1a1030 0%, #0a0618 70%);
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -29,12 +29,12 @@
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 28px;
       box-shadow: 0 25px 50px -8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.03);
       padding: 24px 20px;
       margin-bottom: 18px;
-      transition: all 0.2s;
+      transition: all 0.3s;
     }
     .header {
       display: flex;
@@ -45,15 +45,29 @@
     .logo {
       font-size: 26px;
       font-weight: 700;
-      background: linear-gradient(135deg, #00d4ff, #00b8e6);
+      background: linear-gradient(135deg, #a78bfa, #7c3aed, #3b82f6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo .level-badge {
+      font-size: 20px;
+      -webkit-text-fill-color: initial;
+      background: none;
+      display: inline-block;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
     }
     .badge {
-      background: rgba(0, 212, 255, 0.12);
-      border: 1px solid rgba(0, 212, 255, 0.15);
-      color: #00d4ff;
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.15), rgba(59, 130, 246, 0.15));
+      border: 1px solid rgba(167, 139, 250, 0.2);
+      color: #a78bfa;
       font-size: 11px;
       font-weight: 600;
       padding: 4px 14px;
@@ -62,7 +76,7 @@
       text-transform: uppercase;
     }
     .subtitle {
-      color: #e0e0e0;
+      color: #c4b5d4;
       font-size: 13px;
       font-weight: 400;
       letter-spacing: 2px;
@@ -84,17 +98,20 @@
       color: #FFFFFF;
       letter-spacing: -1px;
       line-height: 1;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .token-label {
       font-size: 18px;
       font-weight: 500;
-      color: #e0e0e0;
+      color: #c4b5d4;
       opacity: 0.7;
       margin-left: 4px;
     }
     .token-sub {
       font-size: 13px;
-      color: #e0e0e0;
+      color: #c4b5d4;
       opacity: 0.35;
       margin-left: auto;
       font-weight: 300;
@@ -113,38 +130,40 @@
       background: rgba(255, 255, 255, 0.03);
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.04);
-      transition: 0.2s;
+      transition: 0.3s;
     }
     .join-item:hover {
       background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(167, 139, 250, 0.15);
     }
     .join-item span {
-      color: #e0e0e0;
+      color: #c4b5d4;
       opacity: 0.8;
       font-size: 14px;
       font-weight: 500;
     }
     .join-item .join-btn {
-      background: rgba(0, 212, 255, 0.08);
-      border: 1px solid rgba(0, 212, 255, 0.15);
-      color: #00d4ff;
+      background: rgba(167, 139, 250, 0.12);
+      border: 1px solid rgba(167, 139, 250, 0.15);
+      color: #a78bfa;
       font-size: 13px;
       font-weight: 600;
       padding: 6px 20px;
       border-radius: 40px;
       cursor: pointer;
-      transition: 0.2s;
+      transition: 0.3s;
       text-decoration: none;
       display: inline-block;
     }
     .join-item .join-btn:hover {
-      background: rgba(0, 212, 255, 0.15);
-      border-color: rgba(0, 212, 255, 0.3);
+      background: rgba(167, 139, 250, 0.2);
+      border-color: rgba(167, 139, 250, 0.3);
+      transform: scale(1.02);
     }
     .join-item .join-btn.verified {
-      background: rgba(0, 255, 136, 0.1);
-      border-color: rgba(0, 255, 136, 0.2);
-      color: #00ff88;
+      background: rgba(52, 211, 153, 0.12);
+      border-color: rgba(52, 211, 153, 0.2);
+      color: #34d399;
       cursor: default;
     }
     .ref-input-area {
@@ -155,7 +174,7 @@
       border: 1px solid rgba(255, 255, 255, 0.04);
     }
     .ref-input-area label {
-      color: #e0e0e0;
+      color: #c4b5d4;
       opacity: 0.5;
       font-size: 13px;
       display: block;
@@ -174,10 +193,10 @@
       color: #FFFFFF;
       font-size: 14px;
       outline: none;
-      transition: 0.2s;
+      transition: 0.3s;
     }
     .ref-input-area input[type="text"]:focus {
-      border-color: rgba(0, 212, 255, 0.3);
+      border-color: rgba(167, 139, 250, 0.3);
       background: rgba(255, 255, 255, 0.05);
     }
     .ref-input-area input[type="text"]:disabled {
@@ -188,23 +207,24 @@
       padding: 10px 20px;
       border: none;
       border-radius: 12px;
-      background: linear-gradient(135deg, #00d4ff, #0099cc);
+      background: linear-gradient(135deg, #a78bfa, #7c3aed);
       color: #FFFFFF;
       font-weight: 600;
       font-size: 13px;
       cursor: pointer;
-      transition: 0.2s;
+      transition: 0.3s;
       white-space: nowrap;
     }
     .ref-input-area .ref-apply-btn:hover {
       opacity: 0.85;
+      transform: scale(1.02);
     }
     .ref-input-area .ref-apply-btn:disabled {
       opacity: 0.3;
       cursor: not-allowed;
     }
     .ref-input-area .ref-status {
-      color: #e0e0e0;
+      color: #c4b5d4;
       opacity: 0.4;
       font-size: 12px;
       margin-top: 6px;
@@ -218,15 +238,15 @@
       font-size: 16px;
       font-weight: 700;
       color: #FFFFFF;
-      background: linear-gradient(135deg, #00d4ff, #0099cc);
+      background: linear-gradient(135deg, #a78bfa, #7c3aed);
       cursor: pointer;
-      transition: 0.25s;
-      box-shadow: 0 8px 24px -6px rgba(0, 212, 255, 0.3);
+      transition: 0.3s;
+      box-shadow: 0 8px 24px -6px rgba(124, 58, 237, 0.3);
       letter-spacing: 0.3px;
     }
-    .confirm-btn:hover {
+    .confirm-btn:hover:not(:disabled) {
       transform: scale(1.01);
-      box-shadow: 0 12px 32px -8px rgba(0, 212, 255, 0.45);
+      box-shadow: 0 12px 32px -8px rgba(124, 58, 237, 0.45);
     }
     .confirm-btn:disabled {
       opacity: 0.4;
@@ -234,11 +254,11 @@
       transform: none;
     }
     .confirm-btn.success {
-      background: linear-gradient(135deg, #00ff88, #00cc66);
-      box-shadow: 0 8px 24px -6px rgba(0, 255, 136, 0.3);
+      background: linear-gradient(135deg, #34d399, #10b981);
+      box-shadow: 0 8px 24px -6px rgba(52, 211, 153, 0.3);
     }
     .confirm-btn.success:hover {
-      box-shadow: 0 12px 32px -8px rgba(0, 255, 136, 0.45);
+      box-shadow: 0 12px 32px -8px rgba(52, 211, 153, 0.45);
     }
     .confirm-btn.loading {
       background: linear-gradient(135deg, #6b7280, #4b5563);
@@ -246,12 +266,12 @@
       box-shadow: none;
     }
     .confirm-btn.error {
-      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      background: linear-gradient(135deg, #f87171, #dc2626);
       box-shadow: none;
     }
     .menu-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 12px;
       margin: 8px 0 4px;
     }
@@ -262,12 +282,13 @@
       padding: 18px 10px 14px;
       text-align: center;
       cursor: pointer;
-      transition: 0.2s;
+      transition: 0.3s;
       backdrop-filter: blur(4px);
+      position: relative;
     }
     .menu-card:hover {
       background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(0, 212, 255, 0.15);
+      border-color: rgba(167, 139, 250, 0.2);
       transform: translateY(-2px);
     }
     .menu-card .icon {
@@ -277,14 +298,26 @@
     }
     .menu-card .label {
       color: #FFFFFF;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
     }
     .menu-card .sub-label {
-      color: #e0e0e0;
-      opacity: 0.35;
-      font-size: 11px;
+      color: #c4b5d4;
+      opacity: 0.5;
+      font-size: 10px;
       margin-top: 2px;
+    }
+    .menu-card .task-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #0a0618;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      border: 2px solid #0f0a1a;
     }
     .distro-box {
       margin-top: 14px;
@@ -295,7 +328,7 @@
       display: flex;
       justify-content: space-between;
       font-size: 13px;
-      color: #e0e0e0;
+      color: #c4b5d4;
       opacity: 0.7;
       padding: 5px 0;
     }
@@ -311,11 +344,11 @@
     .distro-row .bar-fill {
       height: 100%;
       border-radius: 10px;
-      background: linear-gradient(90deg, #00d4ff, #00b8e6);
+      background: linear-gradient(90deg, #a78bfa, #7c3aed);
       width: 0%;
     }
     .distro-row .pct {
-      color: #e0e0e0;
+      color: #c4b5d4;
       opacity: 0.5;
       font-weight: 500;
       min-width: 36px;
@@ -327,55 +360,59 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       z-index: 999;
       display: none;
       justify-content: center;
       align-items: center;
       padding: 20px;
-      animation: fadeIn 0.25s ease;
+      animation: fadeIn 0.2s ease;
     }
     .modal-overlay.active {
       display: flex;
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.96); }
+      from { opacity: 0; transform: scale(0.97); }
       to { opacity: 1; transform: scale(1); }
     }
     .modal {
-      background: rgba(18, 10, 32, 0.95);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      background: rgba(15, 10, 26, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 32px;
-      max-width: 400px;
+      border-radius: 28px;
+      max-width: 420px;
       width: 100%;
       max-height: 85vh;
       overflow-y: auto;
-      padding: 28px 22px 22px;
+      padding: 24px 18px 18px;
       box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.8);
+      -webkit-overflow-scrolling: touch;
     }
+    .modal::-webkit-scrollbar { width: 2px; }
+    .modal::-webkit-scrollbar-track { background: transparent; }
+    .modal::-webkit-scrollbar-thumb { background: rgba(167, 139, 250, 0.2); border-radius: 10px; }
     .modal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
     .modal-header h2 {
       color: #fff;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 700;
     }
     .modal-close {
       background: rgba(255, 255, 255, 0.05);
       border: none;
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 24px;
-      width: 40px;
-      height: 40px;
-      border-radius: 40px;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 36px;
       cursor: pointer;
       transition: 0.2s;
       display: flex;
@@ -383,88 +420,399 @@
       justify-content: center;
     }
     .modal-close:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
       color: #fff;
     }
     .modal-body {
       color: rgba(255, 255, 255, 0.8);
       font-size: 14px;
-      line-height: 1.7;
+      line-height: 1.6;
     }
-    .modal-body .info-row {
+    .modal-tabs {
       display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      gap: 4px;
+      margin-bottom: 14px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      flex-wrap: nowrap;
+      -webkit-overflow-scrolling: touch;
     }
-    .modal-body .info-row .label {
+    .modal-tabs::-webkit-scrollbar { height: 2px; }
+    .modal-tabs::-webkit-scrollbar-thumb { background: rgba(167, 139, 250, 0.2); border-radius: 10px; }
+    .modal-tab {
+      padding: 6px 14px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.02);
       color: rgba(255, 255, 255, 0.4);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
-    .modal-body .info-row .value {
-      color: #fff;
-      font-weight: 500;
+    .modal-tab:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.7);
     }
-    .modal-body .ref-link-box {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 10px 12px;
+    .modal-tab.active {
+      background: rgba(167, 139, 250, 0.12);
+      border-color: rgba(167, 139, 250, 0.15);
+      color: #a78bfa;
+    }
+    .modal-tab .tab-badge {
+      background: rgba(167, 139, 250, 0.1);
+      padding: 0 6px;
       border-radius: 12px;
+      font-size: 8px;
+      margin-left: 3px;
+      color: #a78bfa;
+    }
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    
+    /* ===== TASK CARDS - Optimized ===== */
+    .task-item {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 14px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      margin-bottom: 10px;
+      transition: all 0.2s ease;
+      will-change: transform;
+    }
+    .task-item:hover {
+      border-color: rgba(167, 139, 250, 0.1);
+      transform: translateY(-1px);
+    }
+    .task-item.done {
+      border-color: rgba(52, 211, 153, 0.15);
+      background: rgba(52, 211, 153, 0.02);
+    }
+    .task-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 10px 0;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      margin-bottom: 4px;
     }
-    .modal-body .ref-link-box span {
-      color: rgba(255, 255, 255, 0.6);
+    .task-title {
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .task-title .task-icon {
+      font-size: 16px;
+    }
+    .task-title .task-platform {
+      font-size: 9px;
+      background: rgba(167, 139, 250, 0.08);
+      padding: 1px 8px;
+      border-radius: 12px;
+      color: #a78bfa;
+      font-weight: 500;
+    }
+    .task-title .task-platform.done {
+      background: rgba(52, 211, 153, 0.08);
+      color: #34d399;
+    }
+    .task-reward {
+      font-weight: 700;
       font-size: 13px;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding: 0 8px;
+    }
+    .task-reward.done {
+      background: linear-gradient(135deg, #34d399, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .task-desc {
+      color: rgba(255, 255, 255, 0.35);
+      font-size: 11px;
+      margin-bottom: 10px;
+    }
+    .task-actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .task-btn {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #fff;
+    }
+    .task-btn.open-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .task-btn.open-btn:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .task-btn.open-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .task-btn.verify-btn {
+      background: linear-gradient(135deg, #a78bfa, #7c3aed);
+    }
+    .task-btn.verify-btn:hover:not(:disabled) {
+      opacity: 0.85;
+      transform: scale(1.02);
+    }
+    .task-btn.verify-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .task-btn.done-btn {
+      background: linear-gradient(135deg, #34d399, #10b981);
+      cursor: default;
+    }
+    .task-input {
+      flex: 1;
+      padding: 6px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.02);
+      color: #fff;
+      font-size: 12px;
+      outline: none;
+      transition: all 0.2s;
+      min-width: 80px;
+      height: 32px;
+    }
+    .task-input:focus {
+      border-color: rgba(167, 139, 250, 0.25);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .task-input:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .task-status {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.3);
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .task-status .status-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .task-status .status-dot.active {
+      background: #fbbf24;
+      animation: blink 1s ease-in-out infinite;
+    }
+    .task-status .status-dot.success {
+      background: #34d399;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .task-status.success {
+      color: #34d399;
+    }
+    .task-timer {
+      font-size: 10px;
+      color: #fbbf24;
+      margin-top: 4px;
+      font-weight: 500;
+      background: rgba(251, 191, 36, 0.04);
+      padding: 1px 10px;
+      border-radius: 12px;
+      display: inline-block;
+    }
+    .task-progress {
+      width: 100%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 2px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+    .task-progress .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #a78bfa, #7c3aed);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+    .task-progress .progress-fill.done {
+      background: linear-gradient(90deg, #34d399, #10b981);
+    }
+    .task-item.completed-hidden {
+      display: none !important;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 30px 0;
+      color: rgba(255, 255, 255, 0.25);
+    }
+    .empty-state .empty-icon {
+      font-size: 40px;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .empty-state .empty-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+    .empty-state .empty-desc {
+      font-size: 12px;
+    }
+
+    /* Ref & Token Rewards */
+    .ref-reward-item, .token-reward-item {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.15s;
+    }
+    .ref-reward-item:hover, .token-reward-item:hover {
+      border-color: rgba(167, 139, 250, 0.06);
+    }
+    .ref-reward-item .ref-count, .token-reward-item .token-need {
+      color: #fff;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .ref-reward-item .ref-bonus, .token-reward-item .token-bonus {
+      color: #fbbf24;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .ref-reward-item .ref-status, .token-reward-item .token-status {
+      font-size: 10px;
+      padding: 1px 10px;
+      border-radius: 12px;
+    }
+    .ref-reward-item .ref-status.claimed, .token-reward-item .token-status.claimed {
+      background: rgba(52, 211, 153, 0.08);
+      color: #34d399;
+    }
+    .ref-reward-item .ref-status.unclaimed, .token-reward-item .token-status.unclaimed {
+      background: rgba(251, 191, 36, 0.08);
+      color: #fbbf24;
+    }
+    .ref-reward-item .ref-status.locked, .token-reward-item .token-status.locked {
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(255, 255, 255, 0.15);
+    }
+    .claim-btn {
+      padding: 2px 12px;
+      border: none;
+      border-radius: 14px;
+      font-size: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #0a0618;
+    }
+    .claim-btn:hover:not(:disabled) {
+      transform: scale(1.04);
+    }
+    .claim-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    .info-row .label { color: rgba(255, 255, 255, 0.35); font-size: 13px; }
+    .info-row .value { color: #fff; font-weight: 500; font-size: 13px; }
+
+    .ref-link-box {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 8px 12px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 8px 0;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    .ref-link-box span {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 12px;
       word-break: break-all;
       flex: 1;
-      margin-right: 8px;
+      margin-right: 6px;
     }
-    .modal-body .ref-link-box button {
-      background: rgba(0, 212, 255, 0.12);
+    .ref-link-box button {
+      background: rgba(167, 139, 250, 0.08);
       border: none;
-      color: #00d4ff;
-      padding: 4px 12px;
-      border-radius: 30px;
-      font-size: 12px;
+      color: #a78bfa;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
       font-weight: 600;
       cursor: pointer;
       transition: 0.2s;
     }
-    .modal-body .ref-link-box button:hover {
-      background: rgba(0, 212, 255, 0.2);
+    .ref-link-box button:hover {
+      background: rgba(167, 139, 250, 0.15);
     }
-    .modal::-webkit-scrollbar { width: 3px; }
-    .modal::-webkit-scrollbar-track { background: transparent; }
-    .modal::-webkit-scrollbar-thumb { background: rgba(0, 212, 255, 0.3); border-radius: 10px; }
 
     .daily-check-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
-      padding: 8px 0;
+      gap: 10px;
+      padding: 6px 0;
     }
     .daily-check-btn {
       width: 100%;
-      padding: 16px 24px;
+      padding: 14px 20px;
       border: none;
       border-radius: 60px;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
       color: #fff;
       cursor: pointer;
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
-      background: linear-gradient(135deg, #00d4ff, #0099cc);
-      box-shadow: 0 8px 32px -6px rgba(0, 212, 255, 0.4);
+      background: linear-gradient(135deg, #a78bfa, #7c3aed);
+      box-shadow: 0 8px 32px -6px rgba(124, 58, 237, 0.3);
       letter-spacing: 0.5px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
     }
     .daily-check-btn::before {
       content: '';
@@ -473,218 +821,145 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+      background: radial-gradient(circle, rgba(255,255,255,0.06), transparent 60%);
       opacity: 0;
       transition: opacity 0.3s ease;
     }
-    .daily-check-btn:hover:not(:disabled)::before {
-      opacity: 1;
-    }
+    .daily-check-btn:hover:not(:disabled)::before { opacity: 1; }
     .daily-check-btn:hover:not(:disabled) {
       transform: translateY(-2px) scale(1.01);
-      box-shadow: 0 12px 40px -8px rgba(0, 212, 255, 0.6);
+      box-shadow: 0 12px 40px -8px rgba(124, 58, 237, 0.5);
     }
-    .daily-check-btn:active:not(:disabled) {
-      transform: scale(0.97);
-    }
+    .daily-check-btn:active:not(:disabled) { transform: scale(0.97); }
     .daily-check-btn:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none !important;
-      box-shadow: 0 4px 16px -4px rgba(0, 212, 255, 0.15);
+      box-shadow: 0 4px 16px -4px rgba(124, 58, 237, 0.1);
     }
-    .daily-check-btn .btn-icon {
-      font-size: 22px;
-    }
+    .daily-check-btn .btn-icon { font-size: 20px; }
     .daily-check-btn .btn-reward {
-      background: rgba(255,255,255,0.12);
-      padding: 2px 14px;
-      border-radius: 40px;
-      font-size: 14px;
+      background: rgba(255,255,255,0.08);
+      padding: 1px 12px;
+      border-radius: 30px;
+      font-size: 13px;
       font-weight: 600;
     }
     .daily-check-btn.success {
-      background: linear-gradient(135deg, #00ff88, #00cc66);
-      box-shadow: 0 8px 32px -6px rgba(0, 255, 136, 0.4);
+      background: linear-gradient(135deg, #34d399, #10b981);
+      box-shadow: 0 8px 32px -6px rgba(52, 211, 153, 0.3);
     }
     .daily-check-btn.success:hover:not(:disabled) {
-      box-shadow: 0 12px 40px -8px rgba(0, 255, 136, 0.6);
+      box-shadow: 0 12px 40px -8px rgba(52, 211, 153, 0.5);
     }
     .daily-check-btn.loading {
       background: linear-gradient(135deg, #6b7280, #4b5563);
       cursor: wait;
-      box-shadow: 0 4px 16px -4px rgba(107, 114, 128, 0.3);
+      box-shadow: none;
     }
     .daily-check-btn .spinner {
       display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 2px solid rgba(255,255,255,0.2);
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.15);
       border-top-color: #fff;
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
     }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
     .daily-status-text {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.4);
-      text-align: center;
-      padding: 4px 0;
-    }
-    .daily-status-text.success {
-      color: #00ff88;
-    }
-    .daily-status-text.error {
-      color: #f87171;
-    }
-    .daily-timer {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.3);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.35);
       text-align: center;
       padding: 2px 0;
     }
-    .action-btn {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 60px;
-      background: linear-gradient(135deg, #00d4ff, #0099cc);
-      color: #fff;
-      font-weight: 600;
-      font-size: 14px;
-      cursor: pointer;
-      transition: 0.2s;
-      margin-top: 6px;
-    }
-    .action-btn:hover {
-      opacity: 0.9;
-      transform: scale(1.01);
-    }
-    .action-btn:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
+    .daily-status-text.success { color: #34d399; }
+    .daily-status-text.error { color: #f87171; }
+    .daily-timer {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.25);
+      text-align: center;
+      padding: 2px 0;
     }
 
-    /* ===== TOAST SYSTEM ===== */
+    /* TOAST */
     .toast-container {
       position: fixed;
-      top: 20px;
+      top: 16px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 9999;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
-      width: 90%;
-      max-width: 420px;
+      gap: 8px;
+      width: 92%;
+      max-width: 400px;
       pointer-events: none;
     }
     .toast {
       pointer-events: auto;
-      background: rgba(26, 26, 46, 0.92);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 18px;
-      padding: 14px 20px;
+      background: rgba(15, 10, 26, 0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 12px 16px;
       width: 100%;
       display: flex;
       align-items: center;
-      gap: 14px;
-      box-shadow: 0 20px 60px -12px rgba(0, 0, 0, 0.6);
-      animation: toastIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      transition: all 0.3s ease;
+      gap: 12px;
+      box-shadow: 0 16px 48px -12px rgba(0, 0, 0, 0.6);
+      animation: toastIn 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .toast.hide {
-      animation: toastOut 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
+    .toast.hide { animation: toastOut 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
     @keyframes toastIn {
-      from {
-        opacity: 0;
-        transform: translateY(-30px) scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      from { opacity: 0; transform: translateY(-20px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
     @keyframes toastOut {
-      from {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-      to {
-        opacity: 0;
-        transform: translateY(-20px) scale(0.95);
-      }
+      from { opacity: 1; transform: translateY(0) scale(1); }
+      to { opacity: 0; transform: translateY(-16px) scale(0.96); }
     }
     .toast .toast-icon {
-      width: 38px;
-      height: 38px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 16px;
       flex-shrink: 0;
     }
-    .toast .toast-icon.success {
-      background: rgba(0, 255, 136, 0.12);
-      border: 1px solid rgba(0, 255, 136, 0.15);
-    }
-    .toast .toast-icon.error {
-      background: rgba(248, 113, 113, 0.12);
-      border: 1px solid rgba(248, 113, 113, 0.15);
-    }
-    .toast .toast-icon.warning {
-      background: rgba(251, 191, 36, 0.12);
-      border: 1px solid rgba(251, 191, 36, 0.15);
-    }
-    .toast .toast-icon.info {
-      background: rgba(0, 212, 255, 0.12);
-      border: 1px solid rgba(0, 212, 255, 0.15);
-    }
-    .toast .toast-content {
-      flex: 1;
-    }
-    .toast .toast-title {
-      color: #FFFFFF;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-    .toast .toast-message {
-      color: #e0e0e0;
-      font-size: 13px;
-      opacity: 0.7;
-      line-height: 1.4;
-    }
+    .toast .toast-icon.success { background: rgba(52, 211, 153, 0.1); border: 1px solid rgba(52, 211, 153, 0.1); }
+    .toast .toast-icon.error { background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.1); }
+    .toast .toast-icon.warning { background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.1); }
+    .toast .toast-icon.info { background: rgba(167, 139, 250, 0.1); border: 1px solid rgba(167, 139, 250, 0.1); }
+    .toast .toast-content { flex: 1; }
+    .toast .toast-title { color: #FFFFFF; font-size: 13px; font-weight: 600; margin-bottom: 1px; }
+    .toast .toast-message { color: #c4b5d4; font-size: 12px; opacity: 0.6; line-height: 1.3; }
     .toast .toast-close {
       background: none;
       border: none;
-      color: rgba(255, 255, 255, 0.3);
-      font-size: 18px;
+      color: rgba(255, 255, 255, 0.2);
+      font-size: 16px;
       cursor: pointer;
-      padding: 4px 8px;
+      padding: 2px 6px;
       transition: 0.2s;
-      border-radius: 8px;
+      border-radius: 6px;
     }
-    .toast .toast-close:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.05);
-    }
-    .toast.success .toast-icon { background: rgba(0, 255, 136, 0.12); border-color: rgba(0, 255, 136, 0.15); }
-    .toast.error .toast-icon { background: rgba(248, 113, 113, 0.12); border-color: rgba(248, 113, 113, 0.15); }
-    .toast.warning .toast-icon { background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.15); }
-    .toast.info .toast-icon { background: rgba(0, 212, 255, 0.12); border-color: rgba(0, 212, 255, 0.15); }
+    .toast .toast-close:hover { color: #fff; background: rgba(255, 255, 255, 0.03); }
 
     @media (max-width: 400px) {
       .token-number { font-size: 38px; }
       .glass { padding: 20px 16px; }
-      .menu-card .label { font-size: 12px; }
+      .menu-grid { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+      .menu-card .label { font-size: 11px; }
+      .menu-card { padding: 14px 6px 10px; }
+      .modal-tabs { gap: 3px; }
+      .modal-tab { font-size: 10px; padding: 5px 10px; }
+      .modal { padding: 18px 14px 14px; }
+      .task-item { padding: 12px 14px; }
+      .task-title { font-size: 13px; }
     }
   </style>
 </head>
@@ -697,7 +972,10 @@
   <!-- MAIN CARD -->
   <div class="glass">
     <div class="header">
-      <span class="logo">Benula</span>
+      <span class="logo">
+        ✦ Benula
+        <span class="level-badge" id="levelBadge">🌱</span>
+      </span>
       <span class="badge">Airdrop</span>
     </div>
     <div class="subtitle">✦ Airdrop</div>
@@ -740,20 +1018,16 @@
         <div class="label">Daily Check</div>
         <div class="sub-label" id="dailyCount">0 days</div>
       </div>
-      <div class="menu-card" data-modal="tasks">
+      <div class="menu-card" data-modal="tasks" id="tasksMenuCard">
         <span class="icon">📋</span>
         <div class="label">Tasks</div>
-        <div class="sub-label" id="taskCount">0 completed</div>
+        <div class="sub-label" id="taskCount">0/5 completed</div>
+        <div class="task-badge" id="taskBadge">0/5</div>
       </div>
       <div class="menu-card" data-modal="referral">
         <span class="icon">👥</span>
         <div class="label">Referral</div>
         <div class="sub-label" id="refCount">0 referrals</div>
-      </div>
-      <div class="menu-card" data-modal="distribution">
-        <span class="icon">📊</span>
-        <div class="label">Distribution</div>
-        <div class="sub-label">Tokenomics</div>
       </div>
     </div>
 
@@ -805,50 +1079,155 @@
         <button class="modal-close" data-modal="modal-tasks">✕</button>
       </div>
       <div class="modal-body">
-        
-        <!-- TASK 1: YouTube Channel (Original) -->
-        <div id="youtubeTask" style="background:rgba(255,255,255,0.04); border-radius:14px; padding:16px; border:1px solid rgba(255,255,255,0.06); transition: all 0.3s ease; margin-bottom:12px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-            <span style="color:#fff; font-weight:600; font-size:15px;">▶️ YouTube Channel</span>
-            <span id="youtubeTaskReward" style="color:#00d4ff; font-weight:600; font-size:14px;">+50</span>
-          </div>
-          
-          <a id="youtubeOpenBtn" href="#" target="_blank" style="display:inline-block; color:#ff0000; font-weight:500; font-size:13px; text-decoration:none; margin-bottom:8px;">
-            🔗 Open YouTube Channel
-          </a>
-          
-          <div style="display:flex; gap:6px;">
-            <input type="text" id="youtubeCodeInput" placeholder="Enter code..." style="flex:1; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.03); color:#fff; font-size:13px; outline:none;">
-            <button id="youtubeVerifyBtn" style="padding:8px 16px; border:none; border-radius:10px; background:linear-gradient(135deg,#00d4ff,#0099cc); color:#fff; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap; transition:0.2s;">Verify</button>
-          </div>
-          
-          <div id="youtubeTaskStatus" style="font-size:11px; color:rgba(255,255,255,0.3); margin-top:6px;">🔍 Find code in YouTube Channel</div>
+        <div class="modal-tabs" id="taskTabs">
+          <button class="modal-tab active" data-tab="youtube">🎬 YouTube <span class="tab-badge" id="ytTabBadge">0/2</span></button>
+          <button class="modal-tab" data-tab="telegram">💬 Telegram <span class="tab-badge" id="tgTabBadge">0/2</span></button>
+          <button class="modal-tab" data-tab="twitter">🐦 Twitter <span class="tab-badge" id="twTabBadge">0/1</span></button>
+          <button class="modal-tab" data-tab="referral">👥 Referral</button>
+          <button class="modal-tab" data-tab="tokenbonus">🪙 Token Bonus</button>
         </div>
 
-        <!-- TASK 2: YouTube Short (New) -->
-        <div id="youtubeTask2" style="background:rgba(255,255,255,0.04); border-radius:14px; padding:16px; border:1px solid rgba(255,255,255,0.06); transition: all 0.3s ease;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-            <span style="color:#fff; font-weight:600; font-size:15px;">▶️ YouTube Short</span>
-            <span id="youtubeTask2Reward" style="color:#00d4ff; font-weight:600; font-size:14px;">+10</span>
+        <!-- YouTube Tab -->
+        <div class="tab-content active" id="tab-youtube">
+          <!-- Task 1: YouTube Channel -->
+          <div class="task-item" id="youtubeTask">
+            <div class="task-header">
+              <span class="task-title">
+                <span class="task-icon">▶️</span>
+                YouTube Channel
+                <span class="task-platform" id="yt1Platform">YouTube</span>
+              </span>
+              <span class="task-reward" id="youtubeTaskReward">+50</span>
+            </div>
+            <div class="task-desc">Watch our channel and find the hidden code</div>
+            <div class="task-actions">
+              <button class="task-btn open-btn" id="youtubeOpenBtn">🔗 Open Channel</button>
+              <input type="text" class="task-input" id="youtubeCodeInput" placeholder="Enter code..." />
+              <button class="task-btn verify-btn" id="youtubeVerifyBtn" disabled>⏳ Open first</button>
+            </div>
+            <div class="task-status" id="youtubeTaskStatus">
+              <span class="status-dot"></span> Open the channel to start
+            </div>
+            <div class="task-timer" id="youtubeTimer"></div>
+            <div class="task-progress"><div class="progress-fill" id="yt1Progress"></div></div>
           </div>
-          
-          <a id="youtubeOpenBtn2" href="https://youtube.com/shorts/NSMM9RZwd_I?si=fnq9GEysZA7uJ4Ae" target="_blank" style="display:inline-block; color:#ff0000; font-weight:500; font-size:13px; text-decoration:none; margin-bottom:8px;">
-            🔗 Watch Short
-          </a>
-          
-          <div style="display:flex; gap:6px;">
-            <input type="text" id="youtubeCodeInput2" placeholder="Enter code..." style="flex:1; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.03); color:#fff; font-size:13px; outline:none;">
-            <button id="youtubeVerifyBtn2" style="padding:8px 16px; border:none; border-radius:10px; background:linear-gradient(135deg,#00d4ff,#0099cc); color:#fff; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap; transition:0.2s;">Verify</button>
+
+          <!-- Task 2: YouTube Short -->
+          <div class="task-item" id="youtubeTask2">
+            <div class="task-header">
+              <span class="task-title">
+                <span class="task-icon">📱</span>
+                YouTube Short
+                <span class="task-platform" id="yt2Platform">YouTube</span>
+              </span>
+              <span class="task-reward" id="youtubeTask2Reward">+10</span>
+            </div>
+            <div class="task-desc">Watch our short video and find the hidden code</div>
+            <div class="task-actions">
+              <button class="task-btn open-btn" id="youtubeOpenBtn2">🔗 Watch Short</button>
+              <input type="text" class="task-input" id="youtubeCodeInput2" placeholder="Enter code..." />
+              <button class="task-btn verify-btn" id="youtubeVerifyBtn2" disabled>⏳ Open first</button>
+            </div>
+            <div class="task-status" id="youtubeTask2Status">
+              <span class="status-dot"></span> Open the short to start
+            </div>
+            <div class="task-timer" id="youtubeTimer2"></div>
+            <div class="task-progress"><div class="progress-fill" id="yt2Progress"></div></div>
           </div>
-          
-          <div id="youtubeTask2Status" style="font-size:11px; color:rgba(255,255,255,0.3); margin-top:6px;">🔍 Find code in YouTube Short</div>
         </div>
 
+        <!-- Telegram Tab -->
+        <div class="tab-content" id="tab-telegram">
+          <!-- Task 1: Telegram -->
+          <div class="task-item" id="telegramTask1">
+            <div class="task-header">
+              <span class="task-title">
+                <span class="task-icon">💬</span>
+                Telegram Task 1
+                <span class="task-platform" id="tg1Platform">Telegram</span>
+              </span>
+              <span class="task-reward" id="telegramTask1Reward">+10</span>
+            </div>
+            <div class="task-desc">Open the Telegram post and find the hidden code</div>
+            <div class="task-actions">
+              <button class="task-btn open-btn" id="telegramOpenBtn1">🔗 Open Post</button>
+              <input type="text" class="task-input" id="telegramCodeInput1" placeholder="Enter code..." />
+              <button class="task-btn verify-btn" id="telegramVerifyBtn1" disabled>⏳ Open first</button>
+            </div>
+            <div class="task-status" id="telegramTask1Status">
+              <span class="status-dot"></span> Open the post to start
+            </div>
+            <div class="task-timer" id="telegramTimer1"></div>
+            <div class="task-progress"><div class="progress-fill" id="tg1Progress"></div></div>
+          </div>
+
+          <!-- Task 2: Telegram -->
+          <div class="task-item" id="telegramTask2">
+            <div class="task-header">
+              <span class="task-title">
+                <span class="task-icon">💬</span>
+                Telegram Task 2
+                <span class="task-platform" id="tg2Platform">Telegram</span>
+              </span>
+              <span class="task-reward" id="telegramTask2Reward">+10</span>
+            </div>
+            <div class="task-desc">Open the Telegram post and find the hidden code</div>
+            <div class="task-actions">
+              <button class="task-btn open-btn" id="telegramOpenBtn2">🔗 Open Post</button>
+              <input type="text" class="task-input" id="telegramCodeInput2" placeholder="Enter code..." />
+              <button class="task-btn verify-btn" id="telegramVerifyBtn2" disabled>⏳ Open first</button>
+            </div>
+            <div class="task-status" id="telegramTask2Status">
+              <span class="status-dot"></span> Open the post to start
+            </div>
+            <div class="task-timer" id="telegramTimer2"></div>
+            <div class="task-progress"><div class="progress-fill" id="tg2Progress"></div></div>
+          </div>
+        </div>
+
+        <!-- Twitter Tab -->
+        <div class="tab-content" id="tab-twitter">
+          <div class="task-item" id="twitterTask1">
+            <div class="task-header">
+              <span class="task-title">
+                <span class="task-icon">🐦</span>
+                Twitter Task 1
+                <span class="task-platform" id="tw1Platform">Twitter</span>
+              </span>
+              <span class="task-reward" id="twitterTask1Reward">+20</span>
+            </div>
+            <div class="task-desc">Open the Twitter post and find the hidden code</div>
+            <div class="task-actions">
+              <button class="task-btn open-btn" id="twitterOpenBtn1">🔗 Open Post</button>
+              <input type="text" class="task-input" id="twitterCodeInput1" placeholder="Enter code..." />
+              <button class="task-btn verify-btn" id="twitterVerifyBtn1" disabled>⏳ Open first</button>
+            </div>
+            <div class="task-status" id="twitterTask1Status">
+              <span class="status-dot"></span> Open the post to start
+            </div>
+            <div class="task-timer" id="twitterTimer1"></div>
+            <div class="task-progress"><div class="progress-fill" id="tw1Progress"></div></div>
+          </div>
+        </div>
+
+        <!-- Referral Tab -->
+        <div class="tab-content" id="tab-referral">
+          <div style="margin-bottom:10px;font-weight:600;color:#a78bfa;font-size:13px;">🏆 Referral Rewards</div>
+          <div id="refRewardsList"></div>
+        </div>
+
+        <!-- Token Bonus Tab -->
+        <div class="tab-content" id="tab-tokenbonus">
+          <div style="margin-bottom:10px;color:rgba(255,255,255,0.5);font-size:12px;">
+            🪙 Reach token milestones and earn bonus rewards!
+          </div>
+          <div id="tokenBonusList"></div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Referral -->
+  <!-- Referral Modal -->
   <div class="modal-overlay" id="modal-referral">
     <div class="modal">
       <div class="modal-header">
@@ -862,25 +1241,6 @@
           <span id="refLinkDisplay">Loading link...</span>
           <button id="copyRefLink">Copy</button>
         </div>
-        <div style="margin-top:12px; color:rgba(255,255,255,0.3); font-size:13px; text-align:center;">
-          Share your referral link with friends and earn 20 Benula per referral!
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Distribution -->
-  <div class="modal-overlay" id="modal-distribution">
-    <div class="modal">
-      <div class="modal-header">
-        <h2>📊 Token Distribution</h2>
-        <button class="modal-close" data-modal="modal-distribution">✕</button>
-      </div>
-      <div class="modal-body">
-        <div class="info-row"><span class="label">Community</span><span class="value">68%</span></div>
-        <div class="info-row"><span class="label">Owner</span><span class="value">15%</span></div>
-        <div class="info-row"><span class="label">Liquidity</span><span class="value">12%</span></div>
-        <div class="info-row"><span class="label">Development</span><span class="value">5%</span></div>
       </div>
     </div>
   </div>
@@ -894,13 +1254,7 @@
   const toastContainer = document.getElementById('toastContainer');
 
   function showToast({ type = 'info', title, message, duration = 5000 }) {
-    const icons = {
-      success: '✅',
-      error: '❌',
-      warning: '⚠️',
-      info: 'ℹ️'
-    };
-
+    const icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
     toast.innerHTML = `
@@ -911,15 +1265,11 @@
       </div>
       <button class="toast-close">✕</button>
     `;
-
     const closeBtn = toast.querySelector('.toast-close');
     closeBtn.addEventListener('click', () => removeToast(toast));
-
     toastContainer.appendChild(toast);
-
     const timeout = setTimeout(() => removeToast(toast), duration);
     toast.dataset.timeout = timeout;
-
     return toast;
   }
 
@@ -927,16 +1277,13 @@
     if (toast.classList.contains('hide')) return;
     toast.classList.add('hide');
     clearTimeout(toast.dataset.timeout);
-    setTimeout(() => {
-      if (toast.parentNode) toast.parentNode.removeChild(toast);
-    }, 350);
+    setTimeout(() => { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 300);
   }
 
   // ============================================================
   //  CONFIG
   // ============================================================
   const CONFIG = {
-    GROUP_CHAT_ID: '-1003934156953',
     CHANNEL_LINK: 'https://t.me/Benula_Official',
     GROUP_LINK: 'https://t.me/BenulaOfficial',
     REGISTER_REWARD: 100,
@@ -947,50 +1294,84 @@
     YOUTUBE_CHANNEL_CODE: 'BENULA2026',
     YOUTUBE_SHORT_LINK: 'https://youtube.com/shorts/NSMM9RZwd_I?si=fnq9GEysZA7uJ4Ae',
     YOUTUBE_SHORT_CODE: 'Benula_Airdrop',
+    TELEGRAM_LINK: 'https://t.me/BenulaOfficial/36',
+    TELEGRAM_CODE1: 'B12312',
+    TELEGRAM_CODE2: 'B23421',
+    TWITTER_LINK: 'https://x.com/i/status/2085668689391604072',
+    TWITTER_CODE1: 'B65754',
     BOT_USERNAME: 'Benula_bot'
   };
+
+  // ============================================================
+  //  LEVEL SYSTEM
+  // ============================================================
+  const LEVELS = [
+    { name: 'Sprout', icon: '🌱', min: 0, color: '#34d399' },
+    { name: 'Bronze', icon: '🥉', min: 100, color: '#cd7f32' },
+    { name: 'Silver', icon: '🥈', min: 500, color: '#c0c0c0' },
+    { name: 'Gold', icon: '🥇', min: 1000, color: '#fbbf24' },
+    { name: 'Diamond', icon: '💎', min: 5000, color: '#60a5fa' },
+    { name: 'Legendary', icon: '👑', min: 10000, color: '#a78bfa' },
+    { name: 'Mythic', icon: '🌟', min: 50000, color: '#f472b6' }
+  ];
+
+  function getUserLevel(tokens) {
+    let level = LEVELS[0];
+    for (let i = LEVELS.length - 1; i >= 0; i--) {
+      if (tokens >= LEVELS[i].min) { level = LEVELS[i]; break; }
+    }
+    return level;
+  }
 
   // ============================================================
   //  STATE (localStorage)
   // ============================================================
   function getState() {
-    try {
-      const raw = localStorage.getItem('benula_state');
-      if (raw) return JSON.parse(raw);
-    } catch (_) {}
+    try { const raw = localStorage.getItem('benula_state'); if (raw) return JSON.parse(raw); } catch (_) {}
     return null;
   }
-
-  function saveState(s) {
-    localStorage.setItem('benula_state', JSON.stringify(s));
-  }
+  function saveState(s) { localStorage.setItem('benula_state', JSON.stringify(s)); }
 
   function generateUserId() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let id = '';
-    for (let i = 0; i < 6; i++) {
-      id += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
+    for (let i = 0; i < 6; i++) { id += chars.charAt(Math.floor(Math.random() * chars.length)); }
     return id;
   }
 
-  // init
+  // === MIGRATE OLD YOUTUBE TASKS FROM localStorage ===
+  function migrateOldTasks() {
+    const oldYT1 = localStorage.getItem('youtubeTaskDone');
+    const oldYT2 = localStorage.getItem('youtubeTaskDone2');
+    let migrated = false;
+    
+    if (oldYT1 === 'true' && !state.youtubeTaskDone) {
+      state.youtubeTaskDone = true;
+      migrated = true;
+    }
+    if (oldYT2 === 'true' && !state.youtubeTask2Done) {
+      state.youtubeTask2Done = true;
+      migrated = true;
+    }
+    if (migrated) {
+      localStorage.removeItem('youtubeTaskDone');
+      localStorage.removeItem('youtubeTaskDone2');
+      saveState(state);
+    }
+    return migrated;
+  }
+
   let state = getState();
   if (!state) {
     const newId = generateUserId();
     state = {
-      userId: newId,
-      registered: false,
-      tokens: 0,
-      dailyChecks: [],
-      referrals: [],
-      refCodeUsed: null,
-      dailyCheckDoneToday: false,
-      channelJoined: false,
-      groupJoined: false,
-      referralRewardsClaimed: [],
-      lastDailyCheckDate: null,
-      cachedReferralCount: 0,
+      userId: newId, registered: false, tokens: 0, dailyChecks: [], referrals: [],
+      refCodeUsed: null, dailyCheckDoneToday: false, channelJoined: false, groupJoined: false,
+      referralRewardsClaimed: [], lastDailyCheckDate: null, cachedReferralCount: 0,
+      tokenBonusesClaimed: [],
+      youtubeTaskDone: false, youtubeTask2Done: false,
+      telegramTask1Done: false, telegramTask2Done: false,
+      twitterTask1Done: false
     };
     saveState(state);
   } else {
@@ -1003,70 +1384,105 @@
     if (!state.registered) state.tokens = 0;
     if (!state.lastDailyCheckDate) state.lastDailyCheckDate = null;
     if (typeof state.cachedReferralCount === 'undefined') state.cachedReferralCount = 0;
+    if (!state.tokenBonusesClaimed) state.tokenBonusesClaimed = [];
+    if (typeof state.youtubeTaskDone === 'undefined') state.youtubeTaskDone = false;
+    if (typeof state.youtubeTask2Done === 'undefined') state.youtubeTask2Done = false;
+    if (typeof state.telegramTask1Done === 'undefined') state.telegramTask1Done = false;
+    if (typeof state.telegramTask2Done === 'undefined') state.telegramTask2Done = false;
+    if (typeof state.twitterTask1Done === 'undefined') state.twitterTask1Done = false;
+    
+    migrateOldTasks();
     saveState(state);
   }
+
+  // ============================================================
+  //  REFERRAL & TOKEN CONFIG
+  // ============================================================
+  const REFERRAL_REWARDS = [
+    { count: 3, reward: 50 },
+    { count: 5, reward: 80 },
+    { count: 10, reward: 150 },
+    { count: 100, reward: 1200 },
+    { count: 1000, reward: 10000 },
+    { count: 10000, reward: 50000 },
+    { count: 100000, reward: 100000 }
+  ];
+
+  const TOKEN_BONUSES = [
+    { need: 500, reward: 50 },
+    { need: 2000, reward: 200 },
+    { need: 10000, reward: 1000 },
+    { need: 50000, reward: 5000 },
+    { need: 100000, reward: 10000 }
+  ];
 
   // ============================================================
   //  DOM REFS
   // ============================================================
   const $ = id => document.getElementById(id);
-  const tokenDisplay = $('tokenDisplay');
-  const userIdDisplay = $('userIdDisplay');
-  const confirmBtn = $('confirmBtn');
-  const dailyCount = $('dailyCount');
-  const taskCount = $('taskCount');
-  const refCount = $('refCount');
-  const referralCodeDisplay = $('referralCodeDisplay');
-  const referralTotalDisplay = $('referralTotalDisplay');
-  const modalDailyTotal = $('modalDailyTotal');
-  const dailyCheckBtn = $('dailyCheckBtn');
-  const dailyStatus = $('dailyStatus');
-  const dailyTimer = $('dailyTimer');
-  const refInput = $('refInput');
-  const applyRefBtn = $('applyRefBtn');
-  const refStatus = $('refStatus');
-  const refLinkDisplay = $('refLinkDisplay');
-  const copyRefLink = $('copyRefLink');
-  const channelBtn = $('channelBtn');
-  const groupBtn = $('groupBtn');
-  const refInputArea = $('refInputArea');
+  const tokenDisplay = $('tokenDisplay'), userIdDisplay = $('userIdDisplay');
+  const confirmBtn = $('confirmBtn'), dailyCount = $('dailyCount'), taskCount = $('taskCount');
+  const refCount = $('refCount'), referralCodeDisplay = $('referralCodeDisplay');
+  const referralTotalDisplay = $('referralTotalDisplay'), modalDailyTotal = $('modalDailyTotal');
+  const dailyCheckBtn = $('dailyCheckBtn'), dailyStatus = $('dailyStatus'), dailyTimer = $('dailyTimer');
+  const refInput = $('refInput'), applyRefBtn = $('applyRefBtn'), refStatus = $('refStatus');
+  const refLinkDisplay = $('refLinkDisplay'), copyRefLink = $('copyRefLink');
+  const channelBtn = $('channelBtn'), groupBtn = $('groupBtn'), refInputArea = $('refInputArea');
+  const taskBadge = $('taskBadge'), levelBadge = $('levelBadge');
 
   // ============================================================
   //  MODAL CONTROLS
   // ============================================================
   document.querySelectorAll('.menu-card[data-modal]').forEach(card => {
-    card.addEventListener('click', function(e) {
+    card.addEventListener('click', function() {
       const modalId = this.dataset.modal;
       const overlay = document.getElementById('modal-' + modalId);
       if (overlay) {
         overlay.classList.add('active');
-        if (modalId === 'referral' && state.registered) {
-          showReferrals();
-        }
+        if (modalId === 'referral' && state.registered) showReferrals();
         if (modalId === 'tasks' && state.registered) {
-          updateYoutubeUI();
-          updateYoutubeUI2();
+          updateAllTasks();
+          renderRefRewards();
+          renderTokenBonuses();
+          updateAllBadges();
         }
+        document.body.style.overflow = 'hidden';
       }
     });
   });
 
   document.querySelectorAll('.modal-close[data-modal]').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
+    btn.addEventListener('click', function() {
       const modalId = this.dataset.modal;
       const overlay = document.getElementById(modalId);
       if (overlay) {
         overlay.classList.remove('active');
+        document.body.style.overflow = '';
       }
     });
   });
 
   document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', function(e) {
+    overlay.addEventListener('click', function(e) { 
       if (e.target === this) {
         this.classList.remove('active');
+        document.body.style.overflow = '';
       }
+    });
+  });
+
+  // ============================================================
+  //  TAB SYSTEM
+  // ============================================================
+  document.querySelectorAll('.modal-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      const parent = this.closest('.modal-body');
+      parent.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      const tabId = this.dataset.tab;
+      parent.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+      const target = parent.querySelector('#tab-' + tabId);
+      if (target) target.classList.add('active');
     });
   });
 
@@ -1078,44 +1494,26 @@
       state.channelJoined = true;
       channelBtn.textContent = '✅ Joined';
       channelBtn.classList.add('verified');
-      showToast({
-        type: 'success',
-        title: '✅ Channel Joined!',
-        message: 'You have successfully joined the Benula channel.'
-      });
+      showToast({ type: 'success', title: '✅ Channel Joined!', message: 'You have successfully joined the Benula channel.' });
     } else if (type === 'group') {
       state.groupJoined = true;
       groupBtn.textContent = '✅ Joined';
       groupBtn.classList.add('verified');
-      showToast({
-        type: 'success',
-        title: '✅ Group Joined!',
-        message: 'You have successfully joined the Benula group.'
-      });
+      showToast({ type: 'success', title: '✅ Group Joined!', message: 'You have successfully joined the Benula group.' });
     }
     saveState(state);
     render();
   }
 
-  channelBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.open(CONFIG.CHANNEL_LINK, '_blank');
-    markJoined('channel');
-  });
-
-  groupBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.open(CONFIG.GROUP_LINK, '_blank');
-    markJoined('group');
-  });
+  channelBtn.addEventListener('click', (e) => { e.preventDefault(); window.open(CONFIG.CHANNEL_LINK, '_blank'); markJoined('channel'); });
+  groupBtn.addEventListener('click', (e) => { e.preventDefault(); window.open(CONFIG.GROUP_LINK, '_blank'); markJoined('group'); });
 
   // ============================================================
   //  DAILY CHECK
   // ============================================================
   function checkDailyReset() {
     const today = new Date().toISOString().split('T')[0];
-    const lastCheck = state.lastDailyCheckDate;
-    if (lastCheck !== today) {
+    if (state.lastDailyCheckDate !== today) {
       state.dailyCheckDoneToday = false;
       state.lastDailyCheckDate = today;
       saveState(state);
@@ -1130,53 +1528,31 @@
     endOfDay.setHours(23, 59, 59, 999);
     const diff = endOfDay - now;
     if (diff <= 0) return '⏰ Time expired!';
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-    return `⏳ ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} remaining`;
+    const h = Math.floor(diff / (1000*60*60));
+    const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+    const s = Math.floor((diff % (1000*60)) / 1000);
+    return `⏳ ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} remaining`;
   }
 
-  function updateTimer() {
-    if (dailyTimer) {
-      dailyTimer.textContent = getRemainingTime();
-    }
-  }
-
+  function updateTimer() { if (dailyTimer) dailyTimer.textContent = getRemainingTime(); }
   setInterval(updateTimer, 1000);
-  setInterval(() => {
-    checkDailyReset();
-    render();
-  }, 60000);
+  setInterval(() => { checkDailyReset(); render(); }, 60000);
 
   // ============================================================
-  //  📦 localStorage
+  //  📦 localStorage for referrals
   // ============================================================
   function saveReferralToLocalStorage(refCode, userId) {
     try {
-      let storedReferrals = JSON.parse(localStorage.getItem('benula_referrals')) || {};
-      if (!storedReferrals[refCode]) {
-        storedReferrals[refCode] = [];
-      }
-      if (!storedReferrals[refCode].includes(userId)) {
-        storedReferrals[refCode].push(userId);
-        localStorage.setItem('benula_referrals', JSON.stringify(storedReferrals));
-        return true;
-      }
+      let stored = JSON.parse(localStorage.getItem('benula_referrals')) || {};
+      if (!stored[refCode]) stored[refCode] = [];
+      if (!stored[refCode].includes(userId)) { stored[refCode].push(userId); localStorage.setItem('benula_referrals', JSON.stringify(stored)); return true; }
       return false;
-    } catch (error) {
-      console.error('localStorage error:', error);
-      return false;
-    }
+    } catch(e) { console.error(e); return false; }
   }
 
   function getReferralsFromLocalStorage(refCode) {
-    try {
-      const storedReferrals = JSON.parse(localStorage.getItem('benula_referrals')) || {};
-      return storedReferrals[refCode] || [];
-    } catch (error) {
-      console.error('localStorage read error:', error);
-      return [];
-    }
+    try { const stored = JSON.parse(localStorage.getItem('benula_referrals')) || {}; return stored[refCode] || []; }
+    catch(e) { return []; }
   }
 
   // ============================================================
@@ -1184,56 +1560,36 @@
   // ============================================================
   async function showReferrals() {
     if (!state.registered) return;
-    
-    const localReferrals = getReferralsFromLocalStorage(state.userId);
-    state.cachedReferralCount = localReferrals.length;
-    state.referrals = localReferrals;
+    const local = getReferralsFromLocalStorage(state.userId);
+    state.cachedReferralCount = local.length;
+    state.referrals = local;
     saveState(state);
     render();
-    
-    if (referralTotalDisplay) {
-      referralTotalDisplay.textContent = localReferrals.length;
-    }
-    
+    if (referralTotalDisplay) referralTotalDisplay.textContent = local.length;
     try {
-      const response = await fetch(`${CONFIG.WEBHOOK_SERVER}/api/referrals/${state.userId}`);
-      const data = await response.json();
-      
+      const res = await fetch(`${CONFIG.WEBHOOK_SERVER}/api/referrals/${state.userId}`);
+      const data = await res.json();
       if (data.success) {
-        const serverReferrals = data.referrals || [];
-        const oldCount = localReferrals.length;
-        const allReferrals = [...new Set([...localReferrals, ...serverReferrals])];
-        
-        const storedReferrals = JSON.parse(localStorage.getItem('benula_referrals')) || {};
-        storedReferrals[state.userId] = allReferrals;
-        localStorage.setItem('benula_referrals', JSON.stringify(storedReferrals));
-        
-        state.cachedReferralCount = allReferrals.length;
-        state.referrals = allReferrals;
+        const server = data.referrals || [];
+        const all = [...new Set([...local, ...server])];
+        const stored = JSON.parse(localStorage.getItem('benula_referrals')) || {};
+        stored[state.userId] = all;
+        localStorage.setItem('benula_referrals', JSON.stringify(stored));
+        state.cachedReferralCount = all.length;
+        state.referrals = all;
         saveState(state);
         render();
-        
-        if (referralTotalDisplay) {
-          referralTotalDisplay.textContent = allReferrals.length;
-        }
-        
-        if (allReferrals.length > oldCount) {
-          const newReferrals = allReferrals.length - oldCount;
-          const reward = newReferrals * CONFIG.REF_REWARD;
+        if (referralTotalDisplay) referralTotalDisplay.textContent = all.length;
+        if (all.length > local.length) {
+          const newRefs = all.length - local.length;
+          const reward = newRefs * CONFIG.REF_REWARD;
           state.tokens = (state.tokens || 0) + reward;
           saveState(state);
           render();
-          
-          showToast({
-            type: 'success',
-            title: '🎉 New Referral!',
-            message: `${newReferrals} new user(s)! +${reward} Benula!`
-          });
+          showToast({ type: 'success', title: '🎉 New Referral!', message: `${newRefs} new user(s)! +${reward} Benula!` });
         }
       }
-    } catch (error) {
-      console.error('Sync error:', error);
-    }
+    } catch(e) { console.error('Sync error:', e); }
   }
 
   // ============================================================
@@ -1241,193 +1597,636 @@
   // ============================================================
   async function registerUserDirectly(userId, refCode) {
     try {
-      const response = await fetch(`${CONFIG.WEBHOOK_SERVER}/api/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          userId: userId,
-          refCode: refCode || 'none',
-          timestamp: new Date().toISOString()
-        })
+      const res = await fetch(`${CONFIG.WEBHOOK_SERVER}/api/register`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, refCode: refCode || 'none', timestamp: new Date().toISOString() })
       });
-      
-      const data = await response.json();
-      
+      const data = await res.json();
       if (data.success) {
         saveReferralToLocalStorage(refCode || 'none', userId);
-        
         if (refCode && refCode !== 'none') {
-          const storedReferrals = JSON.parse(localStorage.getItem('benula_referrals')) || {};
-          if (!storedReferrals[refCode]) {
-            storedReferrals[refCode] = [];
-          }
-          if (!storedReferrals[refCode].includes(userId)) {
-            storedReferrals[refCode].push(userId);
-            localStorage.setItem('benula_referrals', JSON.stringify(storedReferrals));
-          }
+          const stored = JSON.parse(localStorage.getItem('benula_referrals')) || {};
+          if (!stored[refCode]) stored[refCode] = [];
+          if (!stored[refCode].includes(userId)) { stored[refCode].push(userId); localStorage.setItem('benula_referrals', JSON.stringify(stored)); }
         }
-        
         return { ok: true };
       }
       return { ok: false, error: 'Server error' };
-    } catch (error) {
-      console.error('Registration error:', error);
-      return { ok: false, error: error.message };
-    }
+    } catch(e) { return { ok: false, error: e.message }; }
   }
 
   // ============================================================
-  //  📋 YOUTUBE TASK 1 - Channel (Original)
+  //  🎬 YOUTUBE TASK 1
   // ============================================================
-  const YT1 = {
-    link: CONFIG.YOUTUBE_CHANNEL_LINK,
-    code: CONFIG.YOUTUBE_CHANNEL_CODE,
-    reward: 50
-  };
+  let ytTimer1 = null, ytTimerRunning1 = false;
 
-  function isYTDone() {
-    return localStorage.getItem('youtubeTaskDone') === 'true';
-  }
+  function isYTDone() { return state.youtubeTaskDone || false; }
 
   function updateYoutubeUI() {
     const done = isYTDone();
-    const task = document.getElementById('youtubeTask');
-    const input = document.getElementById('youtubeCodeInput');
-    const verify = document.getElementById('youtubeVerifyBtn');
-    const status = document.getElementById('youtubeTaskStatus');
-    const reward = document.getElementById('youtubeTaskReward');
+    const task = $('youtubeTask');
+    const input = $('youtubeCodeInput');
+    const verify = $('youtubeVerifyBtn');
+    const status = $('youtubeTaskStatus');
+    const reward = $('youtubeTaskReward');
+    const timer = $('youtubeTimer');
+    const progress = $('yt1Progress');
+    const platform = $('yt1Platform');
+    const openBtn = $('youtubeOpenBtn');
 
     if (done) {
-      if (task) task.style.borderColor = 'rgba(0,255,136,0.3)';
-      if (input) { input.disabled = true; input.value = YT1.code; }
-      if (verify) { verify.disabled = true; verify.textContent = '✅'; verify.style.background = 'linear-gradient(135deg,#00ff88,#00cc66)'; }
-      if (status) { status.textContent = '✅ Done! +50'; status.style.color = '#00ff88'; }
-      if (reward) { reward.textContent = '✅ +50'; reward.style.color = '#00ff88'; }
-    } else {
-      if (task) task.style.borderColor = 'rgba(255,255,255,0.06)';
-      if (input) { input.disabled = false; input.value = ''; }
-      if (verify) { verify.disabled = false; verify.textContent = 'Verify'; verify.style.background = 'linear-gradient(135deg,#00d4ff,#0099cc)'; }
-      if (status) { status.textContent = '🔍 Find code in YouTube Channel'; status.style.color = 'rgba(255,255,255,0.3)'; }
-      if (reward) { reward.textContent = '+50'; reward.style.color = '#00d4ff'; }
-    }
-    updateTaskCount();
-  }
-
-  // ============================================================
-  //  📋 YOUTUBE TASK 2 - Short (New)
-  // ============================================================
-  const YT2 = {
-    link: CONFIG.YOUTUBE_SHORT_LINK,
-    code: CONFIG.YOUTUBE_SHORT_CODE,
-    reward: 10
-  };
-
-  function isYTDone2() {
-    return localStorage.getItem('youtubeTaskDone2') === 'true';
-  }
-
-  function updateYoutubeUI2() {
-    const done = isYTDone2();
-    const task = document.getElementById('youtubeTask2');
-    const input = document.getElementById('youtubeCodeInput2');
-    const verify = document.getElementById('youtubeVerifyBtn2');
-    const status = document.getElementById('youtubeTask2Status');
-    const reward = document.getElementById('youtubeTask2Reward');
-
-    if (done) {
-      if (task) task.style.borderColor = 'rgba(0,255,136,0.3)';
-      if (input) { input.disabled = true; input.value = YT2.code; }
-      if (verify) { verify.disabled = true; verify.textContent = '✅'; verify.style.background = 'linear-gradient(135deg,#00ff88,#00cc66)'; }
-      if (status) { status.textContent = '✅ Done! +10'; status.style.color = '#00ff88'; }
-      if (reward) { reward.textContent = '✅ +10'; reward.style.color = '#00ff88'; }
-    } else {
-      if (task) task.style.borderColor = 'rgba(255,255,255,0.06)';
-      if (input) { input.disabled = false; input.value = ''; }
-      if (verify) { verify.disabled = false; verify.textContent = 'Verify'; verify.style.background = 'linear-gradient(135deg,#00d4ff,#0099cc)'; }
-      if (status) { status.textContent = '🔍 Find code in YouTube Short'; status.style.color = 'rgba(255,255,255,0.3)'; }
-      if (reward) { reward.textContent = '+10'; reward.style.color = '#00d4ff'; }
-    }
-    updateTaskCount();
-  }
-
-  function updateTaskCount() {
-    const done1 = isYTDone();
-    const done2 = isYTDone2();
-    const total = (done1 ? 1 : 0) + (done2 ? 1 : 0);
-    if (taskCount) taskCount.textContent = total + ' completed';
-  }
-
-  // Open YouTube Channel (Task 1)
-  document.getElementById('youtubeOpenBtn')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (!state.registered) {
-      showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' });
+      if (task) task.classList.add('completed-hidden');
       return;
     }
-    window.open(YT1.link, '_blank');
+    
+    if (task) task.classList.remove('completed-hidden');
+    if (input) { input.disabled = false; input.value = ''; }
+    if (reward) { reward.textContent = '+50'; reward.className = 'task-reward'; }
+    if (platform) { platform.textContent = 'YouTube'; platform.className = 'task-platform'; }
+    
+    if (!ytTimerRunning1) {
+      if (verify) { verify.disabled = true; verify.textContent = '⏳ Open first'; }
+      if (status) { status.innerHTML = '<span class="status-dot"></span> Open the channel to start'; status.className = 'task-status'; }
+      if (timer) timer.textContent = '';
+      if (progress) progress.style.width = '0%';
+      if (openBtn) { openBtn.disabled = false; }
+    }
+    updateAllBadges();
+  }
+
+  function startYTTimer1() {
+    if (ytTimerRunning1 || isYTDone()) return;
+    ytTimerRunning1 = true;
+    let seconds = 30;
+    const verify = $('youtubeVerifyBtn');
+    const timer = $('youtubeTimer');
+    const progress = $('yt1Progress');
+    const status = $('youtubeTaskStatus');
+    const openBtn = $('youtubeOpenBtn');
+    
+    if (openBtn) openBtn.disabled = true;
+    if (status) { status.innerHTML = '<span class="status-dot active"></span> Watch the video and find the code!'; status.className = 'task-status'; }
+    
+    const interval = setInterval(() => {
+      seconds--;
+      if (timer) timer.textContent = `⏳ Wait ${seconds}s`;
+      if (progress) progress.style.width = `${(30 - seconds) / 30 * 100}%`;
+      if (seconds <= 0) {
+        clearInterval(interval);
+        if (verify && !isYTDone()) {
+          verify.disabled = false;
+          verify.textContent = 'Verify ✅';
+          if (timer) timer.textContent = '✅ Ready!';
+          if (progress) progress.style.width = '100%';
+          if (status) { status.innerHTML = '<span class="status-dot success"></span> Enter the code and verify!'; status.className = 'task-status success'; }
+        }
+        ytTimerRunning1 = false;
+      }
+    }, 1000);
+    ytTimer1 = interval;
+  }
+
+  $('youtubeOpenBtn')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!state.registered) { showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' }); return; }
+    if (isYTDone()) return;
+    window.open(CONFIG.YOUTUBE_CHANNEL_LINK, '_blank');
+    startYTTimer1();
   });
 
-  // Verify Code (Task 1)
-  document.getElementById('youtubeVerifyBtn')?.addEventListener('click', () => {
-    if (!state.registered) {
-      showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' });
-      return;
-    }
-    if (isYTDone()) {
-      showToast({ type: 'info', title: '✅ Done', message: 'Task already completed!' });
-      return;
-    }
-
-    const input = document.getElementById('youtubeCodeInput');
-    if (input.value.trim() === YT1.code) {
-      localStorage.setItem('youtubeTaskDone', 'true');
-      state.tokens = (state.tokens || 0) + YT1.reward;
+  $('youtubeVerifyBtn')?.addEventListener('click', () => {
+    if (!state.registered) { showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' }); return; }
+    if (isYTDone()) { showToast({ type: 'info', title: '✅ Done', message: 'Task already completed!' }); return; }
+    const input = $('youtubeCodeInput');
+    if (input.value.trim() === CONFIG.YOUTUBE_CHANNEL_CODE) {
+      state.youtubeTaskDone = true;
+      state.tokens = (state.tokens || 0) + 50;
       saveState(state);
       render();
-      showToast({ type: 'success', title: '🎉 +50 Benula!', message: 'Task completed!' });
+      showToast({ type: 'success', title: '🎉 +50 Benula!', message: 'YouTube Channel task completed!' });
       updateYoutubeUI();
       render();
     } else {
-      showToast({ type: 'error', title: '❌ Wrong Code', message: 'Check YouTube Channel!' });
+      showToast({ type: 'error', title: '❌ Wrong Code', message: 'Check the YouTube Channel for the code!' });
     }
   });
 
-  // Open YouTube Short (Task 2)
-  document.getElementById('youtubeOpenBtn2')?.addEventListener('click', (e) => {
+  // ============================================================
+  //  🎬 YOUTUBE TASK 2
+  // ============================================================
+  let ytTimer2 = null, ytTimerRunning2 = false;
+
+  function isYTDone2() { return state.youtubeTask2Done || false; }
+
+  function updateYoutubeUI2() {
+    const done = isYTDone2();
+    const task = $('youtubeTask2');
+    const input = $('youtubeCodeInput2');
+    const verify = $('youtubeVerifyBtn2');
+    const status = $('youtubeTask2Status');
+    const reward = $('youtubeTask2Reward');
+    const timer = $('youtubeTimer2');
+    const progress = $('yt2Progress');
+    const platform = $('yt2Platform');
+    const openBtn = $('youtubeOpenBtn2');
+
+    if (done) {
+      if (task) task.classList.add('completed-hidden');
+      return;
+    }
+    
+    if (task) task.classList.remove('completed-hidden');
+    if (input) { input.disabled = false; input.value = ''; }
+    if (reward) { reward.textContent = '+10'; reward.className = 'task-reward'; }
+    if (platform) { platform.textContent = 'YouTube'; platform.className = 'task-platform'; }
+    
+    if (!ytTimerRunning2) {
+      if (verify) { verify.disabled = true; verify.textContent = '⏳ Open first'; }
+      if (status) { status.innerHTML = '<span class="status-dot"></span> Open the short to start'; status.className = 'task-status'; }
+      if (timer) timer.textContent = '';
+      if (progress) progress.style.width = '0%';
+      if (openBtn) { openBtn.disabled = false; }
+    }
+    updateAllBadges();
+  }
+
+  function startYTTimer2() {
+    if (ytTimerRunning2 || isYTDone2()) return;
+    ytTimerRunning2 = true;
+    let seconds = 30;
+    const verify = $('youtubeVerifyBtn2');
+    const timer = $('youtubeTimer2');
+    const progress = $('yt2Progress');
+    const status = $('youtubeTask2Status');
+    const openBtn = $('youtubeOpenBtn2');
+    
+    if (openBtn) openBtn.disabled = true;
+    if (status) { status.innerHTML = '<span class="status-dot active"></span> Watch the short and find the code!'; status.className = 'task-status'; }
+    
+    const interval = setInterval(() => {
+      seconds--;
+      if (timer) timer.textContent = `⏳ Wait ${seconds}s`;
+      if (progress) progress.style.width = `${(30 - seconds) / 30 * 100}%`;
+      if (seconds <= 0) {
+        clearInterval(interval);
+        if (verify && !isYTDone2()) {
+          verify.disabled = false;
+          verify.textContent = 'Verify ✅';
+          if (timer) timer.textContent = '✅ Ready!';
+          if (progress) progress.style.width = '100%';
+          if (status) { status.innerHTML = '<span class="status-dot success"></span> Enter the code and verify!'; status.className = 'task-status success'; }
+        }
+        ytTimerRunning2 = false;
+      }
+    }, 1000);
+    ytTimer2 = interval;
+  }
+
+  $('youtubeOpenBtn2')?.addEventListener('click', (e) => {
     e.preventDefault();
-    if (!state.registered) {
-      showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' });
-      return;
-    }
-    window.open(YT2.link, '_blank');
+    if (!state.registered) { showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' }); return; }
+    if (isYTDone2()) return;
+    window.open(CONFIG.YOUTUBE_SHORT_LINK, '_blank');
+    startYTTimer2();
   });
 
-  // Verify Code (Task 2)
-  document.getElementById('youtubeVerifyBtn2')?.addEventListener('click', () => {
-    if (!state.registered) {
-      showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' });
-      return;
-    }
-    if (isYTDone2()) {
-      showToast({ type: 'info', title: '✅ Done', message: 'Task already completed!' });
-      return;
-    }
-
-    const input = document.getElementById('youtubeCodeInput2');
-    if (input.value.trim() === YT2.code) {
-      localStorage.setItem('youtubeTaskDone2', 'true');
-      state.tokens = (state.tokens || 0) + YT2.reward;
+  $('youtubeVerifyBtn2')?.addEventListener('click', () => {
+    if (!state.registered) { showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' }); return; }
+    if (isYTDone2()) { showToast({ type: 'info', title: '✅ Done', message: 'Task already completed!' }); return; }
+    const input = $('youtubeCodeInput2');
+    if (input.value.trim() === CONFIG.YOUTUBE_SHORT_CODE) {
+      state.youtubeTask2Done = true;
+      state.tokens = (state.tokens || 0) + 10;
       saveState(state);
       render();
-      showToast({ type: 'success', title: '🎉 +10 Benula!', message: 'Task completed!' });
+      showToast({ type: 'success', title: '🎉 +10 Benula!', message: 'YouTube Short task completed!' });
       updateYoutubeUI2();
       render();
     } else {
-      showToast({ type: 'error', title: '❌ Wrong Code', message: 'Check YouTube Short!' });
+      showToast({ type: 'error', title: '❌ Wrong Code', message: 'Check the YouTube Short for the code!' });
     }
   });
+
+  // ============================================================
+  //  💬 TELEGRAM TASK 1
+  // ============================================================
+  let tgTimer1 = null, tgTimerRunning1 = false;
+
+  function isTG1Done() { return state.telegramTask1Done || false; }
+
+  function updateTelegramUI1() {
+    const done = isTG1Done();
+    const task = $('telegramTask1');
+    const input = $('telegramCodeInput1');
+    const verify = $('telegramVerifyBtn1');
+    const status = $('telegramTask1Status');
+    const reward = $('telegramTask1Reward');
+    const timer = $('telegramTimer1');
+    const progress = $('tg1Progress');
+    const platform = $('tg1Platform');
+    const openBtn = $('telegramOpenBtn1');
+
+    if (done) {
+      if (task) task.classList.add('completed-hidden');
+      return;
+    }
+    
+    if (task) task.classList.remove('completed-hidden');
+    if (input) { input.disabled = false; input.value = ''; }
+    if (reward) { reward.textContent = '+10'; reward.className = 'task-reward'; }
+    if (platform) { platform.textContent = 'Telegram'; platform.className = 'task-platform'; }
+    
+    if (!tgTimerRunning1) {
+      if (verify) { verify.disabled = true; verify.textContent = '⏳ Open first'; }
+      if (status) { status.innerHTML = '<span class="status-dot"></span> Open the post to start'; status.className = 'task-status'; }
+      if (timer) timer.textContent = '';
+      if (progress) progress.style.width = '0%';
+      if (openBtn) { openBtn.disabled = false; }
+    }
+    updateAllBadges();
+  }
+
+  function startTGTimer1() {
+    if (tgTimerRunning1 || isTG1Done()) return;
+    tgTimerRunning1 = true;
+    let seconds = 30;
+    const verify = $('telegramVerifyBtn1');
+    const timer = $('telegramTimer1');
+    const progress = $('tg1Progress');
+    const status = $('telegramTask1Status');
+    const openBtn = $('telegramOpenBtn1');
+    
+    if (openBtn) openBtn.disabled = true;
+    if (status) { status.innerHTML = '<span class="status-dot active"></span> Find the code in the post!'; status.className = 'task-status'; }
+    
+    const interval = setInterval(() => {
+      seconds--;
+      if (timer) timer.textContent = `⏳ Wait ${seconds}s`;
+      if (progress) progress.style.width = `${(30 - seconds) / 30 * 100}%`;
+      if (seconds <= 0) {
+        clearInterval(interval);
+        if (verify && !isTG1Done()) {
+          verify.disabled = false;
+          verify.textContent = 'Verify ✅';
+          if (timer) timer.textContent = '✅ Ready!';
+          if (progress) progress.style.width = '100%';
+          if (status) { status.innerHTML = '<span class="status-dot success"></span> Enter the code and verify!'; status.className = 'task-status success'; }
+        }
+        tgTimerRunning1 = false;
+      }
+    }, 1000);
+    tgTimer1 = interval;
+  }
+
+  $('telegramOpenBtn1')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!state.registered) { showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' }); return; }
+    if (isTG1Done()) return;
+    window.open(CONFIG.TELEGRAM_LINK, '_blank');
+    startTGTimer1();
+  });
+
+  $('telegramVerifyBtn1')?.addEventListener('click', () => {
+    if (!state.registered) { showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' }); return; }
+    if (isTG1Done()) { showToast({ type: 'info', title: '✅ Done', message: 'Task already completed!' }); return; }
+    const input = $('telegramCodeInput1');
+    if (input.value.trim() === CONFIG.TELEGRAM_CODE1) {
+      state.telegramTask1Done = true;
+      state.tokens = (state.tokens || 0) + 10;
+      saveState(state);
+      render();
+      showToast({ type: 'success', title: '🎉 +10 Benula!', message: 'Telegram Task 1 completed!' });
+      updateTelegramUI1();
+      render();
+    } else {
+      showToast({ type: 'error', title: '❌ Wrong Code', message: 'Check the Telegram post for the code!' });
+    }
+  });
+
+  // ============================================================
+  //  💬 TELEGRAM TASK 2
+  // ============================================================
+  let tgTimer2 = null, tgTimerRunning2 = false;
+
+  function isTG2Done() { return state.telegramTask2Done || false; }
+
+  function updateTelegramUI2() {
+    const done = isTG2Done();
+    const task = $('telegramTask2');
+    const input = $('telegramCodeInput2');
+    const verify = $('telegramVerifyBtn2');
+    const status = $('telegramTask2Status');
+    const reward = $('telegramTask2Reward');
+    const timer = $('telegramTimer2');
+    const progress = $('tg2Progress');
+    const platform = $('tg2Platform');
+    const openBtn = $('telegramOpenBtn2');
+
+    if (done) {
+      if (task) task.classList.add('completed-hidden');
+      return;
+    }
+    
+    if (task) task.classList.remove('completed-hidden');
+    if (input) { input.disabled = false; input.value = ''; }
+    if (reward) { reward.textContent = '+10'; reward.className = 'task-reward'; }
+    if (platform) { platform.textContent = 'Telegram'; platform.className = 'task-platform'; }
+    
+    if (!tgTimerRunning2) {
+      if (verify) { verify.disabled = true; verify.textContent = '⏳ Open first'; }
+      if (status) { status.innerHTML = '<span class="status-dot"></span> Open the post to start'; status.className = 'task-status'; }
+      if (timer) timer.textContent = '';
+      if (progress) progress.style.width = '0%';
+      if (openBtn) { openBtn.disabled = false; }
+    }
+    updateAllBadges();
+  }
+
+  function startTGTimer2() {
+    if (tgTimerRunning2 || isTG2Done()) return;
+    tgTimerRunning2 = true;
+    let seconds = 30;
+    const verify = $('telegramVerifyBtn2');
+    const timer = $('telegramTimer2');
+    const progress = $('tg2Progress');
+    const status = $('telegramTask2Status');
+    const openBtn = $('telegramOpenBtn2');
+    
+    if (openBtn) openBtn.disabled = true;
+    if (status) { status.innerHTML = '<span class="status-dot active"></span> Find the code in the post!'; status.className = 'task-status'; }
+    
+    const interval = setInterval(() => {
+      seconds--;
+      if (timer) timer.textContent = `⏳ Wait ${seconds}s`;
+      if (progress) progress.style.width = `${(30 - seconds) / 30 * 100}%`;
+      if (seconds <= 0) {
+        clearInterval(interval);
+        if (verify && !isTG2Done()) {
+          verify.disabled = false;
+          verify.textContent = 'Verify ✅';
+          if (timer) timer.textContent = '✅ Ready!';
+          if (progress) progress.style.width = '100%';
+          if (status) { status.innerHTML = '<span class="status-dot success"></span> Enter the code and verify!'; status.className = 'task-status success'; }
+        }
+        tgTimerRunning2 = false;
+      }
+    }, 1000);
+    tgTimer2 = interval;
+  }
+
+  $('telegramOpenBtn2')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!state.registered) { showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' }); return; }
+    if (isTG2Done()) return;
+    window.open(CONFIG.TELEGRAM_LINK, '_blank');
+    startTGTimer2();
+  });
+
+  $('telegramVerifyBtn2')?.addEventListener('click', () => {
+    if (!state.registered) { showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' }); return; }
+    if (isTG2Done()) { showToast({ type: 'info', title: '✅ Done', message: 'Task already completed!' }); return; }
+    const input = $('telegramCodeInput2');
+    if (input.value.trim() === CONFIG.TELEGRAM_CODE2) {
+      state.telegramTask2Done = true;
+      state.tokens = (state.tokens || 0) + 10;
+      saveState(state);
+      render();
+      showToast({ type: 'success', title: '🎉 +10 Benula!', message: 'Telegram Task 2 completed!' });
+      updateTelegramUI2();
+      render();
+    } else {
+      showToast({ type: 'error', title: '❌ Wrong Code', message: 'Check the Telegram post for the code!' });
+    }
+  });
+
+  // ============================================================
+  //  🐦 TWITTER TASK 1
+  // ============================================================
+  let twTimer1 = null, twTimerRunning1 = false;
+
+  function isTW1Done() { return state.twitterTask1Done || false; }
+
+  function updateTwitterUI1() {
+    const done = isTW1Done();
+    const task = $('twitterTask1');
+    const input = $('twitterCodeInput1');
+    const verify = $('twitterVerifyBtn1');
+    const status = $('twitterTask1Status');
+    const reward = $('twitterTask1Reward');
+    const timer = $('twitterTimer1');
+    const progress = $('tw1Progress');
+    const platform = $('tw1Platform');
+    const openBtn = $('twitterOpenBtn1');
+
+    if (done) {
+      if (task) task.classList.add('completed-hidden');
+      return;
+    }
+    
+    if (task) task.classList.remove('completed-hidden');
+    if (input) { input.disabled = false; input.value = ''; }
+    if (reward) { reward.textContent = '+20'; reward.className = 'task-reward'; }
+    if (platform) { platform.textContent = 'Twitter'; platform.className = 'task-platform'; }
+    
+    if (!twTimerRunning1) {
+      if (verify) { verify.disabled = true; verify.textContent = '⏳ Open first'; }
+      if (status) { status.innerHTML = '<span class="status-dot"></span> Open the post to start'; status.className = 'task-status'; }
+      if (timer) timer.textContent = '';
+      if (progress) progress.style.width = '0%';
+      if (openBtn) { openBtn.disabled = false; }
+    }
+    updateAllBadges();
+  }
+
+  function startTWTimer1() {
+    if (twTimerRunning1 || isTW1Done()) return;
+    twTimerRunning1 = true;
+    let seconds = 30;
+    const verify = $('twitterVerifyBtn1');
+    const timer = $('twitterTimer1');
+    const progress = $('tw1Progress');
+    const status = $('twitterTask1Status');
+    const openBtn = $('twitterOpenBtn1');
+    
+    if (openBtn) openBtn.disabled = true;
+    if (status) { status.innerHTML = '<span class="status-dot active"></span> Find the code in the post!'; status.className = 'task-status'; }
+    
+    const interval = setInterval(() => {
+      seconds--;
+      if (timer) timer.textContent = `⏳ Wait ${seconds}s`;
+      if (progress) progress.style.width = `${(30 - seconds) / 30 * 100}%`;
+      if (seconds <= 0) {
+        clearInterval(interval);
+        if (verify && !isTW1Done()) {
+          verify.disabled = false;
+          verify.textContent = 'Verify ✅';
+          if (timer) timer.textContent = '✅ Ready!';
+          if (progress) progress.style.width = '100%';
+          if (status) { status.innerHTML = '<span class="status-dot success"></span> Enter the code and verify!'; status.className = 'task-status success'; }
+        }
+        twTimerRunning1 = false;
+      }
+    }, 1000);
+    twTimer1 = interval;
+  }
+
+  $('twitterOpenBtn1')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!state.registered) { showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' }); return; }
+    if (isTW1Done()) return;
+    window.open(CONFIG.TWITTER_LINK, '_blank');
+    startTWTimer1();
+  });
+
+  $('twitterVerifyBtn1')?.addEventListener('click', () => {
+    if (!state.registered) { showToast({ type: 'warning', title: '⚠️ Register First', message: 'Please register before doing tasks!' }); return; }
+    if (isTW1Done()) { showToast({ type: 'info', title: '✅ Done', message: 'Task already completed!' }); return; }
+    const input = $('twitterCodeInput1');
+    if (input.value.trim() === CONFIG.TWITTER_CODE1) {
+      state.twitterTask1Done = true;
+      state.tokens = (state.tokens || 0) + 20;
+      saveState(state);
+      render();
+      showToast({ type: 'success', title: '🎉 +20 Benula!', message: 'Twitter Task completed!' });
+      updateTwitterUI1();
+      render();
+    } else {
+      showToast({ type: 'error', title: '❌ Wrong Code', message: 'Check the Twitter post for the code!' });
+    }
+  });
+
+  // ============================================================
+  //  🏆 REFERRAL REWARDS
+  // ============================================================
+  function renderRefRewards() {
+    const list = $('refRewardsList');
+    if (!list) return;
+    const refCount = state.cachedReferralCount || 0;
+    let html = '';
+    REFERRAL_REWARDS.forEach((item, index) => {
+      const claimed = state.referralRewardsClaimed && state.referralRewardsClaimed.includes(index);
+      const reached = refCount >= item.count;
+      html += `
+        <div class="ref-reward-item">
+          <div><span class="ref-count">${item.count} referrals</span></div>
+          <div>
+            <span class="ref-bonus">+${item.reward} 🪙</span>
+            ${claimed ? `<span class="ref-status claimed">✅ Claimed</span>` :
+              reached ? `<button class="claim-btn" data-ref-index="${index}">🎯 Claim</button>` :
+              `<span class="ref-status locked">🔒 Locked</span>`}
+          </div>
+        </div>
+      `;
+    });
+    list.innerHTML = html;
+    list.querySelectorAll('.claim-btn').forEach(btn => {
+      btn.addEventListener('click', function() { claimRefReward(parseInt(this.dataset.refIndex)); });
+    });
+  }
+
+  function claimRefReward(index) {
+    const reward = REFERRAL_REWARDS[index];
+    if (!reward) return;
+    if (state.referralRewardsClaimed && state.referralRewardsClaimed.includes(index)) {
+      showToast({ type: 'warning', title: 'Already Claimed', message: 'You already claimed this reward!' });
+      return;
+    }
+    const refCount = state.cachedReferralCount || 0;
+    if (refCount < reward.count) {
+      showToast({ type: 'warning', title: 'Not Enough Referrals', message: `Need ${reward.count} referrals!` });
+      return;
+    }
+    state.tokens = (state.tokens || 0) + reward.reward;
+    if (!state.referralRewardsClaimed) state.referralRewardsClaimed = [];
+    state.referralRewardsClaimed.push(index);
+    saveState(state);
+    render();
+    showToast({ type: 'success', title: '🎉 Reward Claimed!', message: `+${reward.reward} Benula for ${reward.count} referrals!` });
+    renderRefRewards();
+  }
+
+  // ============================================================
+  //  🪙 TOKEN BONUSES
+  // ============================================================
+  function renderTokenBonuses() {
+    const list = $('tokenBonusList');
+    if (!list) return;
+    const tokens = state.tokens || 0;
+    let html = '';
+    TOKEN_BONUSES.forEach((item, index) => {
+      const claimed = state.tokenBonusesClaimed && state.tokenBonusesClaimed.includes(index);
+      const reached = tokens >= item.need;
+      html += `
+        <div class="token-reward-item">
+          <div><span class="token-need">${item.need.toLocaleString()} tokens</span></div>
+          <div>
+            <span class="token-bonus">+${item.reward.toLocaleString()} 🪙</span>
+            ${claimed ? `<span class="token-status claimed">✅ Claimed</span>` :
+              reached ? `<button class="claim-btn" data-token-index="${index}">🎯 Claim</button>` :
+              `<span class="token-status locked">🔒 Locked</span>`}
+          </div>
+        </div>
+      `;
+    });
+    list.innerHTML = html;
+    list.querySelectorAll('.claim-btn').forEach(btn => {
+      btn.addEventListener('click', function() { claimTokenBonus(parseInt(this.dataset.tokenIndex)); });
+    });
+  }
+
+  function claimTokenBonus(index) {
+    const bonus = TOKEN_BONUSES[index];
+    if (!bonus) return;
+    if (state.tokenBonusesClaimed && state.tokenBonusesClaimed.includes(index)) {
+      showToast({ type: 'warning', title: 'Already Claimed', message: 'You already claimed this bonus!' });
+      return;
+    }
+    const tokens = state.tokens || 0;
+    if (tokens < bonus.need) {
+      showToast({ type: 'warning', title: 'Not Enough Tokens', message: `Need ${bonus.need.toLocaleString()} tokens!` });
+      return;
+    }
+    state.tokens = (state.tokens || 0) + bonus.reward;
+    if (!state.tokenBonusesClaimed) state.tokenBonusesClaimed = [];
+    state.tokenBonusesClaimed.push(index);
+    saveState(state);
+    render();
+    showToast({ type: 'success', title: '🎉 Bonus Claimed!', message: `+${bonus.reward.toLocaleString()} Benula bonus!` });
+    renderTokenBonuses();
+  }
+
+  // ============================================================
+  //  📊 UPDATE ALL BADGES
+  // ============================================================
+  function updateAllBadges() {
+    const totalTasks = 5;
+    const doneTasks = (state.youtubeTaskDone ? 1 : 0) + (state.youtubeTask2Done ? 1 : 0) +
+                      (state.telegramTask1Done ? 1 : 0) + (state.telegramTask2Done ? 1 : 0) +
+                      (state.twitterTask1Done ? 1 : 0);
+    if (taskBadge) taskBadge.textContent = `${doneTasks}/${totalTasks}`;
+    if (taskCount) taskCount.textContent = `${doneTasks}/${totalTasks} completed`;
+
+    const ytBadge = $('ytTabBadge');
+    const ytDone = (state.youtubeTaskDone ? 1 : 0) + (state.youtubeTask2Done ? 1 : 0);
+    if (ytBadge) ytBadge.textContent = `${ytDone}/2`;
+
+    const tgBadge = $('tgTabBadge');
+    const tgDone = (state.telegramTask1Done ? 1 : 0) + (state.telegramTask2Done ? 1 : 0);
+    if (tgBadge) tgBadge.textContent = `${tgDone}/2`;
+
+    const twBadge = $('twTabBadge');
+    const twDone = (state.twitterTask1Done ? 1 : 0);
+    if (twBadge) twBadge.textContent = `${twDone}/1`;
+  }
+
+  function updateAllTasks() {
+    updateYoutubeUI();
+    updateYoutubeUI2();
+    updateTelegramUI1();
+    updateTelegramUI2();
+    updateTwitterUI1();
+    updateAllBadges();
+  }
 
   // ============================================================
   //  RENDER
@@ -1435,6 +2234,10 @@
   function render() {
     tokenDisplay.textContent = state.tokens || 0;
     userIdDisplay.textContent = 'ID: ' + state.userId;
+
+    const level = getUserLevel(state.tokens || 0);
+    levelBadge.textContent = level.icon;
+    levelBadge.style.color = level.color;
 
     const totalDays = state.dailyChecks ? state.dailyChecks.length : 0;
     dailyCount.textContent = totalDays + ' days';
@@ -1449,7 +2252,7 @@
     const refLink = baseUrl + state.userId;
     refLinkDisplay.textContent = refLink;
 
-    updateTaskCount();
+    updateAllBadges();
 
     if (state.channelJoined) {
       channelBtn.textContent = '✅ Joined';
@@ -1488,35 +2291,23 @@
       dailyStatus.className = 'daily-status-text success';
       dailyCheckBtn.disabled = true;
       dailyCheckBtn.className = 'daily-check-btn success';
-      dailyCheckBtn.innerHTML = `
-        <span class="btn-icon">✅</span>
-        Done today!
-        <span class="btn-reward">+5</span>
-      `;
+      dailyCheckBtn.innerHTML = `<span class="btn-icon">✅</span> Done today! <span class="btn-reward">+5</span>`;
     } else if (!state.registered) {
       dailyStatus.textContent = '⚠️ Please register first to check in.';
       dailyStatus.className = 'daily-status-text error';
       dailyCheckBtn.disabled = true;
       dailyCheckBtn.className = 'daily-check-btn';
-      dailyCheckBtn.innerHTML = `
-        <span class="btn-icon">🔒</span>
-        Register first
-      `;
+      dailyCheckBtn.innerHTML = `<span class="btn-icon">🔒</span> Register first`;
     } else {
       dailyStatus.textContent = '💪 Check in now to earn 5 Benula!';
       dailyStatus.className = 'daily-status-text';
       dailyCheckBtn.disabled = false;
       dailyCheckBtn.className = 'daily-check-btn';
-      dailyCheckBtn.innerHTML = `
-        <span class="btn-icon">✅</span>
-        Check in today
-        <span class="btn-reward">+5</span>
-      `;
+      dailyCheckBtn.innerHTML = `<span class="btn-icon">✅</span> Check in today <span class="btn-reward">+5</span>`;
     }
 
     updateConfirmButton();
-    updateYoutubeUI();
-    updateYoutubeUI2();
+    updateAllTasks();
   }
 
   function updateConfirmButton() {
@@ -1542,28 +2333,17 @@
   // ============================================================
   dailyCheckBtn.addEventListener('click', async () => {
     if (!state.registered) {
-      showToast({
-        type: 'warning',
-        title: '⚠️ Registration Required',
-        message: 'Please register first to check in daily.'
-      });
+      showToast({ type: 'warning', title: '⚠️ Registration Required', message: 'Please register first to check in daily.' });
       return;
     }
     if (state.dailyCheckDoneToday) {
-      showToast({
-        type: 'info',
-        title: 'ℹ️ Already Checked',
-        message: 'You have already checked in today! Come back tomorrow.'
-      });
+      showToast({ type: 'info', title: 'ℹ️ Already Checked', message: 'You have already checked in today! Come back tomorrow.' });
       return;
     }
-
     dailyCheckBtn.disabled = true;
     dailyCheckBtn.className = 'daily-check-btn loading';
     dailyCheckBtn.innerHTML = `<span class="spinner"></span> Processing...`;
-
-    await new Promise(resolve => setTimeout(resolve, 800));
-
+    await new Promise(r => setTimeout(r, 600));
     const today = new Date().toISOString().split('T')[0];
     if (!state.dailyChecks) state.dailyChecks = [];
     state.dailyChecks.push(today);
@@ -1571,26 +2351,13 @@
     state.lastDailyCheckDate = today;
     state.tokens = (state.tokens || 0) + CONFIG.DAILY_REWARD;
     saveState(state);
-
-    showToast({
-      type: 'success',
-      title: '🎉 Daily Check Complete!',
-      message: `You earned +${CONFIG.DAILY_REWARD} Benula! Keep it up!`
-    });
-
+    showToast({ type: 'success', title: '🎉 Daily Check Complete!', message: `You earned +${CONFIG.DAILY_REWARD} Benula!` });
     dailyCheckBtn.className = 'daily-check-btn success';
-    dailyCheckBtn.innerHTML = `
-      <span class="btn-icon">🎉</span>
-      +${CONFIG.DAILY_REWARD} Benula Earned!
-    `;
+    dailyCheckBtn.innerHTML = `<span class="btn-icon">🎉</span> +${CONFIG.DAILY_REWARD} Benula Earned!`;
     dailyStatus.textContent = `✅ Checked in! +${CONFIG.DAILY_REWARD} Benula added!`;
     dailyStatus.className = 'daily-status-text success';
-
     render();
-
-    setTimeout(() => {
-      render();
-    }, 2000);
+    setTimeout(() => render(), 1500);
   });
 
   // ============================================================
@@ -1598,56 +2365,31 @@
   // ============================================================
   confirmBtn.addEventListener('click', async () => {
     if (state.registered) return;
-    
     if (!state.channelJoined || !state.groupJoined) {
-      showToast({
-        type: 'warning',
-        title: '⚠️ Join First',
-        message: 'Please join both Channel and Group before registering.'
-      });
+      showToast({ type: 'warning', title: '⚠️ Join First', message: 'Please join both Channel and Group before registering.' });
       return;
     }
-
     confirmBtn.textContent = '⏳ Saving...';
     confirmBtn.disabled = true;
     confirmBtn.classList.add('loading');
-
     const refCode = state.refCodeUsed || null;
     const userId = state.userId;
-    
     const result = await registerUserDirectly(userId, refCode);
-    
     if (result.ok) {
       state.registered = true;
       state.tokens = CONFIG.REGISTER_REWARD;
       saveState(state);
       render();
-      
       confirmBtn.textContent = '✅ Registration Complete!';
       confirmBtn.classList.add('success');
       confirmBtn.classList.remove('loading');
-      
-      showToast({
-        type: 'success',
-        title: '🎉 Registration Successful!',
-        message: `You received ${CONFIG.REGISTER_REWARD} Benula!`
-      });
-      
-      setTimeout(() => {
-        showReferrals();
-      }, 500);
-      
+      showToast({ type: 'success', title: '🎉 Registration Successful!', message: `You received ${CONFIG.REGISTER_REWARD} Benula!` });
+      setTimeout(() => showReferrals(), 500);
     } else {
       confirmBtn.textContent = '❌ Failed';
       confirmBtn.classList.remove('loading');
       confirmBtn.classList.add('error');
-      
-      showToast({
-        type: 'error',
-        title: '❌ Registration Failed',
-        message: 'Network error. Please check your connection and try again.'
-      });
-      
+      showToast({ type: 'error', title: '❌ Registration Failed', message: 'Network error. Please check your connection and try again.' });
       setTimeout(() => {
         confirmBtn.textContent = '✔ Confirm & Get 100 Benula';
         confirmBtn.disabled = false;
@@ -1662,75 +2404,47 @@
   // ============================================================
   applyRefBtn.addEventListener('click', () => {
     if (state.registered) {
-      showToast({
-        type: 'warning',
-        title: '⚠️ Already Registered',
-        message: 'Referral code can only be applied during registration.'
-      });
+      showToast({ type: 'warning', title: '⚠️ Already Registered', message: 'Referral code can only be applied during registration.' });
       return;
     }
     const code = refInput.value.trim();
-    if (!code) {
-      showToast({
-        type: 'warning',
-        title: '⚠️ Empty Code',
-        message: 'Please enter a referral code.'
-      });
-      return;
-    }
-    if (code === state.userId) {
-      showToast({
-        type: 'error',
-        title: '❌ Invalid Code',
-        message: 'You cannot use your own referral code.'
-      });
-      return;
-    }
+    if (!code) { showToast({ type: 'warning', title: '⚠️ Empty Code', message: 'Please enter a referral code.' }); return; }
+    if (code === state.userId) { showToast({ type: 'error', title: '❌ Invalid Code', message: 'You cannot use your own referral code.' }); return; }
     state.refCodeUsed = code;
     saveState(state);
     render();
-    showToast({
-      type: 'success',
-      title: '✅ Code Applied!',
-      message: `Referral code "${code}" applied successfully.`
-    });
+    showToast({ type: 'success', title: '✅ Code Applied!', message: `Referral code "${code}" applied successfully.` });
   });
 
   // ============================================================
   //  COPY REFERRAL LINK
   // ============================================================
-  copyRefLink.addEventListener('click', () => {
-    const link = refLinkDisplay.textContent;
-    const copyFn = () => {
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(link).then(() => {
-          showToast({
-            type: 'success',
-            title: '📋 Copied!',
-            message: 'Referral link copied to clipboard.'
-          });
-        }).catch(() => fallbackCopy(link));
-      } else {
-        fallbackCopy(link);
+  function setupCopyLink(btnId, linkId) {
+    const btn = document.getElementById(btnId);
+    const link = document.getElementById(linkId);
+    if (!btn || !link) return;
+    btn.addEventListener('click', () => {
+      const text = link.textContent;
+      const copyFn = () => {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(() => {
+            showToast({ type: 'success', title: '📋 Copied!', message: 'Referral link copied to clipboard.' });
+          }).catch(() => fallbackCopy(text));
+        } else { fallbackCopy(text); }
+      };
+      function fallbackCopy(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast({ type: 'success', title: '📋 Copied!', message: 'Referral link copied to clipboard.' });
       }
-    };
-
-    function fallbackCopy(text) {
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-      showToast({
-        type: 'success',
-        title: '📋 Copied!',
-        message: 'Referral link copied to clipboard.'
-      });
-    }
-
-    copyFn();
-  });
+      copyFn();
+    });
+  }
+  setupCopyLink('copyRefLink', 'refLinkDisplay');
 
   // ============================================================
   //  AUTO-FILL REFERRAL FROM URL
@@ -1742,11 +2456,7 @@
       state.refCodeUsed = ref;
       saveState(state);
       render();
-      showToast({
-        type: 'info',
-        title: '🔗 Referral Applied',
-        message: `You were referred by "${ref}"!`
-      });
+      showToast({ type: 'info', title: '🔗 Referral Applied', message: `You were referred by "${ref}"!` });
       console.log('✅ Referral code auto-filled from URL:', ref);
     }
   })();
@@ -1756,13 +2466,15 @@
   // ============================================================
   render();
   updateTimer();
-  
-  if (state.registered) {
-    showReferrals();
-  }
-  
+  if (state.registered) showReferrals();
   console.log('✅ Benula Airdrop loaded. User ID:', state.userId);
-  console.log('📊 Webhook Server:', CONFIG.WEBHOOK_SERVER);
+  console.log('📊 Tasks status:', {
+    youtube: state.youtubeTaskDone,
+    youtube2: state.youtubeTask2Done,
+    telegram1: state.telegramTask1Done,
+    telegram2: state.telegramTask2Done,
+    twitter: state.twitterTask1Done
+  });
 </script>
 </body>
   </html>
