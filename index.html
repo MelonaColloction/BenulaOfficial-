@@ -477,7 +477,7 @@
       display: block;
     }
     
-    /* ===== TASK CARDS - Optimized ===== */
+    /* ===== TASK CARDS ===== */
     .task-item {
       background: rgba(255, 255, 255, 0.02);
       border-radius: 14px;
@@ -685,6 +685,54 @@
       font-size: 12px;
     }
 
+    /* Daily Tasks Special */
+    .daily-task-card {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 14px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      margin-bottom: 12px;
+    }
+    .daily-task-card .task-progress-text {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 11px;
+      margin-top: 6px;
+    }
+    .daily-task-card .task-status-badge {
+      display: inline-block;
+      padding: 2px 12px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 600;
+      margin-top: 6px;
+    }
+    .daily-task-card .task-status-badge.completed {
+      background: rgba(52, 211, 153, 0.1);
+      color: #34d399;
+    }
+    .daily-task-card .task-status-badge.pending {
+      background: rgba(251, 191, 36, 0.1);
+      color: #fbbf24;
+    }
+    .daily-task-card .task-status-badge.locked {
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(255, 255, 255, 0.2);
+    }
+    .daily-progress-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    .daily-progress-bar .fill {
+      height: 100%;
+      background: linear-gradient(90deg, #a78bfa, #7c3aed);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
     /* Ref & Token Rewards */
     .ref-reward-item, .token-reward-item {
       background: rgba(255, 255, 255, 0.02);
@@ -875,11 +923,57 @@
     }
     .daily-status-text.success { color: #34d399; }
     .daily-status-text.error { color: #f87171; }
+    .daily-status-text.warning { color: #fbbf24; }
     .daily-timer {
       font-size: 12px;
       color: rgba(255, 255, 255, 0.25);
       text-align: center;
       padding: 2px 0;
+      display: none; /* مخفی کردن تایمر */
+    }
+
+    /* Daily Tasks Modal */
+    .daily-task-item {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      margin-bottom: 8px;
+    }
+    .daily-task-item .task-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .daily-task-item .task-name {
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .daily-task-item .task-reward-text {
+      color: #fbbf24;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .daily-task-item .task-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      transition: 0.3s;
+    }
+    .daily-task-item .task-check.done {
+      background: #34d399;
+      border-color: #34d399;
+      color: #fff;
+    }
+    .daily-task-item .task-check.pending {
+      border-color: #fbbf24;
+      color: #fbbf24;
     }
 
     /* TOAST */
@@ -1024,6 +1118,12 @@
         <div class="sub-label" id="taskCount">0/5 completed</div>
         <div class="task-badge" id="taskBadge">0/5</div>
       </div>
+      <div class="menu-card" data-modal="daily-tasks">
+        <span class="icon">⚡</span>
+        <div class="label">Daily Tasks</div>
+        <div class="sub-label" id="dailyTasksStatus">0/3 done</div>
+        <div class="task-badge" id="dailyTasksBadge">0/3</div>
+      </div>
       <div class="menu-card" data-modal="referral">
         <span class="icon">👥</span>
         <div class="label">Referral</div>
@@ -1055,8 +1155,16 @@
           <span class="value" id="modalDailyTotal">0</span>
         </div>
         <div class="info-row">
+          <span class="label">Consecutive days</span>
+          <span class="value" id="modalConsecutiveDays">0</span>
+        </div>
+        <div class="info-row">
           <span class="label">Reward per check</span>
           <span class="value">5 Benula</span>
+        </div>
+        <div class="info-row">
+          <span class="label">7-day bonus</span>
+          <span class="value" id="sevenDayBonusDisplay">🎯 30-100 Tokens</span>
         </div>
         <div class="daily-check-wrap">
           <button class="daily-check-btn" id="dailyCheckBtn">
@@ -1065,7 +1173,89 @@
             <span class="btn-reward">+5</span>
           </button>
           <div class="daily-status-text" id="dailyStatus">You haven't checked today.</div>
-          <div class="daily-timer" id="dailyTimer"></div>
+          <!-- تایمر مخفی شده -->
+          <div class="daily-timer" id="dailyTimer" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Daily Tasks Modal -->
+  <div class="modal-overlay" id="modal-daily-tasks">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>⚡ Daily Tasks</h2>
+        <button class="modal-close" data-modal="modal-daily-tasks">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="info-row">
+          <span class="label">Today's Progress</span>
+          <span class="value" id="dailyTasksProgress">0/3</span>
+        </div>
+        <div class="daily-progress-bar">
+          <div class="fill" id="dailyTasksProgressFill" style="width:0%"></div>
+        </div>
+        <div style="margin-top: 16px;" id="dailyTasksList">
+          <!-- Task 1: 1 Referral -->
+          <div class="daily-task-item" id="dailyTask1">
+            <div class="task-row">
+              <div>
+                <div class="task-name">👥 1 Referral</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.3);">Get 1 referral today</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span class="task-reward-text">+50 🪙</span>
+                <div class="task-check" id="dailyTask1Check">⬜</div>
+              </div>
+            </div>
+          </div>
+          <!-- Task 2: 10 Referrals -->
+          <div class="daily-task-item" id="dailyTask2">
+            <div class="task-row">
+              <div>
+                <div class="task-name">👥 10 Referrals</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.3);">Get 10 referrals today</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span class="task-reward-text">+500 🪙</span>
+                <div class="task-check" id="dailyTask2Check">⬜</div>
+              </div>
+            </div>
+          </div>
+          <!-- Task 3: Earn 200 Tokens -->
+          <div class="daily-task-item" id="dailyTask3">
+            <div class="task-row">
+              <div>
+                <div class="task-name">🪙 Earn 200 Tokens</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.3);">Earn 200 tokens today</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span class="task-reward-text">+50 🪙</span>
+                <div class="task-check" id="dailyTask3Check">⬜</div>
+              </div>
+            </div>
+          </div>
+          <!-- Bonus: All 3 Tasks -->
+          <div class="daily-task-item" id="dailyTaskBonus" style="border-color:rgba(251,191,36,0.2);background:rgba(251,191,36,0.03);">
+            <div class="task-row">
+              <div>
+                <div class="task-name" style="color:#fbbf24;">⭐ All Tasks Complete!</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.3);">Complete all 3 tasks</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span class="task-reward-text" style="color:#fbbf24;">+200 🪙</span>
+                <div class="task-check" id="dailyTaskBonusCheck">⬜</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:12px;padding:10px;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid rgba(255,255,255,0.03);">
+          <div style="font-size:11px;color:rgba(255,255,255,0.3);text-align:center;">
+            ⏰ Tasks reset at midnight (local time)
+          </div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.2);text-align:center;margin-top:2px;" id="dailyTasksResetTime">
+            Next reset: 00:00
+          </div>
         </div>
       </div>
     </div>
@@ -1089,7 +1279,6 @@
 
         <!-- YouTube Tab -->
         <div class="tab-content active" id="tab-youtube">
-          <!-- Task 1: YouTube Channel -->
           <div class="task-item" id="youtubeTask">
             <div class="task-header">
               <span class="task-title">
@@ -1112,7 +1301,6 @@
             <div class="task-progress"><div class="progress-fill" id="yt1Progress"></div></div>
           </div>
 
-          <!-- Task 2: YouTube Short -->
           <div class="task-item" id="youtubeTask2">
             <div class="task-header">
               <span class="task-title">
@@ -1138,7 +1326,6 @@
 
         <!-- Telegram Tab -->
         <div class="tab-content" id="tab-telegram">
-          <!-- Task 1: Telegram -->
           <div class="task-item" id="telegramTask1">
             <div class="task-header">
               <span class="task-title">
@@ -1161,7 +1348,6 @@
             <div class="task-progress"><div class="progress-fill" id="tg1Progress"></div></div>
           </div>
 
-          <!-- Task 2: Telegram -->
           <div class="task-item" id="telegramTask2">
             <div class="task-header">
               <span class="task-title">
@@ -1339,28 +1525,6 @@
     return id;
   }
 
-  // === MIGRATE OLD YOUTUBE TASKS FROM localStorage ===
-  function migrateOldTasks() {
-    const oldYT1 = localStorage.getItem('youtubeTaskDone');
-    const oldYT2 = localStorage.getItem('youtubeTaskDone2');
-    let migrated = false;
-    
-    if (oldYT1 === 'true' && !state.youtubeTaskDone) {
-      state.youtubeTaskDone = true;
-      migrated = true;
-    }
-    if (oldYT2 === 'true' && !state.youtubeTask2Done) {
-      state.youtubeTask2Done = true;
-      migrated = true;
-    }
-    if (migrated) {
-      localStorage.removeItem('youtubeTaskDone');
-      localStorage.removeItem('youtubeTaskDone2');
-      saveState(state);
-    }
-    return migrated;
-  }
-
   let state = getState();
   if (!state) {
     const newId = generateUserId();
@@ -1371,7 +1535,19 @@
       tokenBonusesClaimed: [],
       youtubeTaskDone: false, youtubeTask2Done: false,
       telegramTask1Done: false, telegramTask2Done: false,
-      twitterTask1Done: false
+      twitterTask1Done: false,
+      // Daily Tasks
+      dailyTasks: {
+        date: null, // format: YYYY-MM-DD
+        task1Done: false, // 1 referral
+        task2Done: false, // 10 referrals
+        task3Done: false, // earned 200 tokens today
+        bonusClaimed: false,
+        dailyReferrals: 0,
+        dailyTokensEarned: 0
+      },
+      sevenDayBonusClaimed: false,
+      lastSevenDayBonusDate: null
     };
     saveState(state);
   } else {
@@ -1390,8 +1566,31 @@
     if (typeof state.telegramTask1Done === 'undefined') state.telegramTask1Done = false;
     if (typeof state.telegramTask2Done === 'undefined') state.telegramTask2Done = false;
     if (typeof state.twitterTask1Done === 'undefined') state.twitterTask1Done = false;
+    if (!state.dailyTasks) {
+      state.dailyTasks = {
+        date: null,
+        task1Done: false,
+        task2Done: false,
+        task3Done: false,
+        bonusClaimed: false,
+        dailyReferrals: 0,
+        dailyTokensEarned: 0
+      };
+    }
+    if (typeof state.sevenDayBonusClaimed === 'undefined') state.sevenDayBonusClaimed = false;
+    if (!state.lastSevenDayBonusDate) state.lastSevenDayBonusDate = null;
     
-    migrateOldTasks();
+    // Migrate old YouTube tasks from localStorage
+    const oldYT1 = localStorage.getItem('youtubeTaskDone');
+    const oldYT2 = localStorage.getItem('youtubeTaskDone2');
+    if (oldYT1 === 'true' && !state.youtubeTaskDone) {
+      state.youtubeTaskDone = true;
+      localStorage.removeItem('youtubeTaskDone');
+    }
+    if (oldYT2 === 'true' && !state.youtubeTask2Done) {
+      state.youtubeTask2Done = true;
+      localStorage.removeItem('youtubeTaskDone2');
+    }
     saveState(state);
   }
 
@@ -1429,6 +1628,7 @@
   const refLinkDisplay = $('refLinkDisplay'), copyRefLink = $('copyRefLink');
   const channelBtn = $('channelBtn'), groupBtn = $('groupBtn'), refInputArea = $('refInputArea');
   const taskBadge = $('taskBadge'), levelBadge = $('levelBadge');
+  const modalConsecutiveDays = $('modalConsecutiveDays');
 
   // ============================================================
   //  MODAL CONTROLS
@@ -1445,6 +1645,12 @@
           renderRefRewards();
           renderTokenBonuses();
           updateAllBadges();
+        }
+        if (modalId === 'daily-tasks' && state.registered) {
+          updateDailyTasksUI();
+        }
+        if (modalId === 'daily') {
+          updateDailyModal();
         }
         document.body.style.overflow = 'hidden';
       }
@@ -1509,34 +1715,74 @@
   groupBtn.addEventListener('click', (e) => { e.preventDefault(); window.open(CONFIG.GROUP_LINK, '_blank'); markJoined('group'); });
 
   // ============================================================
-  //  DAILY CHECK
+  //  DAILY CHECK - با پاداش ۷ روزه
   // ============================================================
+  function getDayOfWeek(date) {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return days[date.getDay()];
+  }
+
+  function getMondayDate(date) {
+    const d = new Date(date);
+    const day = d.getDay();
+    const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+    d.setDate(diff);
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }
+
+  function getConsecutiveDays() {
+    if (!state.dailyChecks || state.dailyChecks.length === 0) return 0;
+    const sorted = [...state.dailyChecks].sort();
+    const today = new Date().toISOString().split('T')[0];
+    let count = 0;
+    let checkDate = new Date(today);
+    
+    // اگر امروز چک نکرده، از دیروز شروع کن
+    if (!state.dailyCheckDoneToday) {
+      checkDate.setDate(checkDate.getDate() - 1);
+    }
+    
+    while (true) {
+      const dateStr = checkDate.toISOString().split('T')[0];
+      if (sorted.includes(dateStr)) {
+        count++;
+        checkDate.setDate(checkDate.getDate() - 1);
+      } else {
+        break;
+      }
+    }
+    return count;
+  }
+
   function checkDailyReset() {
     const today = new Date().toISOString().split('T')[0];
     if (state.lastDailyCheckDate !== today) {
       state.dailyCheckDoneToday = false;
       state.lastDailyCheckDate = today;
       saveState(state);
-      render();
     }
     return state.dailyCheckDoneToday;
   }
 
-  function getRemainingTime() {
-    const now = new Date();
-    const endOfDay = new Date(now);
-    endOfDay.setHours(23, 59, 59, 999);
-    const diff = endOfDay - now;
-    if (diff <= 0) return '⏰ Time expired!';
-    const h = Math.floor(diff / (1000*60*60));
-    const m = Math.floor((diff % (1000*60*60)) / (1000*60));
-    const s = Math.floor((diff % (1000*60)) / 1000);
-    return `⏳ ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} remaining`;
+  function updateDailyModal() {
+    const totalDays = state.dailyChecks ? state.dailyChecks.length : 0;
+    modalDailyTotal.textContent = totalDays;
+    const consecutive = getConsecutiveDays();
+    modalConsecutiveDays.textContent = consecutive;
+    
+    // نمایش پاداش ۷ روزه
+    const sevenDayBonusDisplay = $('sevenDayBonusDisplay');
+    if (consecutive >= 7) {
+      if (state.sevenDayBonusClaimed) {
+        sevenDayBonusDisplay.textContent = '✅ Bonus claimed!';
+      } else {
+        sevenDayBonusDisplay.textContent = '🎯 30-100 Tokens - Claim now!';
+      }
+    } else {
+      sevenDayBonusDisplay.textContent = `📅 ${7 - consecutive} days to go`;
+    }
   }
-
-  function updateTimer() { if (dailyTimer) dailyTimer.textContent = getRemainingTime(); }
-  setInterval(updateTimer, 1000);
-  setInterval(() => { checkDailyReset(); render(); }, 60000);
 
   // ============================================================
   //  📦 localStorage for referrals
@@ -1545,7 +1791,11 @@
     try {
       let stored = JSON.parse(localStorage.getItem('benula_referrals')) || {};
       if (!stored[refCode]) stored[refCode] = [];
-      if (!stored[refCode].includes(userId)) { stored[refCode].push(userId); localStorage.setItem('benula_referrals', JSON.stringify(stored)); return true; }
+      if (!stored[refCode].includes(userId)) { 
+        stored[refCode].push(userId); 
+        localStorage.setItem('benula_referrals', JSON.stringify(stored)); 
+        return true; 
+      }
       return false;
     } catch(e) { console.error(e); return false; }
   }
@@ -1556,16 +1806,29 @@
   }
 
   // ============================================================
-  //  📊 Referrals
+  //  📊 Referrals with Daily Tasks tracking
   // ============================================================
   async function showReferrals() {
     if (!state.registered) return;
     const local = getReferralsFromLocalStorage(state.userId);
+    const previousCount = state.cachedReferralCount || 0;
     state.cachedReferralCount = local.length;
     state.referrals = local;
     saveState(state);
     render();
     if (referralTotalDisplay) referralTotalDisplay.textContent = local.length;
+    
+    // Track new referrals for daily tasks
+    const newRefs = local.length - previousCount;
+    if (newRefs > 0) {
+      const today = new Date().toISOString().split('T')[0];
+      if (state.dailyTasks.date === today) {
+        state.dailyTasks.dailyReferrals = (state.dailyTasks.dailyReferrals || 0) + newRefs;
+        checkDailyTasks();
+        saveState(state);
+      }
+    }
+    
     try {
       const res = await fetch(`${CONFIG.WEBHOOK_SERVER}/api/referrals/${state.userId}`);
       const data = await res.json();
@@ -1575,18 +1838,24 @@
         const stored = JSON.parse(localStorage.getItem('benula_referrals')) || {};
         stored[state.userId] = all;
         localStorage.setItem('benula_referrals', JSON.stringify(stored));
+        const serverNewRefs = all.length - state.cachedReferralCount;
         state.cachedReferralCount = all.length;
         state.referrals = all;
         saveState(state);
         render();
         if (referralTotalDisplay) referralTotalDisplay.textContent = all.length;
-        if (all.length > local.length) {
-          const newRefs = all.length - local.length;
-          const reward = newRefs * CONFIG.REF_REWARD;
+        if (serverNewRefs > 0) {
+          const reward = serverNewRefs * CONFIG.REF_REWARD;
           state.tokens = (state.tokens || 0) + reward;
+          // Track for daily tasks
+          const today = new Date().toISOString().split('T')[0];
+          if (state.dailyTasks.date === today) {
+            state.dailyTasks.dailyReferrals = (state.dailyTasks.dailyReferrals || 0) + serverNewRefs;
+            checkDailyTasks();
+          }
           saveState(state);
           render();
-          showToast({ type: 'success', title: '🎉 New Referral!', message: `${newRefs} new user(s)! +${reward} Benula!` });
+          showToast({ type: 'success', title: '🎉 New Referral!', message: `${serverNewRefs} new user(s)! +${reward} Benula!` });
         }
       }
     } catch(e) { console.error('Sync error:', e); }
@@ -1701,6 +1970,7 @@
     if (input.value.trim() === CONFIG.YOUTUBE_CHANNEL_CODE) {
       state.youtubeTaskDone = true;
       state.tokens = (state.tokens || 0) + 50;
+      trackTokenEarnings(50);
       saveState(state);
       render();
       showToast({ type: 'success', title: '🎉 +50 Benula!', message: 'YouTube Channel task completed!' });
@@ -1797,6 +2067,7 @@
     if (input.value.trim() === CONFIG.YOUTUBE_SHORT_CODE) {
       state.youtubeTask2Done = true;
       state.tokens = (state.tokens || 0) + 10;
+      trackTokenEarnings(10);
       saveState(state);
       render();
       showToast({ type: 'success', title: '🎉 +10 Benula!', message: 'YouTube Short task completed!' });
@@ -1893,6 +2164,7 @@
     if (input.value.trim() === CONFIG.TELEGRAM_CODE1) {
       state.telegramTask1Done = true;
       state.tokens = (state.tokens || 0) + 10;
+      trackTokenEarnings(10);
       saveState(state);
       render();
       showToast({ type: 'success', title: '🎉 +10 Benula!', message: 'Telegram Task 1 completed!' });
@@ -1989,6 +2261,7 @@
     if (input.value.trim() === CONFIG.TELEGRAM_CODE2) {
       state.telegramTask2Done = true;
       state.tokens = (state.tokens || 0) + 10;
+      trackTokenEarnings(10);
       saveState(state);
       render();
       showToast({ type: 'success', title: '🎉 +10 Benula!', message: 'Telegram Task 2 completed!' });
@@ -2085,6 +2358,7 @@
     if (input.value.trim() === CONFIG.TWITTER_CODE1) {
       state.twitterTask1Done = true;
       state.tokens = (state.tokens || 0) + 20;
+      trackTokenEarnings(20);
       saveState(state);
       render();
       showToast({ type: 'success', title: '🎉 +20 Benula!', message: 'Twitter Task completed!' });
@@ -2137,6 +2411,7 @@
       return;
     }
     state.tokens = (state.tokens || 0) + reward.reward;
+    trackTokenEarnings(reward.reward);
     if (!state.referralRewardsClaimed) state.referralRewardsClaimed = [];
     state.referralRewardsClaimed.push(index);
     saveState(state);
@@ -2187,12 +2462,155 @@
       return;
     }
     state.tokens = (state.tokens || 0) + bonus.reward;
+    trackTokenEarnings(bonus.reward);
     if (!state.tokenBonusesClaimed) state.tokenBonusesClaimed = [];
     state.tokenBonusesClaimed.push(index);
     saveState(state);
     render();
     showToast({ type: 'success', title: '🎉 Bonus Claimed!', message: `+${bonus.reward.toLocaleString()} Benula bonus!` });
     renderTokenBonuses();
+  }
+
+  // ============================================================
+  //  ⭐ DAILY TASKS SYSTEM
+  // ============================================================
+  function resetDailyTasks() {
+    const today = new Date().toISOString().split('T')[0];
+    if (state.dailyTasks.date !== today) {
+      state.dailyTasks = {
+        date: today,
+        task1Done: false,
+        task2Done: false,
+        task3Done: false,
+        bonusClaimed: false,
+        dailyReferrals: 0,
+        dailyTokensEarned: 0
+      };
+      saveState(state);
+    }
+  }
+
+  function trackTokenEarnings(amount) {
+    const today = new Date().toISOString().split('T')[0];
+    resetDailyTasks();
+    if (state.dailyTasks.date === today) {
+      state.dailyTasks.dailyTokensEarned = (state.dailyTasks.dailyTokensEarned || 0) + amount;
+      checkDailyTasks();
+      saveState(state);
+    }
+  }
+
+  function checkDailyTasks() {
+    const today = new Date().toISOString().split('T')[0];
+    resetDailyTasks();
+    if (state.dailyTasks.date !== today) return;
+    
+    const refs = state.dailyTasks.dailyReferrals || 0;
+    const tokens = state.dailyTasks.dailyTokensEarned || 0;
+    let changed = false;
+    
+    // Task 1: 1 referral
+    if (refs >= 1 && !state.dailyTasks.task1Done) {
+      state.dailyTasks.task1Done = true;
+      state.tokens = (state.tokens || 0) + 50;
+      trackTokenEarnings(50);
+      changed = true;
+      showToast({ type: 'success', title: '⭐ Daily Task Complete!', message: '1 referral - +50 Benula!' });
+    }
+    
+    // Task 2: 10 referrals
+    if (refs >= 10 && !state.dailyTasks.task2Done) {
+      state.dailyTasks.task2Done = true;
+      state.tokens = (state.tokens || 0) + 500;
+      trackTokenEarnings(500);
+      changed = true;
+      showToast({ type: 'success', title: '⭐ Daily Task Complete!', message: '10 referrals - +500 Benula!' });
+    }
+    
+    // Task 3: Earn 200 tokens
+    if (tokens >= 200 && !state.dailyTasks.task3Done) {
+      state.dailyTasks.task3Done = true;
+      state.tokens = (state.tokens || 0) + 50;
+      trackTokenEarnings(50);
+      changed = true;
+      showToast({ type: 'success', title: '⭐ Daily Task Complete!', message: 'Earned 200 tokens - +50 Benula!' });
+    }
+    
+    // Bonus: All 3 tasks done
+    if (state.dailyTasks.task1Done && state.dailyTasks.task2Done && state.dailyTasks.task3Done && !state.dailyTasks.bonusClaimed) {
+      state.dailyTasks.bonusClaimed = true;
+      state.tokens = (state.tokens || 0) + 200;
+      trackTokenEarnings(200);
+      changed = true;
+      showToast({ type: 'success', title: '⭐ BONUS COMPLETE!', message: 'All daily tasks done - +200 Benula!' });
+    }
+    
+    if (changed) {
+      saveState(state);
+      render();
+      updateDailyTasksUI();
+    }
+  }
+
+  function updateDailyTasksUI() {
+    resetDailyTasks();
+    const tasks = state.dailyTasks;
+    let completed = 0;
+    if (tasks.task1Done) completed++;
+    if (tasks.task2Done) completed++;
+    if (tasks.task3Done) completed++;
+    
+    $('dailyTasksProgress').textContent = `${completed}/3`;
+    $('dailyTasksProgressFill').style.width = `${(completed / 3) * 100}%`;
+    
+    // Update individual task checks
+    const task1Check = $('dailyTask1Check');
+    const task2Check = $('dailyTask2Check');
+    const task3Check = $('dailyTask3Check');
+    const bonusCheck = $('dailyTaskBonusCheck');
+    
+    task1Check.textContent = tasks.task1Done ? '✅' : '⬜';
+    task1Check.className = `task-check ${tasks.task1Done ? 'done' : ''}`;
+    
+    task2Check.textContent = tasks.task2Done ? '✅' : '⬜';
+    task2Check.className = `task-check ${tasks.task2Done ? 'done' : ''}`;
+    
+    task3Check.textContent = tasks.task3Done ? '✅' : '⬜';
+    task3Check.className = `task-check ${tasks.task3Done ? 'done' : ''}`;
+    
+    bonusCheck.textContent = tasks.bonusClaimed ? '⭐' : '⬜';
+    bonusCheck.className = `task-check ${tasks.bonusClaimed ? 'done' : ''}`;
+    
+    // Update daily tasks badge on main page
+    const dailyTasksBadge = $('dailyTasksBadge');
+    const dailyTasksStatus = $('dailyTasksStatus');
+    if (dailyTasksBadge) dailyTasksBadge.textContent = `${completed}/3`;
+    if (dailyTasksStatus) dailyTasksStatus.textContent = `${completed}/3 done`;
+    
+    // Show reset time
+    const resetTime = $('dailyTasksResetTime');
+    if (resetTime) {
+      resetTime.textContent = `Next reset: 00:00 (local time)`;
+    }
+  }
+
+  // ============================================================
+  //  📅 7-DAY BONUS CHECK
+  // ============================================================
+  function checkSevenDayBonus() {
+    const consecutive = getConsecutiveDays();
+    if (consecutive >= 7 && !state.sevenDayBonusClaimed) {
+      // Random reward between 30-100
+      const bonus = Math.floor(Math.random() * 71) + 30;
+      state.tokens = (state.tokens || 0) + bonus;
+      state.sevenDayBonusClaimed = true;
+      state.lastSevenDayBonusDate = new Date().toISOString().split('T')[0];
+      saveState(state);
+      showToast({ type: 'success', title: '🎉 7-Day Bonus!', message: `You earned ${bonus} Benula for 7 consecutive days!` });
+      render();
+      return true;
+    }
+    return false;
   }
 
   // ============================================================
@@ -2217,6 +2635,24 @@
     const twBadge = $('twTabBadge');
     const twDone = (state.twitterTask1Done ? 1 : 0);
     if (twBadge) twBadge.textContent = `${twDone}/1`;
+    
+    // Daily tasks badge
+    const dailyTasksBadge = $('dailyTasksBadge');
+    if (dailyTasksBadge && state.dailyTasks) {
+      let completed = 0;
+      if (state.dailyTasks.task1Done) completed++;
+      if (state.dailyTasks.task2Done) completed++;
+      if (state.dailyTasks.task3Done) completed++;
+      dailyTasksBadge.textContent = `${completed}/3`;
+    }
+    const dailyTasksStatus = $('dailyTasksStatus');
+    if (dailyTasksStatus && state.dailyTasks) {
+      let completed = 0;
+      if (state.dailyTasks.task1Done) completed++;
+      if (state.dailyTasks.task2Done) completed++;
+      if (state.dailyTasks.task3Done) completed++;
+      dailyTasksStatus.textContent = `${completed}/3 done`;
+    }
   }
 
   function updateAllTasks() {
@@ -2242,6 +2678,10 @@
     const totalDays = state.dailyChecks ? state.dailyChecks.length : 0;
     dailyCount.textContent = totalDays + ' days';
     if (modalDailyTotal) modalDailyTotal.textContent = totalDays;
+    
+    // Consecutive days
+    const consecutive = getConsecutiveDays();
+    if (modalConsecutiveDays) modalConsecutiveDays.textContent = consecutive;
 
     const refs = state.cachedReferralCount || 0;
     refCount.textContent = refs + ' referrals';
@@ -2286,6 +2726,12 @@
     }
 
     checkDailyReset();
+    resetDailyTasks();
+    
+    // Check 7-day bonus
+    checkSevenDayBonus();
+    
+    // Update daily check UI
     if (state.dailyCheckDoneToday) {
       dailyStatus.textContent = '✅ Already checked today! +5 Benula rewarded';
       dailyStatus.className = 'daily-status-text success';
@@ -2308,6 +2754,8 @@
 
     updateConfirmButton();
     updateAllTasks();
+    updateDailyTasksUI();
+    updateDailyModal();
   }
 
   function updateConfirmButton() {
@@ -2350,6 +2798,7 @@
     state.dailyCheckDoneToday = true;
     state.lastDailyCheckDate = today;
     state.tokens = (state.tokens || 0) + CONFIG.DAILY_REWARD;
+    trackTokenEarnings(CONFIG.DAILY_REWARD);
     saveState(state);
     showToast({ type: 'success', title: '🎉 Daily Check Complete!', message: `You earned +${CONFIG.DAILY_REWARD} Benula!` });
     dailyCheckBtn.className = 'daily-check-btn success';
@@ -2378,6 +2827,7 @@
     if (result.ok) {
       state.registered = true;
       state.tokens = CONFIG.REGISTER_REWARD;
+      trackTokenEarnings(CONFIG.REGISTER_REWARD);
       saveState(state);
       render();
       confirmBtn.textContent = '✅ Registration Complete!';
@@ -2462,10 +2912,18 @@
   })();
 
   // ============================================================
+  //  BACKGROUND CHECK FOR DAILY TASKS
+  // ============================================================
+  setInterval(() => {
+    resetDailyTasks();
+    updateDailyTasksUI();
+    updateAllBadges();
+  }, 60000); // Check every minute
+
+  // ============================================================
   //  INIT
   // ============================================================
   render();
-  updateTimer();
   if (state.registered) showReferrals();
   console.log('✅ Benula Airdrop loaded. User ID:', state.userId);
   console.log('📊 Tasks status:', {
@@ -2475,6 +2933,7 @@
     telegram2: state.telegramTask2Done,
     twitter: state.twitterTask1Done
   });
+  console.log('📊 Daily Tasks:', state.dailyTasks);
 </script>
 </body>
   </html>
