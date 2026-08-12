@@ -86,11 +86,18 @@
     }
     .token-box {
       display: flex;
+      flex-wrap: wrap;
       align-items: baseline;
       gap: 6px;
       margin-top: 14px;
       padding: 16px 0 10px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .token-item {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin-right: 16px;
     }
     .token-number {
       font-size: 48px;
@@ -102,12 +109,21 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+    .token-number.ton {
+      font-size: 32px;
+      background: linear-gradient(135deg, #60a5fa, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
     .token-label {
       font-size: 18px;
       font-weight: 500;
       color: #c4b5d4;
       opacity: 0.7;
-      margin-left: 4px;
+    }
+    .token-label.ton {
+      font-size: 14px;
+      opacity: 0.5;
     }
     .token-sub {
       font-size: 13px;
@@ -929,7 +945,7 @@
       color: rgba(255, 255, 255, 0.25);
       text-align: center;
       padding: 2px 0;
-      display: none; /* مخفی کردن تایمر */
+      display: none;
     }
 
     /* Daily Tasks Modal */
@@ -1043,8 +1059,26 @@
     }
     .toast .toast-close:hover { color: #fff; background: rgba(255, 255, 255, 0.03); }
 
+    .ton-reward-section {
+      background: rgba(59, 130, 246, 0.05);
+      border: 1px solid rgba(59, 130, 246, 0.1);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-top: 8px;
+    }
+    .ton-reward-section .ton-label {
+      color: rgba(255,255,255,0.4);
+      font-size: 12px;
+    }
+    .ton-reward-section .ton-value {
+      color: #60a5fa;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
     @media (max-width: 400px) {
       .token-number { font-size: 38px; }
+      .token-number.ton { font-size: 26px; }
       .glass { padding: 20px 16px; }
       .menu-grid { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
       .menu-card .label { font-size: 11px; }
@@ -1075,8 +1109,14 @@
     <div class="subtitle">✦ Airdrop</div>
 
     <div class="token-box">
-      <span class="token-number" id="tokenDisplay">0</span>
-      <span class="token-label">Benula</span>
+      <div class="token-item">
+        <span class="token-number" id="tokenDisplay">0</span>
+        <span class="token-label">Benula</span>
+      </div>
+      <div class="token-item">
+        <span class="token-number ton" id="tonDisplay">0</span>
+        <span class="token-label ton">Gram(Ex ton)</span>
+      </div>
       <span class="token-sub" id="userIdDisplay">ID: ---</span>
     </div>
 
@@ -1173,7 +1213,6 @@
             <span class="btn-reward">+5</span>
           </button>
           <div class="daily-status-text" id="dailyStatus">You haven't checked today.</div>
-          <!-- تایمر مخفی شده -->
           <div class="daily-timer" id="dailyTimer" style="display:none;"></div>
         </div>
       </div>
@@ -1400,6 +1439,20 @@
         <div class="tab-content" id="tab-referral">
           <div style="margin-bottom:10px;font-weight:600;color:#a78bfa;font-size:13px;">🏆 Referral Rewards</div>
           <div id="refRewardsList"></div>
+          <div class="ton-reward-section" style="margin-top:12px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="ton-label">💎 Gram(Ex ton) per referral</span>
+              <span style="color:#60a5fa;font-weight:700;">0.05</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">
+              <span class="ton-label">Total referrals</span>
+              <span style="color:#fff;font-weight:600;" id="refTotalForTon">0</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;border-top:1px solid rgba(255,255,255,0.05);padding-top:6px;">
+              <span class="ton-label">💎 Total Gram(Ex ton) earned</span>
+              <span style="color:#60a5fa;font-weight:700;font-size:18px;" id="tonEarnedDisplay">0</span>
+            </div>
+          </div>
         </div>
 
         <!-- Token Bonus Tab -->
@@ -1426,6 +1479,16 @@
         <div class="ref-link-box">
           <span id="refLinkDisplay">Loading link...</span>
           <button id="copyRefLink">Copy</button>
+        </div>
+        <div class="ton-reward-section">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span class="ton-label">💎 Gram(Ex ton) per referral</span>
+            <span style="color:#60a5fa;font-weight:700;">0.05</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;border-top:1px solid rgba(255,255,255,0.05);padding-top:6px;">
+            <span class="ton-label">💎 Total Gram(Ex ton) earned</span>
+            <span style="color:#60a5fa;font-weight:700;font-size:18px;" id="tonEarnedDisplayModal">0</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1475,6 +1538,7 @@
     REGISTER_REWARD: 100,
     REF_REWARD: 20,
     DAILY_REWARD: 5,
+    TON_PER_REFERRAL: 0.05,
     WEBHOOK_SERVER: 'https://benula-webhook-production.up.railway.app',
     YOUTUBE_CHANNEL_LINK: 'https://www.youtube.com/@BenulaOfficial',
     YOUTUBE_CHANNEL_CODE: 'BENULA2026',
@@ -1529,25 +1593,25 @@
   if (!state) {
     const newId = generateUserId();
     state = {
-      userId: newId, registered: false, tokens: 0, dailyChecks: [], referrals: [],
+      userId: newId, registered: false, tokens: 0, tonBalance: 0, dailyChecks: [], referrals: [],
       refCodeUsed: null, dailyCheckDoneToday: false, channelJoined: false, groupJoined: false,
       referralRewardsClaimed: [], lastDailyCheckDate: null, cachedReferralCount: 0,
       tokenBonusesClaimed: [],
       youtubeTaskDone: false, youtubeTask2Done: false,
       telegramTask1Done: false, telegramTask2Done: false,
       twitterTask1Done: false,
-      // Daily Tasks
       dailyTasks: {
-        date: null, // format: YYYY-MM-DD
-        task1Done: false, // 1 referral
-        task2Done: false, // 10 referrals
-        task3Done: false, // earned 200 tokens today
+        date: null,
+        task1Done: false,
+        task2Done: false,
+        task3Done: false,
         bonusClaimed: false,
         dailyReferrals: 0,
         dailyTokensEarned: 0
       },
       sevenDayBonusClaimed: false,
-      lastSevenDayBonusDate: null
+      lastSevenDayBonusDate: null,
+      tonRewardClaimed: false
     };
     saveState(state);
   } else {
@@ -1579,6 +1643,8 @@
     }
     if (typeof state.sevenDayBonusClaimed === 'undefined') state.sevenDayBonusClaimed = false;
     if (!state.lastSevenDayBonusDate) state.lastSevenDayBonusDate = null;
+    if (typeof state.tonBalance === 'undefined') state.tonBalance = 0;
+    if (typeof state.tonRewardClaimed === 'undefined') state.tonRewardClaimed = false;
     
     // Migrate old YouTube tasks from localStorage
     const oldYT1 = localStorage.getItem('youtubeTaskDone');
@@ -1616,10 +1682,39 @@
   ];
 
   // ============================================================
+  //  TON REWARD SYSTEM
+  // ============================================================
+  function calculateTonReward() {
+    const refs = state.cachedReferralCount || 0;
+    return refs * CONFIG.TON_PER_REFERRAL;
+  }
+
+  function claimTonReward() {
+    if (state.tonRewardClaimed) return;
+    if (!state.registered) return;
+    
+    const tonAmount = calculateTonReward();
+    if (tonAmount > 0) {
+      state.tonBalance = (state.tonBalance || 0) + tonAmount;
+      state.tonRewardClaimed = true;
+      saveState(state);
+      render();
+      showToast({
+        type: 'success',
+        title: '💎 TON Reward!',
+        message: `${tonAmount.toFixed(2)} Gram(Ex ton) added to your account!`
+      });
+    } else {
+      state.tonRewardClaimed = true;
+      saveState(state);
+    }
+  }
+
+  // ============================================================
   //  DOM REFS
   // ============================================================
   const $ = id => document.getElementById(id);
-  const tokenDisplay = $('tokenDisplay'), userIdDisplay = $('userIdDisplay');
+  const tokenDisplay = $('tokenDisplay'), tonDisplay = $('tonDisplay'), userIdDisplay = $('userIdDisplay');
   const confirmBtn = $('confirmBtn'), dailyCount = $('dailyCount'), taskCount = $('taskCount');
   const refCount = $('refCount'), referralCodeDisplay = $('referralCodeDisplay');
   const referralTotalDisplay = $('referralTotalDisplay'), modalDailyTotal = $('modalDailyTotal');
@@ -1629,6 +1724,9 @@
   const channelBtn = $('channelBtn'), groupBtn = $('groupBtn'), refInputArea = $('refInputArea');
   const taskBadge = $('taskBadge'), levelBadge = $('levelBadge');
   const modalConsecutiveDays = $('modalConsecutiveDays');
+  const tonEarnedDisplay = $('tonEarnedDisplay');
+  const tonEarnedDisplayModal = $('tonEarnedDisplayModal');
+  const refTotalForTon = $('refTotalForTon');
 
   // ============================================================
   //  MODAL CONTROLS
@@ -1645,6 +1743,7 @@
           renderRefRewards();
           renderTokenBonuses();
           updateAllBadges();
+          updateTonDisplay();
         }
         if (modalId === 'daily-tasks' && state.registered) {
           updateDailyTasksUI();
@@ -1689,6 +1788,10 @@
       parent.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
       const target = parent.querySelector('#tab-' + tabId);
       if (target) target.classList.add('active');
+      if (tabId === 'referral') {
+        renderRefRewards();
+        updateTonDisplay();
+      }
     });
   });
 
@@ -1715,7 +1818,7 @@
   groupBtn.addEventListener('click', (e) => { e.preventDefault(); window.open(CONFIG.GROUP_LINK, '_blank'); markJoined('group'); });
 
   // ============================================================
-  //  DAILY CHECK - با پاداش ۷ روزه
+  //  DAILY CHECK
   // ============================================================
   function getDayOfWeek(date) {
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -1738,7 +1841,6 @@
     let count = 0;
     let checkDate = new Date(today);
     
-    // اگر امروز چک نکرده، از دیروز شروع کن
     if (!state.dailyCheckDoneToday) {
       checkDate.setDate(checkDate.getDate() - 1);
     }
@@ -1771,7 +1873,6 @@
     const consecutive = getConsecutiveDays();
     modalConsecutiveDays.textContent = consecutive;
     
-    // نمایش پاداش ۷ روزه
     const sevenDayBonusDisplay = $('sevenDayBonusDisplay');
     if (consecutive >= 7) {
       if (state.sevenDayBonusClaimed) {
@@ -1817,8 +1918,8 @@
     saveState(state);
     render();
     if (referralTotalDisplay) referralTotalDisplay.textContent = local.length;
+    if (refTotalForTon) refTotalForTon.textContent = local.length;
     
-    // Track new referrals for daily tasks
     const newRefs = local.length - previousCount;
     if (newRefs > 0) {
       const today = new Date().toISOString().split('T')[0];
@@ -1844,10 +1945,10 @@
         saveState(state);
         render();
         if (referralTotalDisplay) referralTotalDisplay.textContent = all.length;
+        if (refTotalForTon) refTotalForTon.textContent = all.length;
         if (serverNewRefs > 0) {
           const reward = serverNewRefs * CONFIG.REF_REWARD;
           state.tokens = (state.tokens || 0) + reward;
-          // Track for daily tasks
           const today = new Date().toISOString().split('T')[0];
           if (state.dailyTasks.date === today) {
             state.dailyTasks.dailyReferrals = (state.dailyTasks.dailyReferrals || 0) + serverNewRefs;
@@ -1859,6 +1960,10 @@
         }
       }
     } catch(e) { console.error('Sync error:', e); }
+    
+    // Claim TON reward
+    claimTonReward();
+    updateTonDisplay();
   }
 
   // ============================================================
@@ -2509,7 +2614,6 @@
     const tokens = state.dailyTasks.dailyTokensEarned || 0;
     let changed = false;
     
-    // Task 1: 1 referral
     if (refs >= 1 && !state.dailyTasks.task1Done) {
       state.dailyTasks.task1Done = true;
       state.tokens = (state.tokens || 0) + 50;
@@ -2518,7 +2622,6 @@
       showToast({ type: 'success', title: '⭐ Daily Task Complete!', message: '1 referral - +50 Benula!' });
     }
     
-    // Task 2: 10 referrals
     if (refs >= 10 && !state.dailyTasks.task2Done) {
       state.dailyTasks.task2Done = true;
       state.tokens = (state.tokens || 0) + 500;
@@ -2527,7 +2630,6 @@
       showToast({ type: 'success', title: '⭐ Daily Task Complete!', message: '10 referrals - +500 Benula!' });
     }
     
-    // Task 3: Earn 200 tokens
     if (tokens >= 200 && !state.dailyTasks.task3Done) {
       state.dailyTasks.task3Done = true;
       state.tokens = (state.tokens || 0) + 50;
@@ -2536,7 +2638,6 @@
       showToast({ type: 'success', title: '⭐ Daily Task Complete!', message: 'Earned 200 tokens - +50 Benula!' });
     }
     
-    // Bonus: All 3 tasks done
     if (state.dailyTasks.task1Done && state.dailyTasks.task2Done && state.dailyTasks.task3Done && !state.dailyTasks.bonusClaimed) {
       state.dailyTasks.bonusClaimed = true;
       state.tokens = (state.tokens || 0) + 200;
@@ -2563,7 +2664,6 @@
     $('dailyTasksProgress').textContent = `${completed}/3`;
     $('dailyTasksProgressFill').style.width = `${(completed / 3) * 100}%`;
     
-    // Update individual task checks
     const task1Check = $('dailyTask1Check');
     const task2Check = $('dailyTask2Check');
     const task3Check = $('dailyTask3Check');
@@ -2581,13 +2681,11 @@
     bonusCheck.textContent = tasks.bonusClaimed ? '⭐' : '⬜';
     bonusCheck.className = `task-check ${tasks.bonusClaimed ? 'done' : ''}`;
     
-    // Update daily tasks badge on main page
     const dailyTasksBadge = $('dailyTasksBadge');
     const dailyTasksStatus = $('dailyTasksStatus');
     if (dailyTasksBadge) dailyTasksBadge.textContent = `${completed}/3`;
     if (dailyTasksStatus) dailyTasksStatus.textContent = `${completed}/3 done`;
     
-    // Show reset time
     const resetTime = $('dailyTasksResetTime');
     if (resetTime) {
       resetTime.textContent = `Next reset: 00:00 (local time)`;
@@ -2600,7 +2698,6 @@
   function checkSevenDayBonus() {
     const consecutive = getConsecutiveDays();
     if (consecutive >= 7 && !state.sevenDayBonusClaimed) {
-      // Random reward between 30-100
       const bonus = Math.floor(Math.random() * 71) + 30;
       state.tokens = (state.tokens || 0) + bonus;
       state.sevenDayBonusClaimed = true;
@@ -2611,6 +2708,17 @@
       return true;
     }
     return false;
+  }
+
+  // ============================================================
+  //  📊 UPDATE TON DISPLAY
+  // ============================================================
+  function updateTonDisplay() {
+    const tonAmount = state.tonBalance || 0;
+    if (tonDisplay) tonDisplay.textContent = tonAmount.toFixed(2);
+    if (tonEarnedDisplay) tonEarnedDisplay.textContent = tonAmount.toFixed(2);
+    if (tonEarnedDisplayModal) tonEarnedDisplayModal.textContent = tonAmount.toFixed(2);
+    if (refTotalForTon) refTotalForTon.textContent = state.cachedReferralCount || 0;
   }
 
   // ============================================================
@@ -2636,7 +2744,6 @@
     const twDone = (state.twitterTask1Done ? 1 : 0);
     if (twBadge) twBadge.textContent = `${twDone}/1`;
     
-    // Daily tasks badge
     const dailyTasksBadge = $('dailyTasksBadge');
     if (dailyTasksBadge && state.dailyTasks) {
       let completed = 0;
@@ -2669,6 +2776,7 @@
   // ============================================================
   function render() {
     tokenDisplay.textContent = state.tokens || 0;
+    updateTonDisplay();
     userIdDisplay.textContent = 'ID: ' + state.userId;
 
     const level = getUserLevel(state.tokens || 0);
@@ -2679,7 +2787,6 @@
     dailyCount.textContent = totalDays + ' days';
     if (modalDailyTotal) modalDailyTotal.textContent = totalDays;
     
-    // Consecutive days
     const consecutive = getConsecutiveDays();
     if (modalConsecutiveDays) modalConsecutiveDays.textContent = consecutive;
 
@@ -2687,6 +2794,7 @@
     refCount.textContent = refs + ' referrals';
     if (referralTotalDisplay) referralTotalDisplay.textContent = refs;
     if (referralCodeDisplay) referralCodeDisplay.textContent = state.userId;
+    if (refTotalForTon) refTotalForTon.textContent = refs;
 
     const baseUrl = `https://t.me/${CONFIG.BOT_USERNAME}?start=ref_`;
     const refLink = baseUrl + state.userId;
@@ -2727,11 +2835,8 @@
 
     checkDailyReset();
     resetDailyTasks();
-    
-    // Check 7-day bonus
     checkSevenDayBonus();
     
-    // Update daily check UI
     if (state.dailyCheckDoneToday) {
       dailyStatus.textContent = '✅ Already checked today! +5 Benula rewarded';
       dailyStatus.className = 'daily-status-text success';
@@ -2756,6 +2861,7 @@
     updateAllTasks();
     updateDailyTasksUI();
     updateDailyModal();
+    updateTonDisplay();
   }
 
   function updateConfirmButton() {
@@ -2918,13 +3024,19 @@
     resetDailyTasks();
     updateDailyTasksUI();
     updateAllBadges();
-  }, 60000); // Check every minute
+    updateTonDisplay();
+  }, 60000);
 
   // ============================================================
   //  INIT
   // ============================================================
   render();
-  if (state.registered) showReferrals();
+  if (state.registered) {
+    showReferrals();
+    if (!state.tonRewardClaimed) {
+      claimTonReward();
+    }
+  }
   console.log('✅ Benula Airdrop loaded. User ID:', state.userId);
   console.log('📊 Tasks status:', {
     youtube: state.youtubeTaskDone,
@@ -2934,6 +3046,7 @@
     twitter: state.twitterTask1Done
   });
   console.log('📊 Daily Tasks:', state.dailyTasks);
+  console.log('💎 TON Balance:', state.tonBalance);
 </script>
 </body>
   </html>
