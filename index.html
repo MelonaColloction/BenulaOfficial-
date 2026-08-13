@@ -1762,67 +1762,17 @@ body::after{
   
 </style>
 
-<style id="weekly-daily-check-polish">
-  /* Weekly Daily Check — horizontal premium tracker */
-  .daily-week {
-    display:grid;
-    grid-template-columns:repeat(7,minmax(0,1fr));
-    gap:8px;
-    width:100%;
-    margin:14px 0 6px;
-  }
-  .week-day {
-    min-width:0;
-    padding:10px 6px 9px;
-    border-radius:14px;
-    text-align:center;
-    background:rgba(255,255,255,.035);
-    border:1px solid rgba(255,255,255,.08);
-    transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease;
-  }
-  .week-day .wd-name {
-    display:block;
-    font-size:10px;
-    font-weight:800;
-    letter-spacing:.08em;
-    color:rgba(255,255,255,.58);
-    margin-bottom:7px;
-  }
-  .week-day .wd-state {
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:26px;
-    height:26px;
-    margin:auto;
-    border-radius:50%;
-    font-size:13px;
-    font-weight:800;
-    color:rgba(255,255,255,.35);
-    background:rgba(255,255,255,.055);
-  }
-  .week-day.done {
-    background:linear-gradient(180deg,rgba(22,135,255,.16),rgba(0,217,255,.055));
-    border-color:rgba(22,135,255,.32);
-  }
-  .week-day.done .wd-name { color:#73b9ff; }
-  .week-day.done .wd-state {
-    color:#fff;
-    background:linear-gradient(135deg,#1687ff,#00d9ff);
-    box-shadow:0 0 16px rgba(0,180,255,.28);
-  }
-  .week-day.today {
-    border-color:rgba(0,217,255,.48);
-    box-shadow:inset 0 0 0 1px rgba(0,217,255,.08),0 0 18px rgba(0,180,255,.08);
-    transform:translateY(-1px);
-  }
-  .week-day.today .wd-name { color:#b7f5ff; }
-  @media (max-width:520px) {
-    .daily-week { gap:5px; }
-    .week-day { padding:8px 3px 7px; border-radius:11px; }
-    .week-day .wd-name { font-size:8px; margin-bottom:5px; }
-    .week-day .wd-state { width:23px; height:23px; font-size:11px; }
-  }
+<style id="weekly-daily-check-horizontal">
+.daily-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;width:100%;margin:14px 0 8px;}
+.week-day{min-width:0;padding:10px 5px;border-radius:14px;text-align:center;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease;}
+.week-day .wd-name{display:block;font-size:10px;font-weight:800;letter-spacing:.08em;color:rgba(255,255,255,.55);margin-bottom:7px;}
+.week-day .wd-state{display:flex;align-items:center;justify-content:center;width:27px;height:27px;margin:auto;border-radius:50%;font-size:13px;font-weight:800;color:rgba(255,255,255,.35);background:rgba(255,255,255,.055);}
+.week-day.done{background:linear-gradient(180deg,rgba(22,135,255,.16),rgba(0,217,255,.055));border-color:rgba(22,135,255,.34);}
+.week-day.done .wd-name{color:#73b9ff;}
+.week-day.done .wd-state{color:#fff;background:linear-gradient(135deg,#1687ff,#00d9ff);box-shadow:0 0 16px rgba(0,180,255,.28);}
+.week-day.today{border-color:rgba(0,217,255,.48);box-shadow:inset 0 0 0 1px rgba(0,217,255,.08),0 0 18px rgba(0,180,255,.08);transform:translateY(-1px);}
+.week-day.today .wd-name{color:#b7f5ff;}
+@media(max-width:520px){.daily-week{gap:5px}.week-day{padding:8px 3px;border-radius:11px}.week-day .wd-name{font-size:8px;margin-bottom:5px}.week-day .wd-state{width:23px;height:23px;font-size:11px}}
 </style>
 </head>
 <body>
@@ -2731,8 +2681,15 @@ body::after{
     
     try {
       const res = await fetch(`${CONFIG.WEBHOOK_SERVER}/api/referrals/${state.userId}`);
-      const data = await res.json();
-      if (data.success) {
+      const contentType = res.headers.get('content-type') || '';
+      let data = {};
+      if (contentType.includes('application/json')) {
+        data = await res.json();
+      } else {
+        const text = await res.text();
+        try { data = JSON.parse(text); } catch (_) { data = { success: res.ok }; }
+      }
+      if (res.ok && data.success) {
         const server = data.referrals || [];
         const all = [...new Set([...local, ...server])];
         const stored = JSON.parse(localStorage.getItem('benula_referrals')) || {};
@@ -3494,23 +3451,25 @@ body::after{
     }
   }
 
-  // Weekly boundary: Monday 00:00 in the user's local timezone.
-  // This is the exact end of Sunday (24:00) and starts a fresh 7-day cycle.
+
+  // Reset the weekly Daily Check exactly at Monday 00:00 in the user's local timezone.
   function scheduleWeeklyBoundaryReset() {
     const now = new Date();
     const nextMonday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const daysUntilMonday = (8 - nextMonday.getDay()) % 7 || 7;
+    const day = nextMonday.getDay(); // Sun=0, Mon=1, ... Sat=6
+    const daysUntilMonday = day === 1 ? 7 : (8 - day) % 7;
     nextMonday.setDate(nextMonday.getDate() + daysUntilMonday);
     nextMonday.setHours(0, 0, 0, 0);
+    const delay = Math.max(1000, nextMonday.getTime() - now.getTime() + 25);
 
     setTimeout(() => {
       ensureWeeklyState();
-      state.dailyCheckDoneToday = false;
-      state.lastDailyCheckDate = localDateKey();
-      saveState(state);
+      checkDailyReset();
+      renderWeeklyTracker();
+      updateDailyModal();
       render();
       scheduleWeeklyBoundaryReset();
-    }, Math.max(1000, nextMonday.getTime() - now.getTime() + 50));
+    }, delay);
   }
 
   // ============================================================
@@ -3793,7 +3752,7 @@ body::after{
     const result = await registerUserDirectly(userId, refCode);
     if (result.ok) {
       state.registered = true;
-      state.tokens = CONFIG.REGISTER_REWARD;
+      state.tokens = (Number(state.tokens) || 0) + CONFIG.REGISTER_REWARD;
       trackTokenEarnings(CONFIG.REGISTER_REWARD);
       saveState(state);
       hideRegistrationOnboarding();
@@ -3879,8 +3838,6 @@ body::after{
     }
   })();
 
-  scheduleWeeklyBoundaryReset();
-
   // ============================================================
   //  BACKGROUND CHECK FOR DAILY TASKS
   // ============================================================
@@ -3897,6 +3854,7 @@ body::after{
   ensureWeeklyState();
   checkDailyReset();
   render();
+  scheduleWeeklyBoundaryReset();
   if (state.registered) {
     hideRegistrationOnboarding();
     showReferrals();
