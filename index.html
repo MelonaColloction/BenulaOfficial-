@@ -109,21 +109,11 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .token-number.ton {
-      font-size: 32px;
-      background: linear-gradient(135deg, #60a5fa, #3b82f6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
     .token-label {
       font-size: 18px;
       font-weight: 500;
       color: #c4b5d4;
       opacity: 0.7;
-    }
-    .token-label.ton {
-      font-size: 14px;
-      opacity: 0.5;
     }
     .token-sub {
       font-size: 13px;
@@ -149,7 +139,7 @@
       transition: 0.3s;
     }
     .join-item:hover {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0);
       border-color: rgba(167, 139, 250, 0.15);
     }
     .join-item span {
@@ -213,7 +203,7 @@
     }
     .ref-input-area input[type="text"]:focus {
       border-color: rgba(167, 139, 250, 0.3);
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0);
     }
     .ref-input-area input[type="text"]:disabled {
       opacity: 0.4;
@@ -352,7 +342,7 @@
       flex: 1;
       margin: 0 12px;
       height: 6px;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0);
       border-radius: 10px;
       overflow: hidden;
       align-self: center;
@@ -422,7 +412,7 @@
       font-weight: 700;
     }
     .modal-close {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0);
       border: none;
       color: rgba(255, 255, 255, 0.4);
       font-size: 20px;
@@ -458,7 +448,7 @@
     .modal-tab {
       padding: 6px 14px;
       border-radius: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0);
       background: rgba(255, 255, 255, 0.02);
       color: rgba(255, 255, 255, 0.4);
       font-size: 11px;
@@ -574,8 +564,8 @@
       color: #fff;
     }
     .task-btn.open-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0);
+      border: 1px solid rgba(255, 255, 255, 0);
     }
     .task-btn.open-btn:hover:not(:disabled) {
       background: rgba(255, 255, 255, 0.08);
@@ -603,7 +593,7 @@
       flex: 1;
       padding: 6px 12px;
       border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0);
       background: rgba(255, 255, 255, 0.02);
       color: #fff;
       font-size: 12px;
@@ -737,7 +727,7 @@
     .daily-progress-bar {
       width: 100%;
       height: 4px;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0);
       border-radius: 4px;
       margin-top: 8px;
       overflow: hidden;
@@ -1011,7 +1001,7 @@
       pointer-events: auto;
       background: rgba(15, 10, 26, 0.95);
       backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0);
       border-radius: 14px;
       padding: 12px 16px;
       width: 100%;
@@ -1059,26 +1049,8 @@
     }
     .toast .toast-close:hover { color: #fff; background: rgba(255, 255, 255, 0.03); }
 
-    .ton-reward-section {
-      background: rgba(59, 130, 246, 0.05);
-      border: 1px solid rgba(59, 130, 246, 0.1);
-      border-radius: 12px;
-      padding: 12px 16px;
-      margin-top: 8px;
-    }
-    .ton-reward-section .ton-label {
-      color: rgba(255,255,255,0.4);
-      font-size: 12px;
-    }
-    .ton-reward-section .ton-value {
-      color: #60a5fa;
-      font-weight: 700;
-      font-size: 16px;
-    }
-
     @media (max-width: 400px) {
       .token-number { font-size: 38px; }
-      .token-number.ton { font-size: 26px; }
       .glass { padding: 20px 16px; }
       .menu-grid { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
       .menu-card .label { font-size: 11px; }
@@ -1279,7 +1251,7 @@ body::after{
 
 .token-item:last-child::after{background:rgba(34,211,238,.16)}
 
-.token-number,.token-number.ton{
+.token-number{
   position:relative;
   z-index:1;
   font-size:38px;
@@ -1293,14 +1265,8 @@ body::after{
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
-.token-number.ton{
-  font-size:32px;
-  background:linear-gradient(135deg,#fff 10%,#a5f3fc 55%,#22d3ee);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
 
-.token-label,.token-label.ton{
+.token-label{
   position:relative;
   z-index:1;
   margin-top:4px;
@@ -1310,7 +1276,6 @@ body::after{
   letter-spacing:.3px;
   opacity:1;
 }
-.token-label.ton{font-size:10px}
 
 .token-sub{
   grid-column:1/-1;
@@ -1689,14 +1654,6 @@ body::after{
 .daily-status-text{color:var(--muted-2)}
 .daily-timer{color:#fcd34d}
 
-.ton-reward-section{
-  background:linear-gradient(145deg,rgba(34,211,238,.07),rgba(59,130,246,.025));
-  border:1px solid rgba(34,211,238,.12);
-  border-radius:16px;
-  padding:13px 14px;
-}
-.ton-reward-section .ton-value{color:#67e8f9}
-
 .info-row{
   padding:10px 0;
   border-bottom:1px solid rgba(255,255,255,.045);
@@ -1746,7 +1703,6 @@ body::after{
   .logo{font-size:25px}
   .token-item{min-height:96px;padding:15px 13px}
   .token-number{font-size:34px}
-  .token-number.ton{font-size:28px}
   .join-row{grid-template-columns:1fr 1fr}
   .menu-grid{grid-template-columns:1fr 1fr;gap:9px}
   .menu-card{min-height:96px}
@@ -1796,10 +1752,6 @@ body::after{
       <div class="token-item">
         <span class="token-number" id="tokenDisplay">0</span>
         <span class="token-label">Benula</span>
-      </div>
-      <div class="token-item">
-        <span class="token-number ton" id="tonDisplay">0</span>
-        <span class="token-label ton">Gram(Ex ton)</span>
       </div>
       <span class="token-sub" id="userIdDisplay">ID: ---</span>
     </div>
@@ -2124,20 +2076,6 @@ body::after{
         <div class="tab-content" id="tab-referral">
           <div style="margin-bottom:10px;font-weight:600;color:#a78bfa;font-size:13px;">🏆 Referral Rewards</div>
           <div id="refRewardsList"></div>
-          <div class="ton-reward-section" style="margin-top:12px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <span class="ton-label">💎 Gram(Ex ton) per referral</span>
-              <span style="color:#60a5fa;font-weight:700;">0.05</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">
-              <span class="ton-label">Total referrals</span>
-              <span style="color:#fff;font-weight:600;" id="refTotalForTon">0</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;border-top:1px solid rgba(255,255,255,0.05);padding-top:6px;">
-              <span class="ton-label">💎 Total Gram(Ex ton) earned</span>
-              <span style="color:#60a5fa;font-weight:700;font-size:18px;" id="tonEarnedDisplay">0</span>
-            </div>
-          </div>
         </div>
 
         <!-- Token Bonus Tab -->
@@ -2164,16 +2102,6 @@ body::after{
         <div class="ref-link-box">
           <span id="refLinkDisplay">Loading link...</span>
           <button id="copyRefLink">Copy</button>
-        </div>
-        <div class="ton-reward-section">
-          <div style="display:flex;justify-content:space-between;align-items:center;">
-            <span class="ton-label">💎 Gram(Ex ton) per referral</span>
-            <span style="color:#60a5fa;font-weight:700;">0.05</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;border-top:1px solid rgba(255,255,255,0.05);padding-top:6px;">
-            <span class="ton-label">💎 Total Gram(Ex ton) earned</span>
-            <span style="color:#60a5fa;font-weight:700;font-size:18px;" id="tonEarnedDisplayModal">0</span>
-          </div>
         </div>
       </div>
     </div>
@@ -2223,7 +2151,6 @@ body::after{
     REGISTER_REWARD: 100,
     REF_REWARD: 20,
     DAILY_REWARD: 5,
-    TON_PER_REFERRAL: 0.05,
     WEBHOOK_SERVER: 'https://benula-webhook-production.up.railway.app',
     YOUTUBE_CHANNEL_LINK: 'https://www.youtube.com/@BenulaOfficial',
     YOUTUBE_CHANNEL_CODE: 'BENULA2026',
@@ -2278,7 +2205,6 @@ body::after{
   if (!state) {
     const newId = generateUserId();
     state = {
-      userId: newId, registered: false, tokens: 0, tonBalance: 0, dailyChecks: [], referrals: [],
       refCodeUsed: null, dailyCheckDoneToday: false, channelJoined: false, groupJoined: false,
       referralRewardsClaimed: [], lastDailyCheckDate: null, cachedReferralCount: 0,
       tokenBonusesClaimed: [],
@@ -2295,12 +2221,14 @@ body::after{
         dailyTokensEarned: 0
       },
       sevenDayBonusClaimed: false,
-      lastSevenDayBonusDate: null,
-      tonRewardClaimed: false,
-      creditedTonReferrals: 0
+      lastSevenDayBonusDate: null
     };
     saveState(state);
   } else {
+    // Gram(Ex ton) has been permanently removed; discard any legacy Gram balance/flags.
+    delete state.tonBalance;
+    delete state.tonRewardClaimed;
+    delete state.creditedTonReferrals;
     if (!state.dailyChecks) state.dailyChecks = [];
     if (!state.referrals) state.referrals = [];
     if (typeof state.dailyCheckDoneToday === 'undefined') state.dailyCheckDoneToday = false;
@@ -2329,9 +2257,6 @@ body::after{
     }
     if (typeof state.sevenDayBonusClaimed === 'undefined') state.sevenDayBonusClaimed = false;
     if (!state.lastSevenDayBonusDate) state.lastSevenDayBonusDate = null;
-    if (typeof state.tonBalance === 'undefined') state.tonBalance = 0;
-    if (typeof state.tonRewardClaimed === 'undefined') state.tonRewardClaimed = false;
-    if (typeof state.creditedTonReferrals === 'undefined') state.creditedTonReferrals = 0;
     
     // Migrate old YouTube tasks from localStorage
     const oldYT1 = localStorage.getItem('youtubeTaskDone');
@@ -2369,33 +2294,10 @@ body::after{
   ];
 
   // ============================================================
-  //  GRAM (EX TON) REWARD SYSTEM — +0.05 FOR EACH NEW REFERRAL
-  // ============================================================
-  function calculateTonReward(refCount) {
-    return (Number(refCount) || 0) * CONFIG.TON_PER_REFERRAL;
-  }
-
-  function creditNewReferralGram(totalReferralCount) {
-    if (!state.registered) return 0;
-    const total = Math.max(0, Number(totalReferralCount) || 0);
-    const credited = Math.max(0, Number(state.creditedTonReferrals) || 0);
-    const newRefs = Math.max(0, total - credited);
-    if (!newRefs) return 0;
-
-    const reward = calculateTonReward(newRefs);
-    state.tonBalance = (state.tonBalance || 0) + reward;
-    state.creditedTonReferrals = total;
-    // Keep this field only for backward compatibility; it is no longer a one-time claim flag.
-    state.tonRewardClaimed = true;
-    saveState(state);
-    return reward;
-  }
-
-  // ============================================================
   //  DOM REFS
   // ============================================================
   const $ = id => document.getElementById(id);
-  const tokenDisplay = $('tokenDisplay'), tonDisplay = $('tonDisplay'), userIdDisplay = $('userIdDisplay');
+  const tokenDisplay = $('tokenDisplay'), userIdDisplay = $('userIdDisplay');
   const confirmBtn = $('confirmBtn'), dailyCount = $('dailyCount'), taskCount = $('taskCount');
   const refCount = $('refCount'), referralCodeDisplay = $('referralCodeDisplay');
   const referralTotalDisplay = $('referralTotalDisplay'), modalDailyTotal = $('modalDailyTotal');
@@ -2405,9 +2307,6 @@ body::after{
   const channelBtn = $('channelBtn'), groupBtn = $('groupBtn'), refInputArea = $('refInputArea');
   const taskBadge = $('taskBadge'), levelBadge = $('levelBadge');
   const modalConsecutiveDays = $('modalConsecutiveDays');
-  const tonEarnedDisplay = $('tonEarnedDisplay');
-  const tonEarnedDisplayModal = $('tonEarnedDisplayModal');
-  const refTotalForTon = $('refTotalForTon');
 
   // ============================================================
   //  MODAL CONTROLS
@@ -2424,8 +2323,7 @@ body::after{
           renderRefRewards();
           renderTokenBonuses();
           updateAllBadges();
-          updateTonDisplay();
-        }
+              }
         if (modalId === 'daily-tasks' && state.registered) {
           updateDailyTasksUI();
         }
@@ -2471,8 +2369,7 @@ body::after{
       if (target) target.classList.add('active');
       if (tabId === 'referral') {
         renderRefRewards();
-        updateTonDisplay();
-      }
+          }
     });
   });
 
@@ -2667,7 +2564,6 @@ body::after{
     saveState(state);
     render();
     if (referralTotalDisplay) referralTotalDisplay.textContent = local.length;
-    if (refTotalForTon) refTotalForTon.textContent = local.length;
     
     const newRefs = local.length - previousCount;
     if (newRefs > 0) {
@@ -2701,7 +2597,6 @@ body::after{
         saveState(state);
         render();
         if (referralTotalDisplay) referralTotalDisplay.textContent = all.length;
-        if (refTotalForTon) refTotalForTon.textContent = all.length;
         if (serverNewRefs > 0) {
           const reward = serverNewRefs * CONFIG.REF_REWARD;
           state.tokens = (state.tokens || 0) + reward;
@@ -2716,13 +2611,6 @@ body::after{
         }
       }
     } catch(e) { console.error('Sync error:', e); }
-    
-    const gramReward = creditNewReferralGram(state.cachedReferralCount || 0);
-    if (gramReward > 0) {
-      render();
-      showToast({ type: 'success', title: '💎 New Referral Reward!', message: `+${gramReward.toFixed(2)} Gram(Ex ton) for new referral(s)!` });
-    }
-    updateTonDisplay();
   }
 
   // ============================================================
@@ -3496,17 +3384,6 @@ body::after{
   }
 
   // ============================================================
-  //  📊 UPDATE TON DISPLAY
-  // ============================================================
-  function updateTonDisplay() {
-    const tonAmount = state.tonBalance || 0;
-    if (tonDisplay) tonDisplay.textContent = tonAmount.toFixed(2);
-    if (tonEarnedDisplay) tonEarnedDisplay.textContent = tonAmount.toFixed(2);
-    if (tonEarnedDisplayModal) tonEarnedDisplayModal.textContent = tonAmount.toFixed(2);
-    if (refTotalForTon) refTotalForTon.textContent = state.cachedReferralCount || 0;
-  }
-
-  // ============================================================
   //  📊 UPDATE ALL BADGES
   // ============================================================
   function updateAllBadges() {
@@ -3561,7 +3438,6 @@ body::after{
   // ============================================================
   function render() {
     tokenDisplay.textContent = state.tokens || 0;
-    updateTonDisplay();
     userIdDisplay.textContent = 'ID: ' + state.userId;
 
     const level = getUserLevel(state.tokens || 0);
@@ -3579,7 +3455,6 @@ body::after{
     refCount.textContent = refs + ' referrals';
     if (referralTotalDisplay) referralTotalDisplay.textContent = refs;
     if (referralCodeDisplay) referralCodeDisplay.textContent = state.userId;
-    if (refTotalForTon) refTotalForTon.textContent = refs;
 
     const baseUrl = `https://t.me/${CONFIG.BOT_USERNAME}?start=ref_`;
     const refLink = baseUrl + state.userId;
@@ -3648,7 +3523,6 @@ body::after{
     updateAllTasks();
     updateDailyTasksUI();
     updateDailyModal();
-    updateTonDisplay();
   }
 
   function hideRegistrationOnboarding() {
@@ -3845,7 +3719,6 @@ body::after{
     resetDailyTasks();
     updateDailyTasksUI();
     updateAllBadges();
-    updateTonDisplay();
   }, 60000);
 
   // ============================================================
@@ -3858,7 +3731,6 @@ body::after{
   if (state.registered) {
     hideRegistrationOnboarding();
     showReferrals();
-    // Gram rewards are credited incrementally inside showReferrals().
   }
   console.log('✅ Benula Airdrop loaded. User ID:', state.userId);
   console.log('📊 Tasks status:', {
@@ -3869,7 +3741,6 @@ body::after{
     twitter: state.twitterTask1Done
   });
   console.log('📊 Daily Tasks:', state.dailyTasks);
-  console.log('💎 TON Balance:', state.tonBalance);
 </script>
 </body>
   </html>
