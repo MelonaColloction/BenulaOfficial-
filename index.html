@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Benula Airdrop</title>
+  <title>Benula • Premium Airdrop</title>
   <style>
     * {
       margin: 0;
@@ -1089,7 +1089,741 @@
       .task-item { padding: 12px 14px; }
       .task-title { font-size: 13px; }
     }
-  </style>
+
+/* ============================================================
+   BENULA — PREMIUM UI REDESIGN
+   Visual-only layer: existing IDs/classes and functionality kept.
+   ============================================================ */
+:root{
+  --bg-0:#050711;
+  --bg-1:#080b18;
+  --panel:rgba(14,18,34,.72);
+  --panel-strong:rgba(17,22,42,.9);
+  --line:rgba(255,255,255,.075);
+  --line-strong:rgba(255,255,255,.12);
+  --text:#f7f9ff;
+  --muted:#8f99b5;
+  --muted-2:#66708c;
+  --violet:#8b5cf6;
+  --violet-2:#6d4aff;
+  --cyan:#22d3ee;
+  --cyan-2:#06b6d4;
+  --green:#34d399;
+  --gold:#fbbf24;
+  --danger:#fb7185;
+}
+
+html{background:var(--bg-0);scroll-behavior:smooth}
+
+body{
+  min-height:100vh;
+  margin:0;
+  padding:28px 14px 56px;
+  color:var(--text);
+  background:
+    radial-gradient(700px 420px at 50% -8%, rgba(124,58,237,.25), transparent 62%),
+    radial-gradient(500px 360px at 100% 35%, rgba(6,182,212,.12), transparent 62%),
+    radial-gradient(500px 400px at 0% 80%, rgba(59,130,246,.08), transparent 65%),
+    linear-gradient(180deg,#060813 0%,#080b17 48%,#050711 100%);
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.22;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:32px 32px;
+  mask-image:linear-gradient(to bottom,black,transparent 88%);
+  z-index:0;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  width:280px;height:280px;
+  top:18%;left:50%;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:rgba(139,92,246,.11);
+  filter:blur(80px);
+  pointer-events:none;
+  z-index:0;
+}
+
+.app{
+  position:relative;
+  z-index:1;
+  max-width:520px;
+  width:100%;
+  margin:0 auto;
+}
+
+.glass{
+  position:relative;
+  overflow:hidden;
+  padding:22px;
+  margin-bottom:18px;
+  border-radius:30px;
+  background:
+    linear-gradient(145deg,rgba(21,27,49,.88),rgba(8,11,23,.76));
+  border:1px solid rgba(255,255,255,.09);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.48),
+    0 0 0 1px rgba(139,92,246,.035) inset,
+    0 1px 0 rgba(255,255,255,.06) inset;
+  backdrop-filter:blur(24px) saturate(130%);
+  -webkit-backdrop-filter:blur(24px) saturate(130%);
+}
+
+.glass::before{
+  content:"";
+  position:absolute;
+  width:220px;height:220px;
+  top:-150px;right:-80px;
+  border-radius:50%;
+  background:rgba(139,92,246,.16);
+  filter:blur(35px);
+  pointer-events:none;
+}
+
+.glass::after{
+  content:"";
+  position:absolute;
+  left:24px;right:24px;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);
+  pointer-events:none;
+}
+
+.header{
+  position:relative;
+  z-index:1;
+  padding:2px 2px 4px;
+}
+
+.logo{
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:-1px;
+  background:linear-gradient(100deg,#fff 5%,#c4b5fd 42%,#67e8f9 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 28px rgba(139,92,246,.16);
+}
+
+.logo .level-badge{
+  -webkit-text-fill-color:initial;
+  filter:drop-shadow(0 4px 12px rgba(139,92,246,.3));
+}
+
+.badge{
+  padding:6px 12px;
+  border-radius:999px;
+  color:#c4b5fd;
+  background:rgba(139,92,246,.1);
+  border:1px solid rgba(139,92,246,.24);
+  box-shadow:0 0 20px rgba(139,92,246,.08) inset;
+  font-size:10px;
+  letter-spacing:1.2px;
+}
+
+.subtitle{
+  margin-top:5px;
+  padding-left:2px;
+  color:var(--muted-2);
+  font-size:10px;
+  letter-spacing:3px;
+}
+
+.token-box{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:20px;
+  padding:0;
+  border:0;
+}
+
+.token-item{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:2px;
+  min-height:104px;
+  margin:0;
+  padding:18px 16px;
+  border-radius:22px;
+  overflow:hidden;
+  background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.018));
+  border:1px solid rgba(255,255,255,.075);
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.token-item:first-child::after,
+.token-item:last-child::after{
+  content:"";
+  position:absolute;
+  width:90px;height:90px;
+  right:-35px;bottom:-45px;
+  border-radius:50%;
+  filter:blur(22px);
+  background:rgba(139,92,246,.2);
+}
+
+.token-item:last-child::after{background:rgba(34,211,238,.16)}
+
+.token-number,.token-number.ton{
+  position:relative;
+  z-index:1;
+  font-size:38px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:-1.8px;
+}
+
+.token-number{
+  background:linear-gradient(135deg,#fff 15%,#c4b5fd 60%,#8b5cf6);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.token-number.ton{
+  font-size:32px;
+  background:linear-gradient(135deg,#fff 10%,#a5f3fc 55%,#22d3ee);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.token-label,.token-label.ton{
+  position:relative;
+  z-index:1;
+  margin-top:4px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.3px;
+  opacity:1;
+}
+.token-label.ton{font-size:10px}
+
+.token-sub{
+  grid-column:1/-1;
+  margin:0;
+  padding:0 3px;
+  color:var(--muted-2);
+  font-size:10px;
+  text-align:right;
+}
+
+.join-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:14px 0 10px;
+}
+
+.join-item{
+  min-width:0;
+  padding:13px 13px;
+  border-radius:18px;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.065);
+  box-shadow:0 8px 24px rgba(0,0,0,.12);
+}
+.join-item span{
+  display:block;
+  margin-bottom:9px;
+  color:#cbd2e6;
+  font-size:11px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.join-item .join-btn{
+  width:100%;
+  padding:7px 10px;
+  border-radius:11px;
+  color:#ddd6fe;
+  background:linear-gradient(135deg,rgba(139,92,246,.17),rgba(109,74,255,.07));
+  border:1px solid rgba(139,92,246,.2);
+  font-size:11px;
+  box-shadow:0 6px 18px rgba(109,74,255,.08);
+}
+.join-item .join-btn:hover{
+  background:linear-gradient(135deg,rgba(139,92,246,.27),rgba(109,74,255,.12));
+  transform:translateY(-1px);
+}
+
+.ref-input-area{
+  margin:12px 0 10px;
+  padding:14px;
+  border-radius:18px;
+  background:rgba(255,255,255,.028);
+  border:1px solid rgba(255,255,255,.06);
+}
+.ref-input-area label{
+  color:var(--muted);
+  opacity:1;
+  font-size:10px;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+.ref-input-area .ref-input-wrap{gap:8px}
+.ref-input-area input[type="text"]{
+  min-width:0;
+  padding:11px 13px;
+  border-radius:12px;
+  background:rgba(0,0,0,.16);
+  border:1px solid rgba(255,255,255,.07);
+  color:#fff;
+}
+.ref-input-area input[type="text"]:focus{
+  border-color:rgba(139,92,246,.5);
+  box-shadow:0 0 0 3px rgba(139,92,246,.08);
+}
+.ref-input-area .ref-apply-btn{
+  border-radius:12px;
+  padding:10px 16px;
+  background:linear-gradient(135deg,#8b5cf6,#6d4aff);
+  box-shadow:0 8px 20px rgba(109,74,255,.2);
+}
+.ref-input-area .ref-status{
+  color:var(--muted-2);
+  opacity:1;
+  font-size:10px;
+}
+
+.confirm-btn{
+  position:relative;
+  overflow:hidden;
+  margin:8px 0 12px;
+  padding:15px;
+  border-radius:17px;
+  background:linear-gradient(110deg,#7c3aed 0%,#8b5cf6 42%,#06b6d4 120%);
+  box-shadow:0 14px 32px rgba(109,74,255,.23);
+  font-size:14px;
+  letter-spacing:.1px;
+}
+.confirm-btn::before,.daily-check-btn::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(105deg,transparent 25%,rgba(255,255,255,.18) 50%,transparent 75%);
+  transform:translateX(-120%);
+  transition:transform .65s ease;
+}
+.confirm-btn:hover::before,.daily-check-btn:hover::after{transform:translateX(120%)}
+.confirm-btn:hover:not(:disabled){
+  transform:translateY(-2px);
+  box-shadow:0 18px 38px rgba(109,74,255,.3);
+}
+
+.menu-grid{
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+  margin:0 0 16px;
+}
+.menu-card{
+  min-height:104px;
+  padding:15px 7px 12px;
+  border-radius:18px;
+  background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+  border:1px solid rgba(255,255,255,.065);
+  box-shadow:0 8px 24px rgba(0,0,0,.13);
+}
+.menu-card:hover{
+  background:linear-gradient(145deg,rgba(139,92,246,.13),rgba(255,255,255,.035));
+  border-color:rgba(139,92,246,.25);
+  transform:translateY(-3px);
+  box-shadow:0 14px 30px rgba(0,0,0,.2),0 0 24px rgba(139,92,246,.07);
+}
+.menu-card .icon{
+  display:grid;
+  place-items:center;
+  width:42px;height:42px;
+  margin:0 auto 9px;
+  border-radius:14px;
+  background:rgba(139,92,246,.09);
+  border:1px solid rgba(139,92,246,.12);
+  font-size:20px;
+}
+.menu-card .label{font-size:10px;letter-spacing:.1px}
+.menu-card .sub-label{
+  color:var(--muted-2);
+  opacity:1;
+  font-size:9px;
+}
+.menu-card .task-badge{
+  top:7px;right:6px;
+  padding:3px 6px;
+  border:1px solid rgba(251,191,36,.2);
+  background:rgba(251,191,36,.12);
+  color:#fcd34d;
+  font-size:8px;
+}
+
+.distro-box{
+  margin-top:2px;
+  padding:15px 14px 4px;
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:18px;
+  background:rgba(0,0,0,.12);
+}
+.distro-row{
+  padding:7px 0;
+  color:var(--muted);
+  font-size:10px;
+}
+.distro-row .bar-wrap{
+  height:5px;
+  margin:0 10px;
+  background:rgba(255,255,255,.05);
+}
+.distro-row .bar-fill{
+  background:linear-gradient(90deg,#8b5cf6,#22d3ee);
+  box-shadow:0 0 10px rgba(139,92,246,.3);
+}
+.distro-row .pct{font-size:9px;color:var(--muted-2);opacity:1}
+
+.modal-overlay{
+  background:rgba(2,4,10,.78);
+  backdrop-filter:blur(18px) saturate(130%);
+  -webkit-backdrop-filter:blur(18px) saturate(130%);
+  padding:14px;
+}
+.modal{
+  position:relative;
+  max-width:520px;
+  padding:20px;
+  border-radius:26px;
+  background:
+    linear-gradient(145deg,rgba(18,23,43,.97),rgba(7,10,20,.98));
+  border:1px solid rgba(255,255,255,.09);
+  box-shadow:0 40px 100px rgba(0,0,0,.65),0 0 50px rgba(109,74,255,.07);
+}
+.modal::before{
+  content:"";
+  position:absolute;
+  left:18%;right:18%;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(139,92,246,.5),transparent);
+}
+.modal-header{margin-bottom:18px}
+.modal-header h2{font-size:19px;letter-spacing:-.4px}
+.modal-close{
+  width:34px;height:34px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.06);
+  color:var(--muted);
+}
+.modal-close:hover{background:rgba(255,255,255,.08);color:#fff}
+.modal-body{font-size:13px}
+
+.modal-tabs{
+  gap:6px;
+  margin:0 -2px 16px;
+  padding:2px;
+}
+.modal-tab{
+  padding:8px 12px;
+  border-radius:12px;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.055);
+  color:var(--muted-2);
+}
+.modal-tab:hover{background:rgba(255,255,255,.055);color:#dbe2f5}
+.modal-tab.active{
+  color:#ddd6fe;
+  background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(34,211,238,.06));
+  border-color:rgba(139,92,246,.25);
+  box-shadow:0 6px 18px rgba(109,74,255,.08);
+}
+.modal-tab .tab-badge{
+  color:#c4b5fd;
+  background:rgba(139,92,246,.13);
+}
+
+.task-item,.daily-task-card,.daily-task-item,.ref-reward-item,.token-reward-item{
+  position:relative;
+  overflow:hidden;
+  border-radius:18px;
+  padding:15px;
+  margin-bottom:10px;
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.018));
+  border:1px solid rgba(255,255,255,.065);
+  box-shadow:0 10px 28px rgba(0,0,0,.12);
+}
+.task-item::before,.daily-task-item::before{
+  content:"";
+  position:absolute;
+  left:0;top:12px;bottom:12px;width:2px;
+  border-radius:2px;
+  background:linear-gradient(#8b5cf6,#22d3ee);
+  opacity:.8;
+}
+.task-item:hover{
+  transform:translateY(-2px);
+  border-color:rgba(139,92,246,.22);
+  box-shadow:0 14px 32px rgba(0,0,0,.2);
+}
+.task-item.done{
+  border-color:rgba(52,211,153,.22);
+  background:linear-gradient(145deg,rgba(52,211,153,.075),rgba(255,255,255,.015));
+}
+.task-item.done::before{background:linear-gradient(#34d399,#10b981)}
+.task-header{gap:8px;margin-bottom:6px}
+.task-title{font-size:13px}
+.task-title .task-icon{
+  display:grid;
+  place-items:center;
+  width:30px;height:30px;
+  border-radius:10px;
+  background:rgba(139,92,246,.09);
+  font-size:14px;
+}
+.task-title .task-platform{
+  color:#b9adff;
+  background:rgba(139,92,246,.09);
+  border:1px solid rgba(139,92,246,.1);
+  padding:2px 7px;
+}
+.task-reward{
+  padding:5px 9px;
+  border-radius:10px;
+  background:rgba(251,191,36,.08);
+  -webkit-text-fill-color:#fcd34d;
+  font-size:11px;
+}
+.task-desc{
+  margin:0 0 12px 38px;
+  color:var(--muted-2);
+  font-size:10px;
+}
+.task-actions{gap:7px}
+.task-btn{
+  min-height:34px;
+  padding:7px 12px;
+  border-radius:11px;
+  font-size:10px;
+}
+.task-btn.open-btn{
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.07);
+}
+.task-btn.verify-btn{
+  background:linear-gradient(135deg,#8b5cf6,#6d4aff);
+  box-shadow:0 7px 18px rgba(109,74,255,.14);
+}
+.task-btn.done-btn{
+  background:linear-gradient(135deg,#34d399,#10b981);
+}
+.task-input{
+  height:34px;
+  padding:7px 11px;
+  border-radius:11px;
+  background:rgba(0,0,0,.13);
+  border:1px solid rgba(255,255,255,.07);
+}
+.task-input:focus{
+  border-color:rgba(34,211,238,.35);
+  box-shadow:0 0 0 3px rgba(34,211,238,.06);
+}
+.task-status{
+  margin-top:9px;
+  color:var(--muted-2);
+}
+.task-status.success{color:#6ee7b7}
+.task-status .status-dot.active{background:#fbbf24;box-shadow:0 0 8px rgba(251,191,36,.5)}
+.task-status .status-dot.success{background:#34d399;box-shadow:0 0 8px rgba(52,211,153,.45)}
+.task-progress{
+  height:3px;
+  margin-top:12px;
+  background:rgba(255,255,255,.045);
+}
+.task-progress .progress-fill{
+  background:linear-gradient(90deg,#8b5cf6,#22d3ee);
+  box-shadow:0 0 10px rgba(139,92,246,.3);
+}
+.task-progress .progress-fill.done{background:linear-gradient(90deg,#34d399,#10b981)}
+
+.daily-progress-bar,.daily-progress-bar .fill{
+  height:7px;
+  border-radius:99px;
+}
+.daily-progress-bar{
+  background:rgba(255,255,255,.05);
+  overflow:hidden;
+}
+.daily-progress-bar .fill{
+  background:linear-gradient(90deg,#8b5cf6,#22d3ee);
+  box-shadow:0 0 12px rgba(34,211,238,.25);
+}
+.daily-task-item .task-name{font-size:12px}
+.daily-task-item .task-reward-text{color:#fcd34d}
+.daily-task-item .task-check{
+  width:24px;height:24px;
+  border-radius:8px;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.08);
+  font-size:11px;
+}
+.daily-task-item .task-check.done{
+  background:rgba(52,211,153,.15);
+  border-color:rgba(52,211,153,.35);
+}
+.daily-check-btn{
+  border-radius:16px;
+  padding:15px;
+  background:linear-gradient(110deg,#7c3aed,#8b5cf6 45%,#06b6d4);
+  box-shadow:0 14px 34px rgba(109,74,255,.2);
+}
+.daily-check-btn:hover:not(:disabled){
+  transform:translateY(-2px);
+  box-shadow:0 18px 40px rgba(109,74,255,.28);
+}
+.daily-status-text{color:var(--muted-2)}
+.daily-timer{color:#fcd34d}
+
+.ton-reward-section{
+  background:linear-gradient(145deg,rgba(34,211,238,.07),rgba(59,130,246,.025));
+  border:1px solid rgba(34,211,238,.12);
+  border-radius:16px;
+  padding:13px 14px;
+}
+.ton-reward-section .ton-value{color:#67e8f9}
+
+.info-row{
+  padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,.045);
+}
+.info-row .label{color:var(--muted-2);font-size:11px}
+.info-row .value{font-size:12px}
+
+.ref-link-box{
+  margin:10px 0;
+  padding:10px 12px;
+  border-radius:13px;
+  background:rgba(0,0,0,.16);
+  border:1px solid rgba(255,255,255,.06);
+}
+.ref-link-box span{color:#9ca6bf;font-size:10px}
+.ref-link-box button{
+  padding:6px 11px;
+  border-radius:9px;
+  color:#c4b5fd;
+  background:rgba(139,92,246,.1);
+  border:1px solid rgba(139,92,246,.12);
+}
+
+.toast{
+  background:rgba(11,15,29,.94);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:16px;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+}
+.toast .toast-message{color:#9da7bf;opacity:1}
+.toast .toast-close{color:#68728c}
+
+.empty-state{
+  padding:40px 20px;
+  border:1px dashed rgba(255,255,255,.07);
+  border-radius:18px;
+  background:rgba(255,255,255,.018);
+}
+.empty-state .empty-icon{filter:grayscale(.2);opacity:.75}
+
+@media (max-width:520px){
+  .app{max-width:520px}
+}
+@media (max-width:420px){
+  body{padding:18px 10px 42px}
+  .glass{padding:17px;border-radius:25px}
+  .logo{font-size:25px}
+  .token-item{min-height:96px;padding:15px 13px}
+  .token-number{font-size:34px}
+  .token-number.ton{font-size:28px}
+  .join-row{grid-template-columns:1fr 1fr}
+  .menu-grid{grid-template-columns:1fr 1fr;gap:9px}
+  .menu-card{min-height:96px}
+  .modal{padding:17px 14px}
+}
+@media (max-width:340px){
+  .join-row{grid-template-columns:1fr}
+  .token-box{grid-template-columns:1fr 1fr}
+  .task-actions{display:grid;grid-template-columns:1fr 1fr}
+  .task-input{width:100%;grid-column:1/-1}
+}
+
+  
+</style>
+
+<style id="weekly-daily-check-polish">
+  /* Weekly Daily Check — horizontal premium tracker */
+  .daily-week {
+    display:grid;
+    grid-template-columns:repeat(7,minmax(0,1fr));
+    gap:8px;
+    width:100%;
+    margin:14px 0 6px;
+  }
+  .week-day {
+    min-width:0;
+    padding:10px 6px 9px;
+    border-radius:14px;
+    text-align:center;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.08);
+    transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease;
+  }
+  .week-day .wd-name {
+    display:block;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.08em;
+    color:rgba(255,255,255,.58);
+    margin-bottom:7px;
+  }
+  .week-day .wd-state {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:26px;
+    height:26px;
+    margin:auto;
+    border-radius:50%;
+    font-size:13px;
+    font-weight:800;
+    color:rgba(255,255,255,.35);
+    background:rgba(255,255,255,.055);
+  }
+  .week-day.done {
+    background:linear-gradient(180deg,rgba(22,135,255,.16),rgba(0,217,255,.055));
+    border-color:rgba(22,135,255,.32);
+  }
+  .week-day.done .wd-name { color:#73b9ff; }
+  .week-day.done .wd-state {
+    color:#fff;
+    background:linear-gradient(135deg,#1687ff,#00d9ff);
+    box-shadow:0 0 16px rgba(0,180,255,.28);
+  }
+  .week-day.today {
+    border-color:rgba(0,217,255,.48);
+    box-shadow:inset 0 0 0 1px rgba(0,217,255,.08),0 0 18px rgba(0,180,255,.08);
+    transform:translateY(-1px);
+  }
+  .week-day.today .wd-name { color:#b7f5ff; }
+  @media (max-width:520px) {
+    .daily-week { gap:5px; }
+    .week-day { padding:8px 3px 7px; border-radius:11px; }
+    .week-day .wd-name { font-size:8px; margin-bottom:5px; }
+    .week-day .wd-state { width:23px; height:23px; font-size:11px; }
+  }
+</style>
 </head>
 <body>
 <div class="app" id="app">
@@ -1194,17 +1928,18 @@
           <span class="label">Total days checked</span>
           <span class="value" id="modalDailyTotal">0</span>
         </div>
-        <div class="info-row">
-          <span class="label">Consecutive days</span>
-          <span class="value" id="modalConsecutiveDays">0</span>
+        <div class="week-summary">
+          <div><strong id="weeklyCheckCount">0 / 7 days</strong><br><span id="weeklyWeekLabel">Monday → Sunday</span></div>
+          <div class="week-bonus" id="sevenDayBonusDisplay">🎁 Bonus: 30–100</div>
         </div>
+        <div class="daily-week" id="dailyWeekTracker"></div>
         <div class="info-row">
           <span class="label">Reward per check</span>
           <span class="value">5 Benula</span>
         </div>
         <div class="info-row">
-          <span class="label">7-day bonus</span>
-          <span class="value" id="sevenDayBonusDisplay">🎯 30-100 Tokens</span>
+          <span class="label">Weekly bonus</span>
+          <span class="value" id="weeklyBonusValue">30–100 Benula</span>
         </div>
         <div class="daily-check-wrap">
           <button class="daily-check-btn" id="dailyCheckBtn">
@@ -1611,7 +2346,8 @@
       },
       sevenDayBonusClaimed: false,
       lastSevenDayBonusDate: null,
-      tonRewardClaimed: false
+      tonRewardClaimed: false,
+      creditedTonReferrals: 0
     };
     saveState(state);
   } else {
@@ -1645,6 +2381,7 @@
     if (!state.lastSevenDayBonusDate) state.lastSevenDayBonusDate = null;
     if (typeof state.tonBalance === 'undefined') state.tonBalance = 0;
     if (typeof state.tonRewardClaimed === 'undefined') state.tonRewardClaimed = false;
+    if (typeof state.creditedTonReferrals === 'undefined') state.creditedTonReferrals = 0;
     
     // Migrate old YouTube tasks from localStorage
     const oldYT1 = localStorage.getItem('youtubeTaskDone');
@@ -1682,32 +2419,26 @@
   ];
 
   // ============================================================
-  //  TON REWARD SYSTEM
+  //  GRAM (EX TON) REWARD SYSTEM — +0.05 FOR EACH NEW REFERRAL
   // ============================================================
-  function calculateTonReward() {
-    const refs = state.cachedReferralCount || 0;
-    return refs * CONFIG.TON_PER_REFERRAL;
+  function calculateTonReward(refCount) {
+    return (Number(refCount) || 0) * CONFIG.TON_PER_REFERRAL;
   }
 
-  function claimTonReward() {
-    if (state.tonRewardClaimed) return;
-    if (!state.registered) return;
-    
-    const tonAmount = calculateTonReward();
-    if (tonAmount > 0) {
-      state.tonBalance = (state.tonBalance || 0) + tonAmount;
-      state.tonRewardClaimed = true;
-      saveState(state);
-      render();
-      showToast({
-        type: 'success',
-        title: '💎 TON Reward!',
-        message: `${tonAmount.toFixed(2)} Gram(Ex ton) added to your account!`
-      });
-    } else {
-      state.tonRewardClaimed = true;
-      saveState(state);
-    }
+  function creditNewReferralGram(totalReferralCount) {
+    if (!state.registered) return 0;
+    const total = Math.max(0, Number(totalReferralCount) || 0);
+    const credited = Math.max(0, Number(state.creditedTonReferrals) || 0);
+    const newRefs = Math.max(0, total - credited);
+    if (!newRefs) return 0;
+
+    const reward = calculateTonReward(newRefs);
+    state.tonBalance = (state.tonBalance || 0) + reward;
+    state.creditedTonReferrals = total;
+    // Keep this field only for backward compatibility; it is no longer a one-time claim flag.
+    state.tonRewardClaimed = true;
+    saveState(state);
+    return reward;
   }
 
   // ============================================================
@@ -1818,70 +2549,138 @@
   groupBtn.addEventListener('click', (e) => { e.preventDefault(); window.open(CONFIG.GROUP_LINK, '_blank'); markJoined('group'); });
 
   // ============================================================
-  //  DAILY CHECK
+  //  DAILY CHECK — MONDAY → SUNDAY WEEKLY SYSTEM
   // ============================================================
-  function getDayOfWeek(date) {
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    return days[date.getDay()];
+  function localDateKey(date = new Date()) {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
   }
 
-  function getMondayDate(date) {
-    const d = new Date(date);
+  function parseLocalDate(key) {
+    const [y,m,d] = key.split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
+
+  function getDayOfWeek(date) {
+    return ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][date.getDay()];
+  }
+
+  function getMondayDate(date = new Date()) {
+    const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const day = d.getDay();
-    const diff = d.getDate() - day + (day === 0 ? -6 : 1);
-    d.setDate(diff);
-    d.setHours(0, 0, 0, 0);
+    const diff = day === 0 ? -6 : 1 - day;
+    d.setDate(d.getDate() + diff);
     return d;
   }
 
-  function getConsecutiveDays() {
-    if (!state.dailyChecks || state.dailyChecks.length === 0) return 0;
-    const sorted = [...state.dailyChecks].sort();
-    const today = new Date().toISOString().split('T')[0];
-    let count = 0;
-    let checkDate = new Date(today);
-    
-    if (!state.dailyCheckDoneToday) {
-      checkDate.setDate(checkDate.getDate() - 1);
+  function getCurrentWeekKey(date = new Date()) {
+    return localDateKey(getMondayDate(date));
+  }
+
+  function getWeekDates(date = new Date()) {
+    const monday = getMondayDate(date);
+    return Array.from({length:7}, (_,i) => {
+      const d = new Date(monday);
+      d.setDate(monday.getDate() + i);
+      return localDateKey(d);
+    });
+  }
+
+  function ensureWeeklyState() {
+    const weekKey = getCurrentWeekKey();
+    if (state.dailyWeekKey !== weekKey) {
+      state.dailyWeekKey = weekKey;
+      state.sevenDayBonusClaimed = false;
+      state.weeklyBonusAmount = null;
+      state.weeklyBonusDate = null;
+      state.weeklyCheckCount = 0;
+      saveState(state);
     }
-    
-    while (true) {
-      const dateStr = checkDate.toISOString().split('T')[0];
-      if (sorted.includes(dateStr)) {
-        count++;
-        checkDate.setDate(checkDate.getDate() - 1);
-      } else {
-        break;
-      }
+    if (!Array.isArray(state.dailyChecks)) state.dailyChecks = [];
+    return weekKey;
+  }
+
+  function getCurrentWeekChecks() {
+    ensureWeeklyState();
+    const weekDates = new Set(getWeekDates());
+    return new Set(state.dailyChecks.filter(d => weekDates.has(d)));
+  }
+
+  function getWeeklyCheckCount() {
+    const count = getCurrentWeekChecks().size;
+    state.weeklyCheckCount = count;
+    return count;
+  }
+
+  function getConsecutiveDays() {
+    const checked = getCurrentWeekChecks();
+    const today = new Date();
+    let cursor = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    let count = 0;
+    while (getCurrentWeekKey(cursor) === getCurrentWeekKey(today) && checked.has(localDateKey(cursor))) {
+      count++;
+      cursor.setDate(cursor.getDate() - 1);
     }
     return count;
   }
 
   function checkDailyReset() {
-    const today = new Date().toISOString().split('T')[0];
-    if (state.lastDailyCheckDate !== today) {
-      state.dailyCheckDoneToday = false;
-      state.lastDailyCheckDate = today;
-      saveState(state);
-    }
-    return state.dailyCheckDoneToday;
+    ensureWeeklyState();
+    const today = localDateKey();
+    const alreadyChecked = Array.isArray(state.dailyChecks) && state.dailyChecks.includes(today);
+    state.dailyCheckDoneToday = alreadyChecked;
+    state.lastDailyCheckDate = today;
+    saveState(state);
+    return alreadyChecked;
+  }
+
+  function renderWeeklyTracker() {
+    const tracker = $('dailyWeekTracker');
+    const countEl = $('weeklyCheckCount');
+    const labelEl = $('weeklyWeekLabel');
+    if (!tracker) return;
+
+    const labels = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
+    const weekDates = getWeekDates();
+    const checked = getCurrentWeekChecks();
+    const today = localDateKey();
+    tracker.innerHTML = weekDates.map((date, i) => {
+      const done = checked.has(date);
+      const isToday = date === today;
+      return `<div class="week-day ${done ? 'done' : ''} ${isToday ? 'today' : ''}">
+        <span class="wd-name">${labels[i]}</span>
+        <span class="wd-state">${done ? '✓' : '•'}</span>
+      </div>`;
+    }).join('');
+
+    const count = checked.size;
+    if (countEl) countEl.textContent = `${count} / 7 days`;
+    if (labelEl) labelEl.textContent = `Week of ${weekDates[0]} → ${weekDates[6]}`;
   }
 
   function updateDailyModal() {
-    const totalDays = state.dailyChecks ? state.dailyChecks.length : 0;
-    modalDailyTotal.textContent = totalDays;
-    const consecutive = getConsecutiveDays();
-    modalConsecutiveDays.textContent = consecutive;
-    
-    const sevenDayBonusDisplay = $('sevenDayBonusDisplay');
-    if (consecutive >= 7) {
-      if (state.sevenDayBonusClaimed) {
-        sevenDayBonusDisplay.textContent = '✅ Bonus claimed!';
-      } else {
-        sevenDayBonusDisplay.textContent = '🎯 30-100 Tokens - Claim now!';
-      }
+    ensureWeeklyState();
+    const totalDays = state.dailyChecks ? new Set(state.dailyChecks).size : 0;
+    if (modalDailyTotal) modalDailyTotal.textContent = totalDays;
+    if (modalConsecutiveDays) modalConsecutiveDays.textContent = getConsecutiveDays();
+    renderWeeklyTracker();
+
+    const count = getWeeklyCheckCount();
+    const isSunday = new Date().getDay() === 0;
+    const bonusEl = $('sevenDayBonusDisplay');
+    const bonusValue = $('weeklyBonusValue');
+    if (state.sevenDayBonusClaimed) {
+      if (bonusEl) bonusEl.textContent = `🎉 +${state.weeklyBonusAmount || 0} claimed`;
+      if (bonusValue) bonusValue.textContent = `+${state.weeklyBonusAmount || 0} Benula`;
+    } else if (count === 7 && isSunday) {
+      if (bonusEl) bonusEl.textContent = '🎁 Weekly bonus earned!';
+      if (bonusValue) bonusValue.textContent = '30–100 Benula';
     } else {
-      sevenDayBonusDisplay.textContent = `📅 ${7 - consecutive} days to go`;
+      const left = Math.max(0, 7 - count);
+      if (bonusEl) bonusEl.textContent = `🎁 ${left} day${left === 1 ? '' : 's'} to bonus`;
+      if (bonusValue) bonusValue.textContent = '30–100 Benula on Sunday';
     }
   }
 
@@ -1961,8 +2760,11 @@
       }
     } catch(e) { console.error('Sync error:', e); }
     
-    // Claim TON reward
-    claimTonReward();
+    const gramReward = creditNewReferralGram(state.cachedReferralCount || 0);
+    if (gramReward > 0) {
+      render();
+      showToast({ type: 'success', title: '💎 New Referral Reward!', message: `+${gramReward.toFixed(2)} Gram(Ex ton) for new referral(s)!` });
+    }
     updateTonDisplay();
   }
 
@@ -2692,22 +3494,46 @@
     }
   }
 
+  // Weekly boundary: Monday 00:00 in the user's local timezone.
+  // This is the exact end of Sunday (24:00) and starts a fresh 7-day cycle.
+  function scheduleWeeklyBoundaryReset() {
+    const now = new Date();
+    const nextMonday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const daysUntilMonday = (8 - nextMonday.getDay()) % 7 || 7;
+    nextMonday.setDate(nextMonday.getDate() + daysUntilMonday);
+    nextMonday.setHours(0, 0, 0, 0);
+
+    setTimeout(() => {
+      ensureWeeklyState();
+      state.dailyCheckDoneToday = false;
+      state.lastDailyCheckDate = localDateKey();
+      saveState(state);
+      render();
+      scheduleWeeklyBoundaryReset();
+    }, Math.max(1000, nextMonday.getTime() - now.getTime() + 50));
+  }
+
   // ============================================================
-  //  📅 7-DAY BONUS CHECK
+  //  📅 WEEKLY BONUS CHECK — ONLY ON SUNDAY
   // ============================================================
   function checkSevenDayBonus() {
-    const consecutive = getConsecutiveDays();
-    if (consecutive >= 7 && !state.sevenDayBonusClaimed) {
-      const bonus = Math.floor(Math.random() * 71) + 30;
-      state.tokens = (state.tokens || 0) + bonus;
-      state.sevenDayBonusClaimed = true;
-      state.lastSevenDayBonusDate = new Date().toISOString().split('T')[0];
-      saveState(state);
-      showToast({ type: 'success', title: '🎉 7-Day Bonus!', message: `You earned ${bonus} Benula for 7 consecutive days!` });
-      render();
-      return true;
-    }
-    return false;
+    ensureWeeklyState();
+    const today = new Date();
+    const isSunday = today.getDay() === 0;
+    const weeklyCount = getWeeklyCheckCount();
+
+    if (!isSunday || weeklyCount !== 7 || state.sevenDayBonusClaimed) return false;
+
+    const bonus = Math.floor(Math.random() * 71) + 30; // 30..100 inclusive
+    state.tokens = (state.tokens || 0) + bonus;
+    state.weeklyBonusAmount = bonus;
+    state.weeklyBonusDate = localDateKey(today);
+    state.sevenDayBonusClaimed = true;
+    state.lastSevenDayBonusDate = localDateKey(today);
+    trackTokenEarnings(bonus);
+    saveState(state);
+    showToast({ type: 'success', title: '🎉 Perfect Week!', message: `You completed Monday → Sunday and earned +${bonus} Benula!` });
+    return true;
   }
 
   // ============================================================
@@ -2784,8 +3610,8 @@
     levelBadge.style.color = level.color;
 
     const totalDays = state.dailyChecks ? state.dailyChecks.length : 0;
-    dailyCount.textContent = totalDays + ' days';
-    if (modalDailyTotal) modalDailyTotal.textContent = totalDays;
+    dailyCount.textContent = getWeeklyCheckCount() + ' / 7 days';
+    if (modalDailyTotal) modalDailyTotal.textContent = getWeeklyCheckCount();
     
     const consecutive = getConsecutiveDays();
     if (modalConsecutiveDays) modalConsecutiveDays.textContent = consecutive;
@@ -2818,9 +3644,12 @@
     }
 
     if (state.registered) {
-      refInputArea.style.display = 'none';
+      hideRegistrationOnboarding();
     } else {
-      refInputArea.style.display = 'block';
+      const joinRow = document.querySelector('.join-row');
+      if (joinRow) joinRow.style.display = 'grid';
+      if (refInputArea) refInputArea.style.display = 'block';
+      if (confirmBtn) confirmBtn.style.display = 'block';
       if (state.refCodeUsed) {
         refInput.value = state.refCodeUsed;
         refInput.disabled = true;
@@ -2835,7 +3664,6 @@
 
     checkDailyReset();
     resetDailyTasks();
-    checkSevenDayBonus();
     
     if (state.dailyCheckDoneToday) {
       dailyStatus.textContent = '✅ Already checked today! +5 Benula rewarded';
@@ -2864,6 +3692,16 @@
     updateTonDisplay();
   }
 
+  function hideRegistrationOnboarding() {
+    if (!state.registered) return;
+    const joinRow = document.querySelector('.join-row');
+    const refArea = $('refInputArea');
+    const confirm = $('confirmBtn');
+    if (joinRow) joinRow.style.display = 'none';
+    if (refArea) refArea.style.display = 'none';
+    if (confirm) confirm.style.display = 'none';
+  }
+
   function updateConfirmButton() {
     const allJoined = state.channelJoined && state.groupJoined;
     if (state.registered) {
@@ -2883,36 +3721,59 @@
   }
 
   // ============================================================
-  //  DAILY CHECK ACTION
+  //  DAILY CHECK ACTION — MONDAY → SUNDAY
+  //  5 Benula per day; complete all 7 days for a random 30–100 bonus.
   // ============================================================
-  dailyCheckBtn.addEventListener('click', async () => {
+  dailyCheckBtn.addEventListener('click', () => {
     if (!state.registered) {
       showToast({ type: 'warning', title: '⚠️ Registration Required', message: 'Please register first to check in daily.' });
       return;
     }
-    if (state.dailyCheckDoneToday) {
-      showToast({ type: 'info', title: 'ℹ️ Already Checked', message: 'You have already checked in today! Come back tomorrow.' });
+
+    ensureWeeklyState();
+    const today = localDateKey();
+    const checked = new Set(Array.isArray(state.dailyChecks) ? state.dailyChecks : []);
+
+    if (checked.has(today)) {
+      state.dailyCheckDoneToday = true;
+      saveState(state);
+      render();
+      showToast({ type: 'info', title: 'ℹ️ Already Checked', message: 'You have already checked in today. Come back tomorrow.' });
       return;
     }
-    dailyCheckBtn.disabled = true;
-    dailyCheckBtn.className = 'daily-check-btn loading';
-    dailyCheckBtn.innerHTML = `<span class="spinner"></span> Processing...`;
-    await new Promise(r => setTimeout(r, 600));
-    const today = new Date().toISOString().split('T')[0];
-    if (!state.dailyChecks) state.dailyChecks = [];
-    state.dailyChecks.push(today);
+
+    checked.add(today);
+    state.dailyChecks = Array.from(checked).sort();
     state.dailyCheckDoneToday = true;
     state.lastDailyCheckDate = today;
     state.tokens = (state.tokens || 0) + CONFIG.DAILY_REWARD;
     trackTokenEarnings(CONFIG.DAILY_REWARD);
+
+    const isSunday = new Date().getDay() === 0;
+    const weekCount = getWeeklyCheckCount();
+    let weeklyBonus = 0;
+
+    if (isSunday && weekCount === 7 && !state.sevenDayBonusClaimed) {
+      weeklyBonus = Math.floor(Math.random() * 71) + 30;
+      state.tokens += weeklyBonus;
+      state.weeklyBonusAmount = weeklyBonus;
+      state.weeklyBonusDate = today;
+      state.lastSevenDayBonusDate = today;
+      state.sevenDayBonusClaimed = true;
+      trackTokenEarnings(weeklyBonus);
+    }
+
+    state.weeklyCheckCount = weekCount;
     saveState(state);
-    showToast({ type: 'success', title: '🎉 Daily Check Complete!', message: `You earned +${CONFIG.DAILY_REWARD} Benula!` });
-    dailyCheckBtn.className = 'daily-check-btn success';
-    dailyCheckBtn.innerHTML = `<span class="btn-icon">🎉</span> +${CONFIG.DAILY_REWARD} Benula Earned!`;
-    dailyStatus.textContent = `✅ Checked in! +${CONFIG.DAILY_REWARD} Benula added!`;
-    dailyStatus.className = 'daily-status-text success';
     render();
-    setTimeout(() => render(), 1500);
+
+    showToast({
+      type: 'success',
+      title: weeklyBonus ? '🎉 Perfect Week!' : '🎉 Daily Check Complete!',
+      message: weeklyBonus
+        ? `+${CONFIG.DAILY_REWARD} Benula + Weekly Bonus ${weeklyBonus} Benula!`
+        : `You earned +${CONFIG.DAILY_REWARD} Benula!`
+    });
   });
 
   // ============================================================
@@ -2935,6 +3796,7 @@
       state.tokens = CONFIG.REGISTER_REWARD;
       trackTokenEarnings(CONFIG.REGISTER_REWARD);
       saveState(state);
+      hideRegistrationOnboarding();
       render();
       confirmBtn.textContent = '✅ Registration Complete!';
       confirmBtn.classList.add('success');
@@ -3017,6 +3879,8 @@
     }
   })();
 
+  scheduleWeeklyBoundaryReset();
+
   // ============================================================
   //  BACKGROUND CHECK FOR DAILY TASKS
   // ============================================================
@@ -3030,12 +3894,13 @@
   // ============================================================
   //  INIT
   // ============================================================
+  ensureWeeklyState();
+  checkDailyReset();
   render();
   if (state.registered) {
+    hideRegistrationOnboarding();
     showReferrals();
-    if (!state.tonRewardClaimed) {
-      claimTonReward();
-    }
+    // Gram rewards are credited incrementally inside showReferrals().
   }
   console.log('✅ Benula Airdrop loaded. User ID:', state.userId);
   console.log('📊 Tasks status:', {
